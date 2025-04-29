@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929ac517ecf84662a6317a55486b3f64, type: 3}
+  m_Name: Test02
+  m_EditorClassIdentifier: 
+  serializedNodes: []
+  nodes:
+  - rid: 525765135661793293
+  - rid: 525765135661793294
+  - rid: 525765135661793295
+  edges:
+  - GUID: 04dd0fd8-86e5-4cbb-a887-7ae812b91898
+    owner: {fileID: 11400000}
+    inputNodeGUID: 03d9d3d8-62c3-4ddf-9fe6-c5e968ae7cb2
+    outputNodeGUID: 1aacb98b-9948-4597-81f4-5340ce79d2f2
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 38a20092-692c-4d8b-a82f-5dcaa367263b
+    owner: {fileID: 11400000}
+    inputNodeGUID: bb316934-95cc-4fdc-a3fb-d60785a2428e
+    outputNodeGUID: 03d9d3d8-62c3-4ddf-9fe6-c5e968ae7cb2
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  groups: []
+  stackNodes: []
+  pinnedElements: []
+  exposedParameters: []
+  serializedParameterList: []
+  stickyNotes: []
+  nodeInspectorReference: {fileID: 0}
+  position: {x: -74, y: -125, z: 0}
+  scale: {x: 1.15, y: 1.15, z: 1}
+  Timestamp: 1741334291
+  OpenCount: 0
+  ProcessWindow: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 525765135661793293
+      type: {class: RootEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 1aacb98b-9948-4597-81f4-5340ce79d2f2
+        computeOrder: 0
+        position:
+          serializedVersion: 2
+          x: 656.5
+          y: 390.4
+          width: 100
+          height: 100
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1
+    - rid: 525765135661793294
+      type: {class: ProcessConfigEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 03d9d3d8-62c3-4ddf-9fe6-c5e968ae7cb2
+        computeOrder: 1
+        position:
+          serializedVersion: 2
+          x: 803
+          y: 362
+          width: 156
+          height: 171
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1
+        ProcessId: 0
+        ProcessDesc: 
+        MultiProcess: 1
+        AutoExecute: 1
+    - rid: 525765135661793295
+      type: {class: StartEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: bb316934-95cc-4fdc-a3fb-d60785a2428e
+        computeOrder: 2
+        position:
+          serializedVersion: 2
+          x: 813.9958
+          y: 574.29846
+          width: 127
+          height: 75
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1

@@ -6,7 +6,7 @@ namespace GraphProcessor
     {
         public NodeMenuItemAttribute(int id)
         {
-            this.menuTitle = NodeGroupHelper.GetGroup(id);
+            menuTitle = NodeGroupHelper.GetMenuTitle(id);
         }
     }
 }
