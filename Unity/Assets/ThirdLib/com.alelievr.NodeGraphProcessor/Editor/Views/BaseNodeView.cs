@@ -135,6 +135,7 @@ namespace GraphProcessor
 
             rightTitleContainer = new VisualElement { name = "RightTitleContainer" };
             titleContainer.Add(rightTitleContainer);
+            titleContainer.Insert(0, new VisualElement(){ name = "NodeIcon_Action" });
 
             topPortContainer = new VisualElement { name = "TopPortContainer" };
             this.Insert(0, topPortContainer);
@@ -892,8 +893,14 @@ namespace GraphProcessor
             {
                 label = customSetting.name;
             }
+            
+            var container = new VisualElement();
+            container.style.flexDirection = FlexDirection.Row;
+            container.Add(new VisualElement{name = $"FieldViewIcon_{field.FieldType.Name}"});
+            
             var element = new PropertyField(FindSerializedProperty(field.Name), showInputDrawer ? "" : label);
             element.Bind(owner.serializedGraph);
+            container.Add(element);
 
 #if UNITY_2020_3 // In Unity 2020.3 the empty label on property field doesn't hide it, so we do it manually
             if ((showInputDrawer || String.IsNullOrEmpty(label)) && element != null)
@@ -922,20 +929,22 @@ namespace GraphProcessor
                 inputFieldList = fieldControlsMap[field] = new List<VisualElement>();
             inputFieldList.Add(element);
 
+
             if (element != null)
             {
                 if (showInputDrawer)
                 {
                     var box = new VisualElement { name = field.Name };
                     box.AddToClassList("port-input-element");
-                    box.Add(element);
+                    box.Add(container);
                     inputContainerElement.Add(box);
                 }
                 else
                 {
-                    controlsContainer.Add(element);
+                    
+                    controlsContainer.Add(container);
                 }
-                element.name = field.Name;
+                container.name = field.Name;
             }
             else
             {

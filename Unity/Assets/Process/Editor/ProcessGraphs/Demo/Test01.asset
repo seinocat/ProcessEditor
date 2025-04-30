@@ -14,8 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedNodes: []
   nodes:
-  - rid: 525765135661793292
-  edges: []
+  - rid: 525765139367460864
+  - rid: 525765139367460865
+  - rid: 525765139367460866
+  - rid: 525765139367460867
+  - rid: 525765139367460869
+  edges:
+  - GUID: 71f6d49c-369e-414c-b872-3586f24b074f
+    owner: {fileID: 11400000}
+    inputNodeGUID: 9b222bd3-1deb-4eea-98d4-15077a5b2c19
+    outputNodeGUID: 5b1b57dd-2c97-4313-86cb-f0eb64cafcda
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: bd87190a-24e7-4cc3-b43c-06fbe181e37e
+    owner: {fileID: 11400000}
+    inputNodeGUID: f4739f2f-46f8-44b6-9a54-27503ca3c685
+    outputNodeGUID: 9b222bd3-1deb-4eea-98d4-15077a5b2c19
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: ee2e6494-0ee4-4f16-be99-b12ceae7b65d
+    owner: {fileID: 11400000}
+    inputNodeGUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+    outputNodeGUID: f4739f2f-46f8-44b6-9a54-27503ca3c685
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups: []
   stackNodes: []
   pinnedElements: []
@@ -23,27 +51,97 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -490, y: -84, z: 0}
-  scale: {x: 0.7561437, y: 0.7561437, z: 1}
+  position: {x: -851, y: -306, z: 0}
+  scale: {x: 1.7490063, y: 1.7490063, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 525765135661793292
+    - rid: 525765139367460864
       type: {class: RootEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
         nodeCustomName: 
-        GUID: cc7e5ad6-908a-40cd-8f37-b269621a6b00
+        GUID: 5b1b57dd-2c97-4313-86cb-f0eb64cafcda
         computeOrder: 0
         position:
           serializedVersion: 2
-          x: 656.5
-          y: 390.4
+          x: 629.55585
+          y: 389.99997
+          width: 99
+          height: 75
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1
+    - rid: 525765139367460865
+      type: {class: ProcessConfigEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 9b222bd3-1deb-4eea-98d4-15077a5b2c19
+        computeOrder: 1
+        position:
+          serializedVersion: 2
+          x: 798.2804
+          y: 389.50003
+          width: 156
+          height: 151
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1
+        ProcessId: 0
+        ProcessDesc: 
+        MultiProcess: 1
+        AutoExecute: 1
+    - rid: 525765139367460866
+      type: {class: StartEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: f4739f2f-46f8-44b6-9a54-27503ca3c685
+        computeOrder: 2
+        position:
+          serializedVersion: 2
+          x: 1007.5
+          y: 390
+          width: 127
+          height: 75
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1
+    - rid: 525765139367460867
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+        computeOrder: 3
+        position:
+          serializedVersion: 2
+          x: 1195
+          y: 390
+          width: 156
+          height: 118
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1
+        Time: 0
+    - rid: 525765139367460869
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: c221934c-9bec-45f6-bf7c-14f897c8cb27
+        computeOrder: 4
+        position:
+          serializedVersion: 2
+          x: 742
+          y: 587
           width: 100
           height: 100
         expanded: 0
         debug: 0
         nodeLock: 0
         NodeOrder: -1
+        Time: 0

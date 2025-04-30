@@ -6,7 +6,8 @@
         "com.alelievr.NodeGraphProcessor.Editor",
         "Seino.Utils.Runtime",
         "Seino.Flow.Runtime",
-        "UniTask"
+        "UniTask",
+        "Unity.Mathematics"
     ],
     "includePlatforms": [
         "Editor"

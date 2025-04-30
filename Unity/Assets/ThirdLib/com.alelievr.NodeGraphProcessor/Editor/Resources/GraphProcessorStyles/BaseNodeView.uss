@@ -126,11 +126,11 @@ ParameterNodeView #controls EnumField > VisualElement > VisualElement {
     width: 100px;
 }
 
-/*×Ô¶¨Òå*/
+/*ï¿½Ô¶ï¿½ï¿½ï¿½*/
 PropertyField > * {
 
 }
-/*´¦Àí Toggle*/
+/*ï¿½ï¿½ï¿½ï¿½ Toggle*/
 PropertyField > Toggle > VisualElement{
     flex-direction:row-reverse;
 }
@@ -149,7 +149,7 @@ IntegerInput,FloatInput,TextInput,{
 Vector3Field{
     min-width:240px;
 }
-/*×Ô¶¨Òå*/
+/*ï¿½Ô¶ï¿½ï¿½ï¿½*/
 
 
 
@@ -248,7 +248,7 @@ Vector3Field{
     align-content: center;
 }
 
-#collapse-button:
+#collapse-button
 {
     width: 16px;
     height: 16px;
@@ -259,4 +259,239 @@ Vector3Field{
 .DrawerField_2020_3 > * > Label
 {
     display: none;
+}
+
+#NodeIcon_Action {
+    align-self: center;
+    margin-left: 8px;
+
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Function@x3");
+}
+
+/**************/
+/* Field icons */
+/**************/
+#FieldViewIcon_Texture2D{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/2DTexture@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Float2,
+#FieldViewIcon_Vector2 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Vector2@x3");
+    -unity-background-image-tint-color: aqua;
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Float3,
+#FieldViewIcon_Vector3 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Vector3@x3");
+    -unity-background-image-tint-color: aquamarine;
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Float4,
+#FieldViewIcon_Vector4 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Vector4@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Quaternion {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Quaternion@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Boolean{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Boolean@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Double,
+#FieldViewIcon_Single{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Double@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Int32{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Integer32@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Int64{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Integer64@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Matrix,
+#FieldViewIcon_Matrix4x4 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Matrix@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Object {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Advanced@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Array {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Array@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_String {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/String@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_GameObject {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/GameObject@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Color {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Color@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Component {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Component@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Condition {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Condition@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_ForEachLoop {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/ForEachLoop@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Action {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Function@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_IfCondition {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/IfCondition@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_KeyCode {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/KeyCode@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_RaycastHit {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/RaycastHit@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Text {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Text@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Transform {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Transform@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_WhileLoop {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/WhileLoop@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Material {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Material@x3");
+    align-self: center;
+    margin-left: 3px;
+}
+
+#FieldViewIcon_Rigidbody {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/RigidBody@x3");
+    align-self: center;
+    margin-left: 3px;
 }

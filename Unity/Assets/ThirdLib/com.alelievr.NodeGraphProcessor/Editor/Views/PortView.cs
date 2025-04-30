@@ -40,6 +40,10 @@ namespace GraphProcessor
             this.portName = fieldName;
 
             styleSheets.Add(Resources.Load<StyleSheet>(portStyle));
+            
+            //绘制端口Icon
+            // var portIcon = new VisualElement() {name = $"PortViewIcon_Text"};
+            // Insert(1, portIcon);
 
             UpdatePortSize();
 

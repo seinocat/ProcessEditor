@@ -1,0 +1,171 @@
+/**************/
+/* Field icons */
+/**************/
+#FieldViewIcon_Texture2D{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/2DTexture@x3");
+}
+
+#FieldViewIcon_Float2,
+#FieldViewIcon_Vector2 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Vector2@x3");
+    -unity-background-image-tint-color: aqua;
+}
+
+#FieldViewIcon_Float3,
+#FieldViewIcon_Vector3 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Vector3@x3");
+    -unity-background-image-tint-color: aquamarine;
+}
+
+#FieldViewIcon_Float4,
+#FieldViewIcon_Vector4 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Vector4@x3");
+}
+
+#FieldViewIcon_Quaternion {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Quaternion@x3");
+}
+
+#FieldViewIcon_Boolean{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Boolean@x3");
+}
+
+#FieldViewIcon_Double,
+#FieldViewIcon_Single{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Double@x3");
+}
+
+#FieldViewIcon_Int32{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Integer32@x3");
+}
+
+#FieldViewIcon_Int64{
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Integer64@x3");
+}
+
+#FieldViewIcon_Matrix,
+#FieldViewIcon_Matrix4x4 {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Matrix@x3");
+}
+
+#FieldViewIcon_Object {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Advanced@x3");
+}
+
+#FieldViewIcon_Array {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Array@x3");
+}
+
+#FieldViewIcon_String {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/String@x3");
+}
+
+#FieldViewIcon_GameObject {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/GameObject@x3");
+}
+
+#FieldViewIcon_Color {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Color@x3");
+}
+
+#FieldViewIcon_Component {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Component@x3");
+}
+
+#FieldViewIcon_Condition {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Condition@x3");
+}
+
+#FieldViewIcon_ForEachLoop {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/ForEachLoop@x3");
+}
+
+#FieldViewIcon_Action {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Function@x3");
+}
+
+#FieldViewIcon_IfCondition {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/IfCondition@x3");
+}
+
+#FieldViewIcon_KeyCode {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/KeyCode@x3");
+}
+
+#FieldViewIcon_RaycastHit {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/RaycastHit@x3");
+}
+
+#FieldViewIcon_Text {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Text@x3");
+}
+
+#FieldViewIcon_Transform {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Transform@x3");
+}
+
+#FieldViewIcon_WhileLoop {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/WhileLoop@x3");
+}
+
+#FieldViewIcon_Material {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Material@x3");
+}
+
+#FieldViewIcon_Rigidbody {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/RigidBody@x3");
+}
