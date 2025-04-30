@@ -110,6 +110,7 @@ namespace GraphProcessor
             RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
             RegisterCallback<DetachFromPanelEvent>(e => ExceptionToLog.Call(Disable));
             OnGeometryChanged(null);
+            InitSelectionBorderStyle();
         }
 
         void InitializePorts()
@@ -894,13 +895,22 @@ namespace GraphProcessor
                 label = customSetting.name;
             }
             
-            var container = new VisualElement();
-            container.style.flexDirection = FlexDirection.Row;
-            container.Add(new VisualElement{name = $"FieldViewIcon_{field.FieldType.Name}"});
+            bool isList = typeof(IList).IsAssignableFrom(field.FieldType);
+
             
             var element = new PropertyField(FindSerializedProperty(field.Name), showInputDrawer ? "" : label);
             element.Bind(owner.serializedGraph);
-            container.Add(element);
+
+            // 插入字段icon
+            VisualElement container = null;
+            if (!isList)
+            {
+                container = new VisualElement();
+                container.style.flexDirection = FlexDirection.Row;
+                container.Add(new VisualElement{name = $"FieldViewIcon_{field.FieldType.Name}"});
+                container.Add(element);
+            }
+
 
 #if UNITY_2020_3 // In Unity 2020.3 the empty label on property field doesn't hide it, so we do it manually
             if ((showInputDrawer || String.IsNullOrEmpty(label)) && element != null)
@@ -918,7 +928,7 @@ namespace GraphProcessor
             });
 
             // Disallow picking scene objects when the graph is not linked to a scene
-            if (element != null && !owner.graph.IsLinkedToScene())
+            if (!owner.graph.IsLinkedToScene())
             {
                 var objectField = element.Q<ObjectField>();
                 if (objectField != null)
@@ -930,30 +940,22 @@ namespace GraphProcessor
             inputFieldList.Add(element);
 
 
-            if (element != null)
+            if (showInputDrawer)
             {
-                if (showInputDrawer)
-                {
-                    var box = new VisualElement { name = field.Name };
-                    box.AddToClassList("port-input-element");
-                    box.Add(container);
-                    inputContainerElement.Add(box);
-                }
-                else
-                {
-                    
-                    controlsContainer.Add(container);
-                }
-                container.name = field.Name;
+                var box = new VisualElement { name = field.Name };
+                box.AddToClassList("port-input-element");
+                box.Add(isList ? element : container);
+                inputContainerElement.Add(box);
             }
             else
             {
-                // Make sure we create an empty placeholder if FieldFactory can not provide a drawer
-                if (showInputDrawer) AddEmptyField(field, false);
+                controlsContainer.Add(isList ? element : container);
             }
 
-            var visibleCondition = field.GetCustomAttribute(typeof(VisibleIf)) as VisibleIf;
-            if (visibleCondition != null)
+            if (isList) element.name = field.Name; 
+            else        container.name = field.Name;
+
+            if (field.GetCustomAttribute(typeof(VisibleIf)) is VisibleIf visibleCondition)
             {
                 // Check if target field exists:
                 var conditionField = nodeTarget.GetType().GetField(visibleCondition.fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1224,5 +1226,25 @@ namespace GraphProcessor
         public void NotifyNodeChanged() => owner.graph.NotifyNodeChanged(nodeTarget);
 
         #endregion
+
+        #region 选择框
+
+        void InitSelectionBorderStyle()
+        {
+            selectionBorder = this.Q("selection-border");
+            nodeBorder = this.Q("node-border");
+            schedule.Execute(() =>
+            {
+                selectionBorder.style.height = nodeBorder.localBound.height + 3;
+                selectionBorder.style.borderBottomLeftRadius = 4;
+                selectionBorder.style.borderBottomRightRadius = 4;
+                selectionBorder.style.borderTopLeftRadius = 4;
+                selectionBorder.style.borderTopRightRadius = 4;
+            }).Every(17);
+        }
+        
+
+        #endregion
     }
+    
 }

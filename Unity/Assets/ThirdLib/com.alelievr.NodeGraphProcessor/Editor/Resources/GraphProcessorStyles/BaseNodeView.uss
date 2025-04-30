@@ -47,7 +47,7 @@ ParameterNodeView #title.input {
 }
 
 ParameterNodeView #node-border {
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 ParameterNodeView #selection-border {
@@ -136,12 +136,12 @@ PropertyField > Toggle > VisualElement{
 }
 PropertyField > * > Label{
     min-width:30px;
-    max-width:auto;
+    /*max-width:auto;*/
     width:80px;
-    font-size:auto;
+    /*font-size:auto;*/
     /*max-height:auto;*/
 }
-IntegerInput,FloatInput,TextInput,{
+IntegerInput,FloatInput,TextInput{
     min-width:60px;
     /*max-width:auto;
     width:auto;*/
@@ -197,7 +197,7 @@ Vector3Field{
     overflow: hidden;
     padding-right: 1px;
 }
-
++
 #input-container > .port-input-element.empty {
     width: 0;
     padding: 0;
@@ -277,53 +277,56 @@ Vector3Field{
     width: 12px;
     height: 12px;
     background-image: resource("Icons/2DTexture@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 3px;
 }
 
 #FieldViewIcon_Float2,
+#FieldViewIcon_float2,
 #FieldViewIcon_Vector2 {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Vector2@x3");
     -unity-background-image-tint-color: aqua;
-    align-self: center;
     margin-left: 3px;
+    margin-top: 3px;
 }
 
 #FieldViewIcon_Float3,
+#FieldViewIcon_float3,
 #FieldViewIcon_Vector3 {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Vector3@x3");
     -unity-background-image-tint-color: aquamarine;
-    align-self: center;
     margin-left: 3px;
+    margin-top: 3px;
 }
 
 #FieldViewIcon_Float4,
+#FieldViewIcon_float4,
 #FieldViewIcon_Vector4 {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Vector4@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Quaternion {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Quaternion@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Boolean{
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Boolean@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 3px;
 }
 
 #FieldViewIcon_Double,
@@ -331,24 +334,26 @@ Vector3Field{
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Double@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
+#FieldViewIcon_UInt32,
 #FieldViewIcon_Int32{
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Integer32@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
+#FieldViewIcon_UInt64,
 #FieldViewIcon_Int64{
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Integer64@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 3px;
 }
 
 #FieldViewIcon_Matrix,
@@ -356,142 +361,142 @@ Vector3Field{
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Matrix@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Object {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Advanced@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Array {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Array@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_String {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/String@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_GameObject {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/GameObject@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Color {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Color@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Component {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Component@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Condition {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Condition@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_ForEachLoop {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/ForEachLoop@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Action {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Function@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_IfCondition {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/IfCondition@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_KeyCode {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/KeyCode@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_RaycastHit {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/RaycastHit@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Text {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Text@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Transform {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Transform@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_WhileLoop {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/WhileLoop@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Material {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/Material@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Rigidbody {
     width: 12px;
     height: 12px;
     background-image: resource("Icons/RigidBody@x3");
-    align-self: center;
     margin-left: 3px;
+    margin-top: 5px;
 }

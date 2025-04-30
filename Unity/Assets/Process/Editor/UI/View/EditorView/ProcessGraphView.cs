@@ -15,7 +15,6 @@ namespace Process.Editor
 
         public ProcessGraphWindow Window;
         public FileListView FileView;
-        public OperationView OperationView;
         public ProcessMiniMapView MiniMapView;
         
         public Sprite FolderOpen;
@@ -31,21 +30,7 @@ namespace Process.Editor
             
             Insert(0, new GraphGridView());
         }
-
-        public void DrawOperationView()
-        {
-            OperationView = new OperationView(this);
-            Add(OperationView);
-        }
-
-        public void DelOperationView()
-        {
-            if (this.OperationView != null)
-            {
-                Remove(this.OperationView);
-            }
-        }
-
+        
         public void DrawFileListView()
         {
             this.FileView = new FileListView(this);

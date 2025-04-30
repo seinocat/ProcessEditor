@@ -15,7 +15,6 @@ namespace Process.Editor
         public ProcessToolBarView(BaseGraphView graphView) : base(graphView)
         {
             m_GraphView = graphView as ProcessGraphView;
-            ShowOperation(Cookie.GetPublic(SHOW_OPERATION, true));
             ShowFileList(Cookie.GetPublic(SHOW_FILELIST, true));
             ShowMiniMap(Cookie.GetPublic(SHOW_MINIMAP, false));
         }
@@ -30,20 +29,6 @@ namespace Process.Editor
             AddButton(new GUIContent("刷新"), Refresh);
             AddButton(new GUIContent("导出当前"), Export, false);
             AddButton(new GUIContent("一键导出"), OneKeyExport, false);
-        }
-
-        public void ShowOperation(bool show)
-        {
-            if (show)
-            {
-                Cookie.SetPublic(SHOW_OPERATION, true);
-                m_GraphView.DrawOperationView();
-            }
-            else
-            {
-                Cookie.SetPublic(SHOW_OPERATION, false);
-                m_GraphView.DelOperationView();
-            }
         }
         
         public void ShowFileList(bool show)
