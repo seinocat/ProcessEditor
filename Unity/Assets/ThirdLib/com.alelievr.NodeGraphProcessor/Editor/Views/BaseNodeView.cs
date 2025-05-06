@@ -136,6 +136,7 @@ namespace GraphProcessor
 
             rightTitleContainer = new VisualElement { name = "RightTitleContainer" };
             titleContainer.Add(rightTitleContainer);
+            // 插入TitleIcon
             titleContainer.Insert(0, new VisualElement(){ name = "NodeIcon_Action" });
 
             topPortContainer = new VisualElement { name = "TopPortContainer" };
@@ -896,16 +897,14 @@ namespace GraphProcessor
             }
             
             bool isList = typeof(IList).IsAssignableFrom(field.FieldType);
-
             
             var element = new PropertyField(FindSerializedProperty(field.Name), showInputDrawer ? "" : label);
             element.Bind(owner.serializedGraph);
 
             // 插入字段icon
-            VisualElement container = null;
+            VisualElement container = new VisualElement();
             if (!isList)
             {
-                container = new VisualElement();
                 container.style.flexDirection = FlexDirection.Row;
                 container.Add(new VisualElement{name = $"FieldViewIcon_{field.FieldType.Name}"});
                 container.Add(element);
@@ -952,8 +951,8 @@ namespace GraphProcessor
                 controlsContainer.Add(isList ? element : container);
             }
 
-            if (isList) element.name = field.Name; 
-            else        container.name = field.Name;
+            element.name    = field.Name; 
+            container.name  = field.Name;
 
             if (field.GetCustomAttribute(typeof(VisibleIf)) is VisibleIf visibleCondition)
             {

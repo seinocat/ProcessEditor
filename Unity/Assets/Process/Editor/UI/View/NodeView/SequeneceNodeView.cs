@@ -12,8 +12,8 @@ namespace Process.Editor
         public override void Enable()
         {
             base.Enable();
-
-            PortCount = this.Q<PropertyField>(nameof(PortCount));
+            
+            PortCount = this.Q<PropertyField>("PortCount");
             PortCount.RegisterValueChangeCallback(OnPortCount);
         }
         

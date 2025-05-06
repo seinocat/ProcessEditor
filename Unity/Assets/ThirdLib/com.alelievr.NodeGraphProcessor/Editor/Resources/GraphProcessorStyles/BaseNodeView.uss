@@ -270,6 +270,15 @@ Vector3Field{
     background-image: resource("Icons/Function@x3");
 }
 
+#NodeIcon_GraphScript{
+    align-self: center;
+    margin-left: 8px;
+
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/GraphScript@x3");
+}
+
 /**************/
 /* Field icons */
 /**************/
