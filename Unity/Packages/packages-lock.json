@@ -14,13 +14,6 @@
       "dependencies": {},
       "hash": "24379bef5dcd0b02c4bddff078cb5b1aa0f28307"
     },
-    "com.seinocat.utils": {
-      "version": "https://github.com/seinocat/SeinoUtils.git#0.0.7",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "5dab59fa5244cbbb8f012cd3845b0ac89c8700a3"
-    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,

@@ -7,7 +7,6 @@ using GraphProcessor;
 using UnityEditor;
 using UnityEngine;
 using Process.Runtime;
-using ProcessEditor;
 
 namespace Process.Editor
 {
@@ -23,8 +22,9 @@ namespace Process.Editor
         public static void OneKeyGenerate()
         {
             GenerateDataNodeWriter();
+            GenerateDataNodeReader();
             GenerateRuntimeNode();
-            GenerateProcessNodePool();
+            // GenerateProcessNodePool();
             // GenerateLogicNode();
         }
         
@@ -41,7 +41,10 @@ namespace Process.Editor
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeWriter ***/");
+            builder.AppendLine("using System.IO;");
             builder.AppendLine("using UnityEngine;");
+            builder.AppendLine("using System.Threading.Tasks;");
+            builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Editor");
             builder.AppendLine("{");
@@ -62,32 +65,22 @@ namespace Process.Editor
                 if (fields.Count == 0)
                     continue;
                 
-                builder.AppendLine($"    public partial class {type.Name}");
+                builder.AppendLine($"    public class {type.Name}Writer : IFileWriter");
                 builder.AppendLine("    {");
-                builder.AppendLine("         public override ProcessNodeDataConfig WriteNodeData()");
-                builder.AppendLine("         {");
-                builder.AppendLine("             var config = new ProcessNodeDataConfig();");
-                
-                //先统计一下类型数量
-                Dictionary<Type, int> typeCount = new Dictionary<Type, int>();
+                builder.AppendLine($"        public {type.Name} Data;");
+                builder.AppendLine("        public float Progress => 0;");
+                builder.AppendLine("        public bool IsComplete { get; }");
+                builder.AppendLine("");
+                builder.AppendLine("        public Task WriteAsync(BinaryWriter writer)");
+                builder.AppendLine("        {");
+
                 foreach (var field in fields)
                 {
-                    var fieldType = field.FieldType;
-                    typeCount.TryAdd(fieldType.IsEnum ? typeof(Enum) : fieldType, 0);
+                    builder.AppendLine($"            writer.Write(Data.{field.Name});");
                 }
-                
-                foreach (var field in fields)
-                {
-                    var isEnum = field.FieldType.IsEnum;
-                    var fieldName = GetFieldName(field, ++typeCount[isEnum ? typeof(Enum) : field.FieldType]);
-                    //枚举类型需要转换类型，默认为int
-                    builder.AppendLine(isEnum
-                        ? $"             config.{fieldName} = (int){field.Name};"
-                        : $"             config.{fieldName} = {field.Name};");
-                }
-                
-                builder.AppendLine("             return config;");
-                builder.AppendLine("         }");
+
+                builder.AppendLine("            return Task.CompletedTask;");
+                builder.AppendLine("        }");
                 builder.AppendLine("    }");
                 builder.AppendLine("");
             }
@@ -95,6 +88,67 @@ namespace Process.Editor
             builder.AppendLine("}");
             
             ProcessWriter.WriteFile(builder, GlobalPathConfig.NodeDataWriterPath);
+        }
+        
+        /// <summary>
+        /// 自动生成DataNodeReader，用于反序列化数据
+        /// </summary>
+        [MenuItem("Tools/ProcessEditor/GenerateDataNodeReader")]
+        public static void GenerateDataNodeReader()
+        {
+            //先找到所有继承自ProcessNodeBase的类
+            var types = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
+                .ToList();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeReader ***/");
+            builder.AppendLine("using System.IO;");
+            builder.AppendLine("using UnityEngine;");
+            builder.AppendLine("using System.Threading.Tasks;");
+            builder.AppendLine("using Seino.Utils.FastFileReader;");
+            builder.AppendLine("");
+            builder.AppendLine("namespace Process.Runtime");
+            builder.AppendLine("{");
+            
+            foreach (var type in types)
+            {
+                //获取所有带CustomSetting标签且需要导出的字段
+                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p =>
+                    {
+                        var customAttr = p.GetCustomAttribute(typeof(CustomSettingAttribute), false);
+                        if (customAttr is CustomSettingAttribute customSettingAttribute)
+                            return customSettingAttribute.export;
+                        return false;
+                    })
+                    .ToList();
+
+                if (fields.Count == 0)
+                    continue;
+                string className = type.Name.Replace("EditorNode", "Node");
+                builder.AppendLine($"    public class {className}Reader : IFileReader");
+                builder.AppendLine("    {");
+                builder.AppendLine("        public float Progress => 0;");
+                builder.AppendLine("        public bool IsComplete { get; }");
+                builder.AppendLine("");
+                builder.AppendLine("        public Task ReadAsync(BinaryReader reader)");
+                builder.AppendLine("        {");
+
+                foreach (var field in fields)
+                {
+                    builder.AppendLine($"            reader.Read{field.FieldType.Name}();");
+                }
+
+                builder.AppendLine("            return Task.CompletedTask;");
+                builder.AppendLine("        }");
+                builder.AppendLine("    }");
+                builder.AppendLine("");
+            }
+            
+            builder.AppendLine("}");
+            
+            ProcessWriter.WriteFile(builder, GlobalPathConfig.NodeDataReaderPath);
         }
 
         /// <summary>
@@ -113,7 +167,7 @@ namespace Process.Editor
             builder.AppendLine("using System;");
             builder.AppendLine("using UnityEngine;");
             builder.AppendLine("");
-            builder.AppendLine("namespace Process.Common");
+            builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
             
             foreach (var type in types)
@@ -153,7 +207,7 @@ namespace Process.Editor
                 }
                 
                 builder.AppendLine("");
-                builder.AppendLine("         protected override void ReadNodeData(ProcessNodeDataConfig config)");
+                builder.AppendLine("         protected override void ReadNodeData()");
                 builder.AppendLine("         {");
                 
                 //写入字段数据

@@ -1,5 +1,6 @@
 ﻿using Process.Runtime;
 using GraphProcessor;
+using UnityEngine;
 
 namespace Process.Editor
 {
@@ -10,5 +11,17 @@ namespace Process.Editor
         
         [CustomSetting("时间(秒)")]
         public float Time;
+
+        [CustomSetting("")]
+        public ulong uid;
+        
+        [CustomSetting("")]
+        public Quaternion rotation;
+        
+        [CustomSetting("")]
+        public Vector3 scale;
+        
+        [CustomSetting("")]
+        public Color color;
     }
 }

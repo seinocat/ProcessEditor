@@ -18,6 +18,7 @@ MonoBehaviour:
   - rid: 525765135661793294
   - rid: 525765135661793295
   - rid: 525765139367460871
+  - rid: 8003730113316257792
   edges:
   - GUID: 04dd0fd8-86e5-4cbb-a887-7ae812b91898
     owner: {fileID: 11400000}
@@ -43,6 +44,14 @@ MonoBehaviour:
     outputFieldName: Output
     inputPortIdentifier: 
     outputPortIdentifier: 
+  - GUID: f591df8b-f3cd-4a71-ad5e-ea8b824c68a8
+    owner: {fileID: 11400000}
+    inputNodeGUID: 1aa59b55-ff8c-4366-91c2-5097d126171a
+    outputNodeGUID: 1ae7f23b-0907-46d7-85e2-4959f91b77ed
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups: []
   stackNodes: []
   pinnedElements: []
@@ -50,7 +59,7 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -303, y: -37, z: 0}
+  position: {x: -355, y: 109, z: 0}
   scale: {x: 1.3225, y: 1.3225, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
@@ -66,8 +75,8 @@ MonoBehaviour:
         computeOrder: 0
         position:
           serializedVersion: 2
-          x: 572.53546
-          y: 368.00006
+          x: 567
+          y: 286
           width: 99
           height: 75
         expanded: 0
@@ -82,10 +91,10 @@ MonoBehaviour:
         computeOrder: 1
         position:
           serializedVersion: 2
-          x: 715.2576
-          y: 368
-          width: 286
-          height: 248
+          x: 700.707
+          y: 126.69565
+          width: 171
+          height: 151
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -102,8 +111,8 @@ MonoBehaviour:
         computeOrder: 2
         position:
           serializedVersion: 2
-          x: 915.4386
-          y: 368
+          x: 915.707
+          y: 286
           width: 127
           height: 75
         expanded: 1
@@ -118,15 +127,28 @@ MonoBehaviour:
         computeOrder: 3
         position:
           serializedVersion: 2
-          x: 1075.707
-          y: 368
-          width: 205
-          height: 158
+          x: 1081.5
+          y: 286
+          width: 171
+          height: 139
         expanded: 1
         debug: 0
         nodeLock: 0
         NodeOrder: 2
         Time: 0
-        Position:
-          x: 0
-          y: 0
+    - rid: 8003730113316257792
+      type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 1aa59b55-ff8c-4366-91c2-5097d126171a
+        computeOrder: 4
+        position:
+          serializedVersion: 2
+          x: 1303
+          y: 286
+          width: 87
+          height: 75
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: -1

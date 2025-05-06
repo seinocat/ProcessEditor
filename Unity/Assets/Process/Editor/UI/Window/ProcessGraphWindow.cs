@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Process.Runtime;
 using GraphProcessor;
-using ProcessEditor;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -84,6 +83,4 @@ namespace Process.Editor
             rootView.Add(graphView);
         }
     }
-    
-
 }

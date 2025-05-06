@@ -1,0 +1,17 @@
+{
+    "name": "Seino.Utils.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Mathematics",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

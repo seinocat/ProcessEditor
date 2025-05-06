@@ -1,5 +1,4 @@
-﻿using ProcessEditor;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace Process.Editor

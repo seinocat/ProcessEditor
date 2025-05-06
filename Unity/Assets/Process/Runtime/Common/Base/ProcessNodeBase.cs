@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Seino.Utils.FastFileReader;
 using UnityEngine;
 
 namespace Process.Runtime
@@ -66,7 +67,7 @@ namespace Process.Runtime
         /// <summary>
         /// 序列化读取节点数据，需要派生类实现(工具生成)
         /// </summary>
-        protected abstract void ReadNodeData();
+        protected abstract void ReadNodeData(IFileReader reader);
 
         /// <summary>
         /// 清除节点数据，需要派生类实现(工具生成)
@@ -116,7 +117,7 @@ namespace Process.Runtime
             m_IsDirty = false;
             IsSequential = data.IsSequential;
             
-            ReadNodeData();
+            // ReadNodeData();
         }  
         
         /// <summary>
