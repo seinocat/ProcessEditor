@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using Seino.Utils.FastFileReader;
 using UnityEngine;
 
 namespace Process.Runtime
@@ -65,11 +65,6 @@ namespace Process.Runtime
         public abstract bool            IsStart     { get; }
         
         /// <summary>
-        /// 序列化读取节点数据，需要派生类实现(工具生成)
-        /// </summary>
-        protected abstract void ReadNodeData(IFileReader reader);
-
-        /// <summary>
         /// 清除节点数据，需要派生类实现(工具生成)
         /// </summary>
         protected abstract void ClearNodeData();
@@ -116,8 +111,6 @@ namespace Process.Runtime
             SeqStatus = ProcessStatus.Ready;
             m_IsDirty = false;
             IsSequential = data.IsSequential;
-            
-            // ReadNodeData();
         }  
         
         /// <summary>
@@ -317,8 +310,6 @@ namespace Process.Runtime
         #endregion
 
         #region 内部方法
-        
-
 
         /// <summary>
         /// 设置状态
@@ -346,6 +337,12 @@ namespace Process.Runtime
                 Debug.LogWarning($"ProcessNode timeout, process id : {ProcessId}, node type : {Type}");
             }
         }
+
+        #endregion
+
+        #region 二进制读取
+
+        public virtual void ReadNodeData(BinaryReader reader){}
 
         #endregion
     }

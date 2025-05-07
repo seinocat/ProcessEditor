@@ -98,7 +98,7 @@ namespace Seino.Utils.FastFileReader
         {
             try
             {
-#if FAST_FILE_DEBUG
+#if !FAST_FILE_DEBUG
                 long m_StartTime = GetFileTime();
 #endif
                 using (FileStream fileStream = File.OpenRead(filePath))
@@ -109,7 +109,7 @@ namespace Seino.Utils.FastFileReader
                         task.Wait();
                     }
                 }
-#if FAST_FILE_DEBUG
+#if !FAST_FILE_DEBUG
                 Debug.Log($"读取文件 {filePath} 完成，耗时：{GetFileTime() - m_StartTime} ms");
 #endif
             }
@@ -157,6 +157,17 @@ namespace Seino.Utils.FastFileReader
             }
 
             return Task.Run(() => WriteFileByBinary(filePath, file));
+        }
+
+        /// <summary>
+        /// 创建二进制写入流
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static BinaryWriter CreateBinaryWriter(string filePath)
+        {
+            var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            return new BinaryWriter(fileStream);
         }
         
         #endregion

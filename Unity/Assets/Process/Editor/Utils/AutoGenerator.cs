@@ -65,21 +65,16 @@ namespace Process.Editor
                 if (fields.Count == 0)
                     continue;
                 
-                builder.AppendLine($"    public class {type.Name}Writer : IFileWriter");
+                builder.AppendLine($"    public partial class {type.Name}");
                 builder.AppendLine("    {");
-                builder.AppendLine($"        public {type.Name} Data;");
-                builder.AppendLine("        public float Progress => 0;");
-                builder.AppendLine("        public bool IsComplete { get; }");
-                builder.AppendLine("");
-                builder.AppendLine("        public Task WriteAsync(BinaryWriter writer)");
+                builder.AppendLine("        public override void WriteNodeData(BinaryWriter writer)");
                 builder.AppendLine("        {");
 
                 foreach (var field in fields)
                 {
-                    builder.AppendLine($"            writer.Write(Data.{field.Name});");
+                    builder.AppendLine($"            writer.Write({field.Name});");
                 }
-
-                builder.AppendLine("            return Task.CompletedTask;");
+                
                 builder.AppendLine("        }");
                 builder.AppendLine("    }");
                 builder.AppendLine("");
@@ -165,7 +160,11 @@ namespace Process.Editor
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateRuntimeNode ***/");
             builder.AppendLine("using System;");
+            builder.AppendLine("using System.IO;");
             builder.AppendLine("using UnityEngine;");
+            builder.AppendLine("using System.Threading.Tasks;");
+            builder.AppendLine("using Cysharp.Threading.Tasks;");
+            builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
@@ -207,18 +206,17 @@ namespace Process.Editor
                 }
                 
                 builder.AppendLine("");
-                builder.AppendLine("         protected override void ReadNodeData()");
+                builder.AppendLine("         public override void ReadNodeData(BinaryReader reader)");
                 builder.AppendLine("         {");
                 
                 //写入字段数据
                 foreach (var field in fields)
                 {
                     var isEnum = field.FieldType.IsEnum;
-                    var fieldName = GetFieldName(field, ++typeCount[isEnum ? typeof(Enum) : field.FieldType]);
                     //枚举类型需要转换
                     builder.AppendLine(isEnum
-                        ? $"             m_{field.Name} = ({field.FieldType.Name})config.{fieldName};"
-                        : $"             m_{field.Name} = config.{fieldName};");
+                        ? $"             m_{field.Name} = ({field.FieldType.Name})reader.ReadInt32();"
+                        : $"             m_{field.Name} = reader.Read{field.FieldType.Name}();");
                 }
                 
                 builder.AppendLine("         }");
@@ -250,53 +248,7 @@ namespace Process.Editor
             
             ProcessWriter.WriteFile(builder, GlobalPathConfig.RunTimeNodePath);
         }
-
-        /// <summary>
-        /// 自动生成LogicNode，用于逻辑处理
-        /// </summary>
-        // [MenuItem("Tools/ProcessEditor/GenerateLogicNode")]
-        [Obsolete("会覆盖原有的逻辑处理节点")]
-        public static void GenerateLogicNode()
-        {
-            //先找到所有继承自ProcessNodeBase的类
-            var types = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
-                .ToList();
-            
-            foreach (var type in types)
-            {
-                StringBuilder builder = new StringBuilder();
-                builder.AppendLine("using UnityEngine;");
-                builder.AppendLine("");
-                builder.AppendLine("/*** 工具生成 => Tools/ProcessEditor/GenerateLogicNode ***/");
-                builder.AppendLine("namespace Process.Common");
-                builder.AppendLine("{");
-                
-                //获取所有带CustomSetting标签且需要导出的字段
-                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(p =>
-                    {
-                        var customAttr = p.GetCustomAttribute(typeof(CustomSettingAttribute), false);
-                        if (customAttr is CustomSettingAttribute customSettingAttribute)
-                            return customSettingAttribute.export;
-                        return false;
-                    })
-                    .ToList();
-
-                if (fields.Count == 0)
-                    continue;
-                string className = type.Name.Replace("EditorNode", "Node");
-                builder.AppendLine($"    public partial class {className}  : ProcessNodeBase");
-                builder.AppendLine("    {");
-                builder.AppendLine("");
-                builder.AppendLine("    }");
-                builder.AppendLine("");
-                builder.AppendLine("}");
-                ProcessWriter.WriteFile(builder, $"{GlobalPathConfig.LogicNodePath}/{className}.cs");
-            }
-        }
-
-
+        
         /// <summary>
         /// 不需要生成的运行时节点列表
         /// </summary>
@@ -317,7 +269,7 @@ namespace Process.Editor
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateProcessNodePool ***/");
             builder.AppendLine("using UnityEngine;");
             builder.AppendLine("");
-            builder.AppendLine("namespace Process.Common");
+            builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
             builder.AppendLine("    public static class ProcessNodePool");
             builder.AppendLine("    {");

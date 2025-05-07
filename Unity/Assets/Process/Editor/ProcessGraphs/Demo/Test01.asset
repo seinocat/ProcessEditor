@@ -18,7 +18,7 @@ MonoBehaviour:
   - rid: 525765139367460865
   - rid: 525765139367460866
   - rid: 525765139367460867
-  - rid: 525765139367460869
+  - rid: 8003730113316257801
   edges:
   - GUID: 71f6d49c-369e-414c-b872-3586f24b074f
     owner: {fileID: 11400000}
@@ -44,6 +44,14 @@ MonoBehaviour:
     outputFieldName: Output
     inputPortIdentifier: 
     outputPortIdentifier: 
+  - GUID: f0d673ab-ad00-4b1f-b011-bd10605957bd
+    owner: {fileID: 11400000}
+    inputNodeGUID: 523f41f2-5b9d-441c-8228-8238fcf96a61
+    outputNodeGUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups: []
   stackNodes: []
   pinnedElements: []
@@ -51,8 +59,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: 64, y: 267, z: 0}
-  scale: {x: 0.8695652, y: 0.8695652, z: 1}
+  position: {x: -360, y: -49, z: 0}
+  scale: {x: 1.15, y: 1.15, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -91,10 +99,11 @@ MonoBehaviour:
         debug: 0
         nodeLock: 0
         NodeOrder: -1
-        ProcessId: 0
+        ProcessId: 1001
         ProcessDesc: 
         MultiProcess: 1
         AutoExecute: 1
+        Conditions: []
     - rid: 525765139367460866
       type: {class: StartEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -110,7 +119,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-        NodeOrder: -1
+        NodeOrder: 1
     - rid: 525765139367460867
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -126,22 +135,25 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
-        NodeOrder: -1
-        Time: 0
-    - rid: 525765139367460869
-      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+        NodeOrder: 2
+        Time: 250
+        uid: 13232
+        rotation: {x: 1, y: 2, z: 3, w: 4}
+        scale: {x: 1, y: 3, z: 2}
+        color: {r: 0.7830189, g: 0.40258992, b: 0.40258992, a: 0}
+    - rid: 8003730113316257801
+      type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
         nodeCustomName: 
-        GUID: c221934c-9bec-45f6-bf7c-14f897c8cb27
+        GUID: 523f41f2-5b9d-441c-8228-8238fcf96a61
         computeOrder: 4
         position:
           serializedVersion: 2
-          x: 798.0001
-          y: 570.9909
-          width: 171
-          height: 118
+          x: 1600
+          y: 496.03027
+          width: 100
+          height: 100
         expanded: 0
         debug: 0
         nodeLock: 0
-        NodeOrder: -1
-        Time: 0
+        NodeOrder: 3

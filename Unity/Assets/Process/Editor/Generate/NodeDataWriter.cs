@@ -6,47 +6,32 @@ using Seino.Utils.FastFileReader;
 
 namespace Process.Editor
 {
-    public class ConditionEditorNodeWriter : IFileWriter
+    public partial class ConditionEditorNode
     {
-        public ConditionEditorNode Data;
-        public float Progress => 0;
-        public bool IsComplete { get; }
-
-        public Task WriteAsync(BinaryWriter writer)
+        public override void WriteNodeData(BinaryWriter writer)
         {
-            writer.Write(Data.SuccessID);
-            writer.Write(Data.FailID);
-            return Task.CompletedTask;
+            writer.Write(SuccessID);
+            writer.Write(FailID);
         }
     }
 
-    public class SequenceEditorNodeWriter : IFileWriter
+    public partial class SequenceEditorNode
     {
-        public SequenceEditorNode Data;
-        public float Progress => 0;
-        public bool IsComplete { get; }
-
-        public Task WriteAsync(BinaryWriter writer)
+        public override void WriteNodeData(BinaryWriter writer)
         {
-            writer.Write(Data.IsSequential);
-            return Task.CompletedTask;
+            writer.Write(IsSequential);
         }
     }
 
-    public class WaitTimeEditorNodeWriter : IFileWriter
+    public partial class WaitTimeEditorNode
     {
-        public WaitTimeEditorNode Data;
-        public float Progress => 0;
-        public bool IsComplete { get; }
-
-        public Task WriteAsync(BinaryWriter writer)
+        public override void WriteNodeData(BinaryWriter writer)
         {
-            writer.Write(Data.Time);
-            writer.Write(Data.uid);
-            writer.Write(Data.rotation);
-            writer.Write(Data.scale);
-            writer.Write(Data.color);
-            return Task.CompletedTask;
+            writer.Write(Time);
+            writer.Write(uid);
+            writer.Write(rotation);
+            writer.Write(scale);
+            writer.Write(color);
         }
     }
 

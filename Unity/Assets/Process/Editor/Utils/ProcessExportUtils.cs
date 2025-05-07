@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using GraphProcessor;
 using Process.Runtime;
+using Seino.Utils.FastFileReader;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,13 +15,19 @@ namespace Process.Editor
     /// </summary>
     public static class ProcessExportUtils
     {
+        [MenuItem("Assets/Open Process Editor")]
+        public static void TestRead()
+        {
+            ProcessSystem system = new ProcessSystem();
+            system.CreateNodeLink(null, null);
+        }
+        
         /// <summary>
         /// 导出所有流程
         /// </summary>
         /// <returns></returns>
         public static bool ExportAllProcess()
         {
-            GlobalProcessConfig globalProcessConfig = ScriptableObject.CreateInstance<GlobalProcessConfig>();
             var allProcess = ProcessUtils.GetAllProcess();
             foreach (var processGraph in allProcess)
             {
@@ -33,24 +42,16 @@ namespace Process.Editor
                 processGraph.ComputeGraphOrder();
                 
                 var outputNodes = baseNode.GetOutputNodeList();
-                ProcessConfigEditorNode processConfigEditorNode = (ProcessConfigEditorNode)outputNodes.Find((node) => node is ProcessConfigEditorNode);
-                if (processConfigEditorNode == null)
+                ProcessConfigEditorNode node = (ProcessConfigEditorNode)outputNodes.Find((node) => node is ProcessConfigEditorNode);
+                if (node == null)
                 {
                     Debug.LogError("未配置流程配置节点");
                     continue;
                 }
-
-                ProcessConfig processConfig = new ProcessConfig();
-                processConfig.ProcessId = processConfigEditorNode.ProcessId;
-                processConfig.AutoExecute = processConfigEditorNode.AutoExecute;
-                processConfig.MultiProcess = processConfigEditorNode.MultiProcess;
                 
-                processConfig.NodeDataList = GenerateNodeList(processGraph);
-            
-                globalProcessConfig.ProcessList.Add(processConfig);
+                BinaryWriteNodeList(processGraph, node);
             }
-            
-            AssetDatabase.CreateAsset(globalProcessConfig, GlobalPathConfig.ConfigExportPath);
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             
@@ -61,39 +62,73 @@ namespace Process.Editor
         /// 生成节点列表
         /// </summary>
         /// <param name="graphBase"></param>
+        /// <param name="nodeData"></param>
         /// <returns></returns>
-        public static List<ProcessNodeData> GenerateNodeList(ProcessGraphBase graphBase)
+        public static void BinaryWriteNodeList(ProcessGraphBase graphBase, ProcessConfigEditorNode nodeData) 
         {
-            List<ProcessNodeData> nodeList = new List<ProcessNodeData>();
+            var writer = FastFileUtils.CreateBinaryWriter(
+                $"{Application.streamingAssetsPath}/Process_{nodeData.ProcessId}.bytes");
+            
+            // 写入基本数据
+            writer.Write(nodeData.ProcessId);
+            writer.Write(nodeData.AutoExecute);
+            writer.Write(nodeData.MultiProcess);
+            writer.Write(nodeData.Conditions.Count);
+
+            // 写入条件数据
+            for (int i = 0; i < nodeData.Conditions.Count; i++)
+            {
+                var condition = nodeData.Conditions[i];
+                writer.Write(condition.Type);
+                writer.Write(condition.Id);
+                writer.Write(condition.Value1);
+                writer.Write(condition.Value2);
+                writer.Write(condition.IsAnd);
+            }
+            
+            // 写入节点数据
             List<BaseNode> nodes = graphBase.nodes;
+            writer.Write(nodes.Count(x=> x is not EditorEditorNode));
+            
             foreach (var baseNode in nodes)
             {
                 if (baseNode is EditorEditorNode)
                     continue;
                 
-                var nodeData = GenerateNodeData(baseNode as ProcessEditorNodeBase);
-                if (nodeData.Type != ProcessNodeType.Sequence)
-                    nodeList.Add(nodeData);
+                BinaryWriteNodeData(baseNode as ProcessEditorNodeBase, writer);
             }
-            return nodeList;
+            
+            // 释放写入器
+            writer.Dispose();
         }
-        
+
         /// <summary>
-        /// 生成节点数据
+        /// 写入节点数据
         /// </summary>
-        /// <param name="baseEditorNode"></param>
+        /// <param name="baseNode"></param>
+        /// <param name="writer"></param>
         /// <returns></returns>
-        public static ProcessNodeData GenerateNodeData(ProcessEditorNodeBase baseEditorNode)
+        public static void BinaryWriteNodeData(ProcessEditorNodeBase baseNode, BinaryWriter writer)
         {
-            ProcessNodeData processNodeData = new ProcessNodeData();
-            processNodeData.Order = baseEditorNode.NodeOrder;
-            processNodeData.Type = baseEditorNode.Type;
-            // processNodeData.Data = baseEditorNode.WriteNodeData();
-            var (orderList, seqOrderList, isOrder) = GetNextNodeOrderList(baseEditorNode);
-            processNodeData.NextNodeOrderList = orderList;
-            processNodeData.SequenceNodeOrderList = seqOrderList;
-            processNodeData.IsSequential = isOrder;
-            return processNodeData;
+            var (orderList, seqOrderList, isOrder) = GetNextNodeOrderList(baseNode);
+            
+            writer.Write((int)baseNode.Type);
+            writer.Write(baseNode.NodeOrder);
+            writer.Write(orderList.Count);
+
+            for (int i = 0; i < orderList.Count; i++)
+            {
+                writer.Write(orderList[i]);
+            }
+            
+            writer.Write(isOrder);
+            writer.Write(seqOrderList.Count);
+            for (int i = 0; i < seqOrderList.Count; i++)
+            {
+                writer.Write(seqOrderList[i]);
+            }
+            
+            baseNode.WriteNodeData(writer);
         }
 
         /// <summary>

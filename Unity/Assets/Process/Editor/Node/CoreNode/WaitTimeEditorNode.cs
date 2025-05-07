@@ -12,16 +12,16 @@ namespace Process.Editor
         [CustomSetting("时间(秒)")]
         public float Time;
 
-        [CustomSetting("")]
+        [CustomSetting("Uid")]
         public ulong uid;
         
-        [CustomSetting("")]
+        [CustomSetting("旋转")]
         public Quaternion rotation;
         
-        [CustomSetting("")]
+        [CustomSetting("缩放")]
         public Vector3 scale;
         
-        [CustomSetting("")]
+        [CustomSetting("颜色")]
         public Color color;
     }
 }

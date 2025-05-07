@@ -1,4 +1,5 @@
-﻿using Process.Runtime;
+﻿using System.IO;
+using Process.Runtime;
 using GraphProcessor;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace Process.Editor
         /// 配置数据序列化方法，需要派生类实现
         /// </summary>
         /// <returns></returns>
-        public virtual void WriteNodeData(){}
+        public virtual void WriteNodeData(BinaryWriter writer){}
         
         public virtual void UpdateForExport(){}
 

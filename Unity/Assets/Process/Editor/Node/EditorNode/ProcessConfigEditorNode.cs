@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using GraphProcessor;
+using Process.Runtime;
 
 namespace Process.Editor
 {
@@ -17,13 +19,16 @@ namespace Process.Editor
         [CustomSetting("流程ID(必填)")] 
         public int ProcessId;
         
-        [CustomSetting("流程说明")] 
-        public string ProcessDesc;
-        
         [CustomSetting("允许同时执行")]
         public bool MultiProcess = true;
         
         [CustomSetting("自动触发")] 
-        public bool AutoExecute = true;
+        public bool AutoExecute;
+        
+        [CustomSetting("条件列表"), VisibleIf("AutoExecute", true)]
+        public List<ProcessConditionData> Conditions;
+        
+        [CustomSetting("备注", false)] 
+        public string ProcessDesc;
     }
 }

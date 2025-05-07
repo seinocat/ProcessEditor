@@ -246,7 +246,6 @@ namespace Process.Editor
                             }
                         }
                     }
-                    
                 }
             }
             //Scroll定位

@@ -28,12 +28,12 @@ namespace Process.Runtime
     [Serializable]
     public class ProcessNodeData
     {
-        public int Order;
         public ProcessNodeType Type;
+        public int Order;
         public int NextNodeCount;
         public List<int> NextNodeOrderList;
+        public bool IsSequential;
         public int SeqNodeCount;
         public List<int> SequenceNodeOrderList;
-        public bool IsSequential;
     }
 }
