@@ -23,5 +23,8 @@ namespace Process.Editor
         
         [CustomSetting("颜色")]
         public Color color;
+        
+        [CustomSetting("过渡类型")]
+        public eFadeType fadeType;
     }
 }

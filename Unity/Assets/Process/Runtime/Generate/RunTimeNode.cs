@@ -70,6 +70,7 @@ namespace Process.Runtime
          private Quaternion m_rotation;
          private Vector3 m_scale;
          private Color m_color;
+         private eFadeType m_fadeType;
 
          public override void ReadNodeData(ProcessNodeParam data)
          {
@@ -80,6 +81,7 @@ namespace Process.Runtime
                  m_rotation = paramData.rotation;
                  m_scale = paramData.scale;
                  m_color = paramData.color;
+                 m_fadeType = (eFadeType)paramData.fadeType;
              }
          }
 
@@ -90,6 +92,7 @@ namespace Process.Runtime
              m_rotation = Quaternion.identity;
              m_scale = Vector3.zero;
              m_color = Color.black;
+             m_fadeType = default;
          }
 
          public override void Recycle()

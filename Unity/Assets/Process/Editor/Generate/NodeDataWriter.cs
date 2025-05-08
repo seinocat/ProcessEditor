@@ -1,7 +1,5 @@
 ﻿/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeWriter ***/
 using System.IO;
-using UnityEngine;
-using System.Threading.Tasks;
 using Seino.Utils.FastFileReader;
 
 namespace Process.Editor
@@ -32,6 +30,7 @@ namespace Process.Editor
             writer.Write(rotation);
             writer.Write(scale);
             writer.Write(color);
+            writer.Write((int)fadeType);
         }
     }
 

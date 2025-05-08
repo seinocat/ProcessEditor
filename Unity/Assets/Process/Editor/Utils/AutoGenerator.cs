@@ -41,8 +41,6 @@ namespace Process.Editor
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeWriter ***/");
             builder.AppendLine("using System.IO;");
-            builder.AppendLine("using UnityEngine;");
-            builder.AppendLine("using System.Threading.Tasks;");
             builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Editor");
@@ -71,7 +69,11 @@ namespace Process.Editor
 
                 foreach (var field in fields)
                 {
-                    builder.AppendLine($"            writer.Write({field.Name});");
+                    var isEnum = field.FieldType.IsEnum;
+                    //枚举类型需要转换
+                    builder.AppendLine(isEnum
+                        ? $"            writer.Write((int){field.Name});"
+                        : $"            writer.Write({field.Name});");
                 }
                 
                 builder.AppendLine("        }");
@@ -99,7 +101,6 @@ namespace Process.Editor
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeReader ***/");
             builder.AppendLine("using System.IO;");
             builder.AppendLine("using UnityEngine;");
-            builder.AppendLine("using System.Threading.Tasks;");
             builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
@@ -133,7 +134,12 @@ namespace Process.Editor
                 builder.AppendLine("        {");
                 foreach (var field in fields)
                 {
-                    builder.AppendLine($"            {field.Name} = reader.Read{field.FieldType.Name}();");
+                    var isEnum = field.FieldType.IsEnum;
+                    //枚举类型需要转换
+                    builder.AppendLine(isEnum
+                        ? $"            {field.Name} = ({field.FieldType.Name})reader.ReadInt32();"
+                        : $"            {field.Name} = reader.Read{field.FieldType.Name}();");
+                    
                 }
                 builder.AppendLine("        }");
                 

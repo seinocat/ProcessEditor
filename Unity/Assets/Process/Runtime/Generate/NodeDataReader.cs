@@ -1,7 +1,6 @@
 ﻿/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeReader ***/
 using System.IO;
 using UnityEngine;
-using System.Threading.Tasks;
 using Seino.Utils.FastFileReader;
 
 namespace Process.Runtime
@@ -35,6 +34,7 @@ namespace Process.Runtime
         public Quaternion rotation;
         public Vector3 scale;
         public Color color;
+        public eFadeType fadeType;
 
         public override void ReadNodeData(BinaryReader reader)
         {
@@ -43,6 +43,7 @@ namespace Process.Runtime
             rotation = reader.ReadQuaternion();
             scale = reader.ReadVector3();
             color = reader.ReadColor();
+            fadeType = (eFadeType)reader.ReadInt32();
         }
     }
 
