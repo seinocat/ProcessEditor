@@ -5,7 +5,7 @@ using Process.Runtime;
 namespace Process.Editor
 {
     [NodeMenuItem((int)ProcessNodeType.Empty), ProcessNode, Serializable]
-    public class EmptyEditorNode : ProcessEditorNodeBase
+    public class EmptyEditorNode : CommonEditorNode
     {
         public override ProcessNodeType Type => ProcessNodeType.Empty;
     }

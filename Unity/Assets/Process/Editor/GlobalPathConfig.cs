@@ -13,8 +13,6 @@ namespace Process.Editor
         public const string GraphsRelativePath  = "Process/Editor/ProcessGraphs";
         //节点分组配置路径
         public const string ResIconPath         = RootPath +  "/Editor/Resource/Icon";
-        //导出配置路径
-        public static readonly string ConfigExportPath  = $"{RootPath}/Export/{nameof(GlobalProcessConfig)}.asset";
         //编辑器逻辑节点路径
         public static string EditorNodePath             => Application.dataPath + "/Process/Editor/Node/Logic";
         //运行时节点类型路径

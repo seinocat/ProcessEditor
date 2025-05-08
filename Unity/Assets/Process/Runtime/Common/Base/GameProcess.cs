@@ -13,7 +13,7 @@ namespace Process.Runtime
         /// <summary>
         /// 流程ID
         /// </summary>
-        public int                      ProcessId;
+        public ulong                    ProcessId;
         
         /// <summary>
         /// 流程状态

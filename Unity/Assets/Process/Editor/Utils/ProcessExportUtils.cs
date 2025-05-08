@@ -16,10 +16,11 @@ namespace Process.Editor
     public static class ProcessExportUtils
     {
         [MenuItem("Assets/Open Process Editor")]
-        public static void TestRead()
+        public static async void TestRead()
         {
             ProcessSystem system = new ProcessSystem();
-            system.CreateNodeLink(null, null);
+            await system.LoadConfigs();
+            var process = system.CreateProcess(1008, null);
         }
         
         /// <summary>
@@ -28,7 +29,12 @@ namespace Process.Editor
         /// <returns></returns>
         public static bool ExportAllProcess()
         {
+             var writer = FastFileUtils.CreateBinaryWriter(
+                            $"{Application.streamingAssetsPath}/Events.bytes");
+            
             var allProcess = ProcessUtils.GetAllProcess();
+            writer.Write(allProcess.Count);
+            
             foreach (var processGraph in allProcess)
             {
                 //根节点
@@ -49,9 +55,12 @@ namespace Process.Editor
                     continue;
                 }
                 
-                BinaryWriteNodeList(processGraph, node);
+                BinaryWriteNodeList(processGraph, node, writer);
             }
 
+            // 释放写入器
+            writer.Dispose();
+            
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             
@@ -63,12 +72,10 @@ namespace Process.Editor
         /// </summary>
         /// <param name="graphBase"></param>
         /// <param name="nodeData"></param>
+        /// <param name="writer"></param>
         /// <returns></returns>
-        public static void BinaryWriteNodeList(ProcessGraphBase graphBase, ProcessConfigEditorNode nodeData) 
+        public static void BinaryWriteNodeList(ProcessGraphBase graphBase, ProcessConfigEditorNode nodeData, BinaryWriter writer) 
         {
-            var writer = FastFileUtils.CreateBinaryWriter(
-                $"{Application.streamingAssetsPath}/Process_{nodeData.ProcessId}.bytes");
-            
             // 写入基本数据
             writer.Write(nodeData.ProcessId);
             writer.Write(nodeData.AutoExecute);
@@ -97,9 +104,6 @@ namespace Process.Editor
                 
                 BinaryWriteNodeData(baseNode as ProcessEditorNodeBase, writer);
             }
-            
-            // 释放写入器
-            writer.Dispose();
         }
 
         /// <summary>

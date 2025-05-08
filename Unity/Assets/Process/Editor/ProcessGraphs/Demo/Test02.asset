@@ -18,10 +18,41 @@ MonoBehaviour:
   - rid: 525765135661793294
   - rid: 525765135661793295
   - rid: 525765139367460871
-  - rid: 8003730113316257792
   - rid: 8003730132929085440
   - rid: 8003730132929085441
   - rid: 8003730132929085442
+  - rid: 8003730137690144768
+  - rid: 8003730137690144769
+  - rid: 8003730137690144770
+  - rid: 8003730137690144771
+  - rid: 8003730137690144772
+  - rid: 8003730137690144773
+  - rid: 8003730137690144774
+  - rid: 8003730137690144775
+  - rid: 8003730137690144776
+  - rid: 8003730137690144777
+  - rid: 8003730137690144778
+  - rid: 8003730137690144779
+  - rid: 8003730137690144780
+  - rid: 8003730137690144781
+  - rid: 8003730137690144782
+  - rid: 8003730137690144783
+  - rid: 8003730137690144784
+  - rid: 8003730137690144785
+  - rid: 8003730137690144786
+  - rid: 8003730137690144787
+  - rid: 8003730137690144788
+  - rid: 8003730137690144789
+  - rid: 8003730137690144790
+  - rid: 8003730137690144791
+  - rid: 8003730137690144793
+  - rid: 8003730137690144794
+  - rid: 8003730137690144795
+  - rid: 8003730137690144796
+  - rid: 8003730137690144797
+  - rid: 8003730137690144798
+  - rid: 8003730137690144799
+  - rid: 8003730137690144800
   edges:
   - GUID: 04dd0fd8-86e5-4cbb-a887-7ae812b91898
     owner: {fileID: 11400000}
@@ -43,14 +74,6 @@ MonoBehaviour:
     owner: {fileID: 11400000}
     inputNodeGUID: 1ae7f23b-0907-46d7-85e2-4959f91b77ed
     outputNodeGUID: bb316934-95cc-4fdc-a3fb-d60785a2428e
-    inputFieldName: Input
-    outputFieldName: Output
-    inputPortIdentifier: 
-    outputPortIdentifier: 
-  - GUID: f591df8b-f3cd-4a71-ad5e-ea8b824c68a8
-    owner: {fileID: 11400000}
-    inputNodeGUID: 1aa59b55-ff8c-4366-91c2-5097d126171a
-    outputNodeGUID: 1ae7f23b-0907-46d7-85e2-4959f91b77ed
     inputFieldName: Input
     outputFieldName: Output
     inputPortIdentifier: 
@@ -79,6 +102,262 @@ MonoBehaviour:
     outputFieldName: Sequences
     inputPortIdentifier: 
     outputPortIdentifier: 2
+  - GUID: e4c8bb2f-ef28-4159-9cbc-34c7bf586d51
+    owner: {fileID: 11400000}
+    inputNodeGUID: f5d1844a-640b-4a17-a10a-a46d994e1987
+    outputNodeGUID: 1ae7f23b-0907-46d7-85e2-4959f91b77ed
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 43cadc85-f7f7-4eb7-af39-70d5c4e4dc9c
+    owner: {fileID: 11400000}
+    inputNodeGUID: 2b97edb8-6daf-4d73-a341-b56e7929f5d0
+    outputNodeGUID: f5d1844a-640b-4a17-a10a-a46d994e1987
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 582e982e-1be7-4aea-9980-d12ad8299659
+    owner: {fileID: 11400000}
+    inputNodeGUID: 167985b9-932d-4bc2-9c15-355b4c37c387
+    outputNodeGUID: 2b97edb8-6daf-4d73-a341-b56e7929f5d0
+    inputFieldName: Input
+    outputFieldName: Sequence
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: c54f815b-79bc-4e23-b175-27f8c015fc53
+    owner: {fileID: 11400000}
+    inputNodeGUID: 6dd138ed-b0f0-43c1-aa05-46e8a282a550
+    outputNodeGUID: 167985b9-932d-4bc2-9c15-355b4c37c387
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 1
+  - GUID: d27a9d26-1a2e-4caa-a467-e0a9d9c44676
+    owner: {fileID: 11400000}
+    inputNodeGUID: f3e62ce3-ccb4-45ef-9419-efd21a2fd325
+    outputNodeGUID: 167985b9-932d-4bc2-9c15-355b4c37c387
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 2
+  - GUID: afe05311-4fcd-484a-ba28-538a962f6b39
+    owner: {fileID: 11400000}
+    inputNodeGUID: 8e2c384a-c4ed-47ae-89b7-2b57fafd6995
+    outputNodeGUID: 167985b9-932d-4bc2-9c15-355b4c37c387
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 3
+  - GUID: befd2e8d-80b7-48c3-a48e-4b7565013661
+    owner: {fileID: 11400000}
+    inputNodeGUID: b4b3b9a6-a794-4d10-ae8d-897f6576c7d5
+    outputNodeGUID: 167985b9-932d-4bc2-9c15-355b4c37c387
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 4
+  - GUID: 748b6665-c3a2-48ec-a002-fc384b9ebfa2
+    owner: {fileID: 11400000}
+    inputNodeGUID: 2491eca2-3d54-4571-a021-85207a32b0b9
+    outputNodeGUID: 2b97edb8-6daf-4d73-a341-b56e7929f5d0
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 4e447804-f6bb-4c3d-9dc3-4a5c6fea43d3
+    owner: {fileID: 11400000}
+    inputNodeGUID: 5de19514-202c-454d-a809-b139a29261b3
+    outputNodeGUID: 2491eca2-3d54-4571-a021-85207a32b0b9
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: d78a0853-05dc-41fc-88e6-db694ef53b7d
+    owner: {fileID: 11400000}
+    inputNodeGUID: 39d794de-cbf1-42fc-b7cf-1623fcbc044f
+    outputNodeGUID: 5de19514-202c-454d-a809-b139a29261b3
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 684c683e-736b-4fd4-be2b-5a7d053cc9ed
+    owner: {fileID: 11400000}
+    inputNodeGUID: 374224c2-3126-4d2e-b6c2-57764447aefa
+    outputNodeGUID: 39d794de-cbf1-42fc-b7cf-1623fcbc044f
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: df2703a4-875a-4cf3-a746-e5ac34e64f2a
+    owner: {fileID: 11400000}
+    inputNodeGUID: 6927eaef-8b86-4fb0-8ffc-6966de5b1f40
+    outputNodeGUID: 374224c2-3126-4d2e-b6c2-57764447aefa
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 54106522-c54e-402e-84a8-94ae1a006ef5
+    owner: {fileID: 11400000}
+    inputNodeGUID: 56106f25-de69-45a9-87cb-f1ebe29c2d29
+    outputNodeGUID: 6927eaef-8b86-4fb0-8ffc-6966de5b1f40
+    inputFieldName: Input
+    outputFieldName: Sequence
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: c7695014-89fa-4e11-b044-3903e4c63c44
+    owner: {fileID: 11400000}
+    inputNodeGUID: 5ea121d0-6dcf-4af1-ac1a-4e0dabc173e9
+    outputNodeGUID: 56106f25-de69-45a9-87cb-f1ebe29c2d29
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 1
+  - GUID: bf9f68d6-fed8-4d85-b336-15b40c5118cd
+    owner: {fileID: 11400000}
+    inputNodeGUID: bf5d57d8-693b-4629-9270-3ce441a71f0a
+    outputNodeGUID: 56106f25-de69-45a9-87cb-f1ebe29c2d29
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 2
+  - GUID: b4886cf0-01ce-4fa2-a484-32f282fe66f4
+    owner: {fileID: 11400000}
+    inputNodeGUID: c160807a-74bc-4317-8777-e74aef935a3e
+    outputNodeGUID: 6927eaef-8b86-4fb0-8ffc-6966de5b1f40
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: a5c226ea-cd61-4980-acfc-c6afc4f258b3
+    owner: {fileID: 11400000}
+    inputNodeGUID: a0335994-4cbf-42ed-b88f-b4931bc21685
+    outputNodeGUID: c160807a-74bc-4317-8777-e74aef935a3e
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 04ab1c3f-2743-482f-8cbb-4b635ed4202e
+    owner: {fileID: 11400000}
+    inputNodeGUID: d48c2bf7-6667-4367-9167-41a3bced4e0d
+    outputNodeGUID: 810b183c-5c0a-4269-960b-8b2510e18f1f
+    inputFieldName: Input
+    outputFieldName: Sequence
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 24769fbd-c342-4299-abf7-4170712d83ab
+    owner: {fileID: 11400000}
+    inputNodeGUID: 810b183c-5c0a-4269-960b-8b2510e18f1f
+    outputNodeGUID: a0335994-4cbf-42ed-b88f-b4931bc21685
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 2bfe82d6-6526-4115-9c31-90bc097c54a4
+    owner: {fileID: 11400000}
+    inputNodeGUID: 13415a8e-cb0f-43c6-b625-e11d981ee455
+    outputNodeGUID: d48c2bf7-6667-4367-9167-41a3bced4e0d
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 1
+  - GUID: 5034d9fc-4304-4ced-a7fc-0c0f644797f1
+    owner: {fileID: 11400000}
+    inputNodeGUID: 3ef67cc0-5f6e-4c2e-ae64-dfcb9b705f92
+    outputNodeGUID: d48c2bf7-6667-4367-9167-41a3bced4e0d
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 2
+  - GUID: 453f67b3-7bcd-4b89-a230-8f91afed6330
+    owner: {fileID: 11400000}
+    inputNodeGUID: 0890ccd6-77a2-4843-9fb4-de35de21655f
+    outputNodeGUID: 810b183c-5c0a-4269-960b-8b2510e18f1f
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 20378065-f4a0-4627-92f1-67a19a729d45
+    owner: {fileID: 11400000}
+    inputNodeGUID: 3fc145c3-74e0-4df8-9215-56a9578df937
+    outputNodeGUID: 0890ccd6-77a2-4843-9fb4-de35de21655f
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 2f1b1df4-6f30-4c6a-99a5-cb4825f2f039
+    owner: {fileID: 11400000}
+    inputNodeGUID: 2c67bc75-4954-4fcb-8ee2-203558c65d4d
+    outputNodeGUID: 3fc145c3-74e0-4df8-9215-56a9578df937
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 844def74-9c57-4a02-9de2-69d397bf2e2e
+    owner: {fileID: 11400000}
+    inputNodeGUID: b8650267-f70d-4e8b-92ff-1a255727c216
+    outputNodeGUID: 6f38885e-054e-4293-8d58-0eaa10874adf
+    inputFieldName: Input
+    outputFieldName: Sequence
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: c3417c26-9dee-4cbd-9f4d-60e4c160ad26
+    owner: {fileID: 11400000}
+    inputNodeGUID: 6f38885e-054e-4293-8d58-0eaa10874adf
+    outputNodeGUID: 2c67bc75-4954-4fcb-8ee2-203558c65d4d
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 0423a89e-a88f-4323-b9d5-fe2e5b0f4935
+    owner: {fileID: 11400000}
+    inputNodeGUID: b5febadc-6e13-4042-aab5-bfaf60382a79
+    outputNodeGUID: b8650267-f70d-4e8b-92ff-1a255727c216
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 1
+  - GUID: b5561178-3bbd-4ddf-8731-c4fdf10783f1
+    owner: {fileID: 11400000}
+    inputNodeGUID: b419f9b0-cdb5-4f51-9bca-9cf62d055261
+    outputNodeGUID: b8650267-f70d-4e8b-92ff-1a255727c216
+    inputFieldName: Input
+    outputFieldName: Sequences
+    inputPortIdentifier: 
+    outputPortIdentifier: 2
+  - GUID: ccdf1208-4490-4e7f-a9d6-c80087370581
+    owner: {fileID: 11400000}
+    inputNodeGUID: e3afcadd-6d6a-4de1-9fce-4f8733162bc6
+    outputNodeGUID: 6f38885e-054e-4293-8d58-0eaa10874adf
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 0dfd710b-f433-4e7a-bc9f-2441a8ed1991
+    owner: {fileID: 11400000}
+    inputNodeGUID: c82b83f3-0182-4adf-90c8-4227e3098c9e
+    outputNodeGUID: e3afcadd-6d6a-4de1-9fce-4f8733162bc6
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 583e1ae9-660a-48b4-9d0e-7d068a0cee09
+    owner: {fileID: 11400000}
+    inputNodeGUID: 694a6cfc-0581-4e75-93dc-18efcd4e7bae
+    outputNodeGUID: c82b83f3-0182-4adf-90c8-4227e3098c9e
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 1d15e0b2-c5f5-45e6-bc94-db1c1006c74a
+    owner: {fileID: 11400000}
+    inputNodeGUID: 6be69081-16e2-4100-bf51-b821f4ea8df8
+    outputNodeGUID: 694a6cfc-0581-4e75-93dc-18efcd4e7bae
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups: []
   stackNodes: []
   pinnedElements: []
@@ -86,8 +365,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -344, y: 57, z: 0}
-  scale: {x: 0.7561437, y: 0.7561437, z: 1}
+  position: {x: -2907, y: -892, z: 0}
+  scale: {x: 2, y: 2, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -168,36 +447,20 @@ MonoBehaviour:
         rotation: {x: 0, y: 0, z: 0, w: 0}
         scale: {x: 0, y: 0, z: 0}
         color: {r: 0, g: 0, b: 0, a: 0}
-    - rid: 8003730113316257792
-      type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
-      data:
-        nodeCustomName: 
-        GUID: 1aa59b55-ff8c-4366-91c2-5097d126171a
-        computeOrder: 4
-        position:
-          serializedVersion: 2
-          x: 1565.1287
-          y: 248.5
-          width: 87
-          height: 75
-        expanded: 0
-        debug: 0
-        nodeLock: 0
-        NodeOrder: 6
     - rid: 8003730132929085440
       type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
         nodeCustomName: 
         GUID: d0faccea-9201-40f0-81b5-71e53c48aad2
-        computeOrder: 5
+        computeOrder: 4
         position:
           serializedVersion: 2
-          x: 1498.6768
-          y: 629.8677
-          width: 100
-          height: 100
+          x: 1499
+          y: 639
+          width: 171
+          height: 137
         expanded: 0
-        debug: 0
+        debug: 1
         nodeLock: 0
         NodeOrder: 3
         IsSequential: 1
@@ -207,7 +470,7 @@ MonoBehaviour:
       data:
         nodeCustomName: 
         GUID: fdfaa500-39dc-437f-a958-3d9b45d7dc7a
-        computeOrder: 6
+        computeOrder: 5
         position:
           serializedVersion: 2
           x: 1712.2158
@@ -215,7 +478,7 @@ MonoBehaviour:
           width: 345
           height: 196
         expanded: 0
-        debug: 0
+        debug: 1
         nodeLock: 0
         NodeOrder: 4
         Time: 0
@@ -228,7 +491,7 @@ MonoBehaviour:
       data:
         nodeCustomName: 
         GUID: 9468cb67-c362-4599-92d5-a6c225dfa88f
-        computeOrder: 7
+        computeOrder: 6
         position:
           serializedVersion: 2
           x: 1712
@@ -236,7 +499,7 @@ MonoBehaviour:
           width: 345
           height: 196
         expanded: 0
-        debug: 0
+        debug: 1
         nodeLock: 0
         NodeOrder: 5
         Time: 0
@@ -244,3 +507,628 @@ MonoBehaviour:
         rotation: {x: 0, y: 0, z: 0, w: 0}
         scale: {x: 0, y: 0, z: 0}
         color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144768
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: f5d1844a-640b-4a17-a10a-a46d994e1987
+        computeOrder: 7
+        position:
+          serializedVersion: 2
+          x: 1499
+          y: 154.42879
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 6
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144769
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 2b97edb8-6daf-4d73-a341-b56e7929f5d0
+        computeOrder: 8
+        position:
+          serializedVersion: 2
+          x: 1926
+          y: 154
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 7
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144770
+      type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 167985b9-932d-4bc2-9c15-355b4c37c387
+        computeOrder: 9
+        position:
+          serializedVersion: 2
+          x: 2264.8516
+          y: 853.00006
+          width: 171
+          height: 185
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 8
+        IsSequential: 1
+        PortCount: 4
+    - rid: 8003730137690144771
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 6dd138ed-b0f0-43c1-aa05-46e8a282a550
+        computeOrder: 10
+        position:
+          serializedVersion: 2
+          x: 2567.8516
+          y: 514
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 9
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144772
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: f3e62ce3-ccb4-45ef-9419-efd21a2fd325
+        computeOrder: 11
+        position:
+          serializedVersion: 2
+          x: 2568
+          y: 733
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 10
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144773
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 8e2c384a-c4ed-47ae-89b7-2b57fafd6995
+        computeOrder: 12
+        position:
+          serializedVersion: 2
+          x: 2567.8516
+          y: 964.00006
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 11
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144774
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: b4b3b9a6-a794-4d10-ae8d-897f6576c7d5
+        computeOrder: 13
+        position:
+          serializedVersion: 2
+          x: 2567.8516
+          y: 1189.0001
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 12
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144775
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 2491eca2-3d54-4571-a021-85207a32b0b9
+        computeOrder: 14
+        position:
+          serializedVersion: 2
+          x: 2546.5886
+          y: 153.99995
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 13
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144776
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 5de19514-202c-454d-a809-b139a29261b3
+        computeOrder: 15
+        position:
+          serializedVersion: 2
+          x: 2983.2
+          y: 154.00002
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 14
+    - rid: 8003730137690144777
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 39d794de-cbf1-42fc-b7cf-1623fcbc044f
+        computeOrder: 16
+        position:
+          serializedVersion: 2
+          x: 3166.3
+          y: 154.00002
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 15
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144778
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 374224c2-3126-4d2e-b6c2-57764447aefa
+        computeOrder: 17
+        position:
+          serializedVersion: 2
+          x: 3590.2002
+          y: 155.00009
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 16
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144779
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 6927eaef-8b86-4fb0-8ffc-6966de5b1f40
+        computeOrder: 18
+        position:
+          serializedVersion: 2
+          x: 3992
+          y: 155
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 17
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144780
+      type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 56106f25-de69-45a9-87cb-f1ebe29c2d29
+        computeOrder: 19
+        position:
+          serializedVersion: 2
+          x: 3987.4106
+          y: 569.9999
+          width: 171
+          height: 137
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 18
+        IsSequential: 1
+        PortCount: 2
+    - rid: 8003730137690144781
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 5ea121d0-6dcf-4af1-ac1a-4e0dabc173e9
+        computeOrder: 20
+        position:
+          serializedVersion: 2
+          x: 4269.4106
+          y: 439.99994
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 19
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144782
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: bf5d57d8-693b-4629-9270-3ce441a71f0a
+        computeOrder: 21
+        position:
+          serializedVersion: 2
+          x: 4269.4106
+          y: 683.9999
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 20
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144783
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: c160807a-74bc-4317-8777-e74aef935a3e
+        computeOrder: 22
+        position:
+          serializedVersion: 2
+          x: 4479
+          y: 155
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 21
+    - rid: 8003730137690144784
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: a0335994-4cbf-42ed-b88f-b4931bc21685
+        computeOrder: 23
+        position:
+          serializedVersion: 2
+          x: 4662
+          y: 156
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 22
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144785
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 810b183c-5c0a-4269-960b-8b2510e18f1f
+        computeOrder: 24
+        position:
+          serializedVersion: 2
+          x: 5270.1895
+          y: 153.00006
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 23
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144786
+      type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: d48c2bf7-6667-4367-9167-41a3bced4e0d
+        computeOrder: 25
+        position:
+          serializedVersion: 2
+          x: 5108.1895
+          y: 569.99994
+          width: 171
+          height: 137
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 24
+        IsSequential: 1
+        PortCount: 2
+    - rid: 8003730137690144787
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 13415a8e-cb0f-43c6-b625-e11d981ee455
+        computeOrder: 26
+        position:
+          serializedVersion: 2
+          x: 5390.1895
+          y: 440.00006
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 25
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144788
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 3ef67cc0-5f6e-4c2e-ae64-dfcb9b705f92
+        computeOrder: 27
+        position:
+          serializedVersion: 2
+          x: 5390.1895
+          y: 684.00006
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 26
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144789
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 0890ccd6-77a2-4843-9fb4-de35de21655f
+        computeOrder: 28
+        position:
+          serializedVersion: 2
+          x: 5757.1895
+          y: 153.00006
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 27
+    - rid: 8003730137690144790
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 3fc145c3-74e0-4df8-9215-56a9578df937
+        computeOrder: 29
+        position:
+          serializedVersion: 2
+          x: 5940.1895
+          y: 154
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 28
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144791
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 2c67bc75-4954-4fcb-8ee2-203558c65d4d
+        computeOrder: 30
+        position:
+          serializedVersion: 2
+          x: 6358.6577
+          y: 156.00005
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 29
+    - rid: 8003730137690144793
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 6f38885e-054e-4293-8d58-0eaa10874adf
+        computeOrder: 31
+        position:
+          serializedVersion: 2
+          x: 6638.4653
+          y: 156.00006
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 30
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144794
+      type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: b8650267-f70d-4e8b-92ff-1a255727c216
+        computeOrder: 32
+        position:
+          serializedVersion: 2
+          x: 6476.4653
+          y: 573.0001
+          width: 171
+          height: 137
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 31
+        IsSequential: 1
+        PortCount: 2
+    - rid: 8003730137690144795
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: b5febadc-6e13-4042-aab5-bfaf60382a79
+        computeOrder: 33
+        position:
+          serializedVersion: 2
+          x: 6758.4653
+          y: 443.0001
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 32
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144796
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: b419f9b0-cdb5-4f51-9bca-9cf62d055261
+        computeOrder: 34
+        position:
+          serializedVersion: 2
+          x: 6758.4653
+          y: 687
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 33
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144797
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: e3afcadd-6d6a-4de1-9fce-4f8733162bc6
+        computeOrder: 35
+        position:
+          serializedVersion: 2
+          x: 7125.4653
+          y: 156.00006
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 34
+    - rid: 8003730137690144798
+      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: c82b83f3-0182-4adf-90c8-4227e3098c9e
+        computeOrder: 36
+        position:
+          serializedVersion: 2
+          x: 7308.4653
+          y: 157.00009
+          width: 345
+          height: 196
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 35
+        Time: 0
+        uid: 0
+        rotation: {x: 0, y: 0, z: 0, w: 0}
+        scale: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
+    - rid: 8003730137690144799
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 694a6cfc-0581-4e75-93dc-18efcd4e7bae
+        computeOrder: 37
+        position:
+          serializedVersion: 2
+          x: 7724
+          y: 156
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 36
+    - rid: 8003730137690144800
+      type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 6be69081-16e2-4100-bf51-b821f4ea8df8
+        computeOrder: 38
+        position:
+          serializedVersion: 2
+          x: 7891
+          y: 156
+          width: 87
+          height: 75
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        NodeOrder: 37

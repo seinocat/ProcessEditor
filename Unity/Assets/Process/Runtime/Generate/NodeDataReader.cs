@@ -6,45 +6,75 @@ using Seino.Utils.FastFileReader;
 
 namespace Process.Runtime
 {
-    public class ConditionNodeReader : IFileReader
+    public class ConditionNodeParam : ProcessNodeParam
     {
-        public float Progress => 0;
-        public bool IsComplete { get; }
+        public int SuccessID;
+        public int FailID;
 
-        public Task ReadAsync(BinaryReader reader)
+        public override void ReadNodeData(BinaryReader reader)
         {
-            reader.ReadInt32();
-            reader.ReadInt32();
-            return Task.CompletedTask;
+            SuccessID = reader.ReadInt32();
+            FailID = reader.ReadInt32();
         }
     }
 
-    public class SequenceNodeReader : IFileReader
+    public class SequenceNodeParam : ProcessNodeParam
     {
-        public float Progress => 0;
-        public bool IsComplete { get; }
+        public bool IsSequential;
 
-        public Task ReadAsync(BinaryReader reader)
+        public override void ReadNodeData(BinaryReader reader)
         {
-            reader.ReadBoolean();
-            return Task.CompletedTask;
+            IsSequential = reader.ReadBoolean();
         }
     }
 
-    public class WaitTimeNodeReader : IFileReader
+    public class WaitTimeNodeParam : ProcessNodeParam
     {
-        public float Progress => 0;
-        public bool IsComplete { get; }
-        // public WaitTimeNode Data;
+        public float Time;
+        public ulong uid;
+        public Quaternion rotation;
+        public Vector3 scale;
+        public Color color;
 
-        public Task ReadAsync(BinaryReader reader)
+        public override void ReadNodeData(BinaryReader reader)
         {
-            reader.ReadSingle();
-            reader.ReadUInt64();
-            reader.ReadQuaternion();
-            reader.ReadVector3();
-            reader.ReadColor();
-            return Task.CompletedTask;
+            Time = reader.ReadSingle();
+            uid = reader.ReadUInt64();
+            rotation = reader.ReadQuaternion();
+            scale = reader.ReadVector3();
+            color = reader.ReadColor();
+        }
+    }
+
+    public class EmptyNodeParam : ProcessNodeParam
+    {
+
+        public override void ReadNodeData(BinaryReader reader)
+        {
+        }
+    }
+
+    public class EndNodeParam : ProcessNodeParam
+    {
+
+        public override void ReadNodeData(BinaryReader reader)
+        {
+        }
+    }
+
+    public class SelectBranchNodeParam : ProcessNodeParam
+    {
+
+        public override void ReadNodeData(BinaryReader reader)
+        {
+        }
+    }
+
+    public class StartNodeParam : ProcessNodeParam
+    {
+
+        public override void ReadNodeData(BinaryReader reader)
+        {
         }
     }
 

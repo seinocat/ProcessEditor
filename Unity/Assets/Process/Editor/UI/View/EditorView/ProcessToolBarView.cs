@@ -28,7 +28,7 @@ namespace Process.Editor
             AddButton(new GUIContent("计算Order"), ()=> {m_GraphView.Window.Graph.ComputeGraphOrder();});
             AddButton(new GUIContent("刷新"), Refresh);
             AddButton(new GUIContent("导出当前"), Export, false);
-            AddButton(new GUIContent("一键导出"), OneKeyExport, false);
+            AddButton(new GUIContent("代码生成"), OneKeyGenerate, false);
         }
         
         public void ShowFileList(bool show)
@@ -76,16 +76,9 @@ namespace Process.Editor
                 ProcessExportUtils.ExportAllProcess() ? "导出流程配置成功" : "导出失败，请根据报错日志修改！", "确定");
         }
 
-        public void OneKeyExport()
+        public void OneKeyGenerate()
         {
-            // if (ProcessExportUtils.ExportAllGraph() && ProcessExportUtils.ExportServer())
-            // {
-            //     EditorUtility.DisplayDialog("提示", "导出客户端和服务器配置成功", "确定");
-            // }
-            // else
-            // {
-            //     EditorUtility.DisplayDialog("提示", "导出失败，请根据报错日志修改！", "确定");
-            // }
+           AutoGenerator.OneKeyGenerate();
         }
         
     }

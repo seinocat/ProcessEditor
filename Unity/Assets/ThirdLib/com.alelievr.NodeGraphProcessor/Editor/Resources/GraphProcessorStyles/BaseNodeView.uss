@@ -362,7 +362,7 @@ Vector3Field{
     height: 12px;
     background-image: resource("Icons/Integer64@x3");
     margin-left: 3px;
-    margin-top: 3px;
+    margin-top: 5px;
 }
 
 #FieldViewIcon_Matrix,

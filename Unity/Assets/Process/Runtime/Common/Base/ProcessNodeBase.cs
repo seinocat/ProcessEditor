@@ -15,7 +15,7 @@ namespace Process.Runtime
         /// <summary>
         /// 所属流程ID
         /// </summary>
-        public int                      ProcessId   { get; private set; }
+        public ulong                    ProcessId   { get; private set; }
         
         /// <summary>
         /// 流程实例
@@ -111,6 +111,9 @@ namespace Process.Runtime
             SeqStatus = ProcessStatus.Ready;
             m_IsDirty = false;
             IsSequential = data.IsSequential;
+            
+            //读取节点数据
+            ReadNodeData(data.Param);
         }  
         
         /// <summary>
@@ -342,7 +345,7 @@ namespace Process.Runtime
 
         #region 二进制读取
 
-        public virtual void ReadNodeData(BinaryReader reader){}
+        public virtual void ReadNodeData(ProcessNodeParam data){}
 
         #endregion
     }

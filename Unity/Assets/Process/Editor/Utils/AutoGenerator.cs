@@ -24,8 +24,7 @@ namespace Process.Editor
             GenerateDataNodeWriter();
             GenerateDataNodeReader();
             GenerateRuntimeNode();
-            // GenerateProcessNodePool();
-            // GenerateLogicNode();
+            GenerateProcessNodePool();
         }
         
         /// <summary>
@@ -118,25 +117,26 @@ namespace Process.Editor
                         return false;
                     })
                     .ToList();
-
-                if (fields.Count == 0)
-                    continue;
+                
                 string className = type.Name.Replace("EditorNode", "Node");
-                builder.AppendLine($"    public class {className}Reader : IFileReader");
+                builder.AppendLine($"    public class {className}Param : ProcessNodeParam");
                 builder.AppendLine("    {");
-                builder.AppendLine("        public float Progress => 0;");
-                builder.AppendLine("        public bool IsComplete { get; }");
-                builder.AppendLine("");
-                builder.AppendLine("        public Task ReadAsync(BinaryReader reader)");
-                builder.AppendLine("        {");
-
+                
+                //字段声明
                 foreach (var field in fields)
                 {
-                    builder.AppendLine($"            reader.Read{field.FieldType.Name}();");
+                    builder.AppendLine($"        public {GetFieldAlias(field)} {field.Name};");
                 }
-
-                builder.AppendLine("            return Task.CompletedTask;");
+                builder.AppendLine("");
+                
+                builder.AppendLine("        public override void ReadNodeData(BinaryReader reader)");
+                builder.AppendLine("        {");
+                foreach (var field in fields)
+                {
+                    builder.AppendLine($"            {field.Name} = reader.Read{field.FieldType.Name}();");
+                }
                 builder.AppendLine("        }");
+                
                 builder.AppendLine("    }");
                 builder.AppendLine("");
             }
@@ -159,12 +159,7 @@ namespace Process.Editor
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateRuntimeNode ***/");
-            builder.AppendLine("using System;");
-            builder.AppendLine("using System.IO;");
             builder.AppendLine("using UnityEngine;");
-            builder.AppendLine("using System.Threading.Tasks;");
-            builder.AppendLine("using Cysharp.Threading.Tasks;");
-            builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
@@ -206,8 +201,10 @@ namespace Process.Editor
                 }
                 
                 builder.AppendLine("");
-                builder.AppendLine("         public override void ReadNodeData(BinaryReader reader)");
+                builder.AppendLine("         public override void ReadNodeData(ProcessNodeParam data)");
                 builder.AppendLine("         {");
+                builder.AppendLine($"             if(data is {className}Param paramData)");
+                builder.AppendLine("             {");
                 
                 //写入字段数据
                 foreach (var field in fields)
@@ -215,9 +212,11 @@ namespace Process.Editor
                     var isEnum = field.FieldType.IsEnum;
                     //枚举类型需要转换
                     builder.AppendLine(isEnum
-                        ? $"             m_{field.Name} = ({field.FieldType.Name})reader.ReadInt32();"
-                        : $"             m_{field.Name} = reader.Read{field.FieldType.Name}();");
+                        ? $"                 m_{field.Name} = ({field.FieldType.Name})paramData.{field.Name};"
+                        : $"                 m_{field.Name} = paramData.{field.Name};");
                 }
+                
+                builder.AppendLine("             }");
                 
                 builder.AppendLine("         }");
                 builder.AppendLine("");
@@ -267,92 +266,99 @@ namespace Process.Editor
             
             var values = Enum.GetValues(typeof(ProcessNodeType));
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateProcessNodePool ***/");
+            builder.AppendLine("using System;");
             builder.AppendLine("using UnityEngine;");
+            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
             builder.AppendLine("    public static class ProcessNodePool");
             builder.AppendLine("    {");
+            builder.AppendLine("        private static readonly Dictionary<ProcessNodeType, Func<ProcessNodeBase>> m_FactoryMap = new();");
+            builder.AppendLine("");
             
-            builder.AppendLine("        public static ProcessNodeBase Get(ProcessNodeType type)");
+            builder.AppendLine("        static ProcessNodePool()");
             builder.AppendLine("        {");
-            builder.AppendLine("            switch (type)");
-            builder.AppendLine("            {");
             foreach (ProcessNodeType value in values)
             {
                 if (m_BlackNodeList.Contains(value))
                     continue;
                 
                 string typeName = Enum.GetName(typeof(ProcessNodeType), value);
-                builder.AppendLine($"                case ProcessNodeType.{typeName}:");
-                builder.AppendLine($"                    return NodePool<{typeName}Node>.Get();");
+                builder.AppendLine($"             Register<{typeName}Node>(ProcessNodeType.{typeName});");
             }
-            builder.AppendLine("                default:");
-            builder.AppendLine("                    Debug.LogError($\"invalid process node type：{type}\");");
-            builder.AppendLine("                    return null;");
-            builder.AppendLine("            }");
+            builder.AppendLine("        }");
+            builder.AppendLine("");
+            
+            builder.AppendLine("        private static void Register<T>(ProcessNodeType type) where T : ProcessNodeBase, new()");
+            builder.AppendLine("        {");
+            builder.AppendLine("            m_FactoryMap[type] = () => NodePool<T>.Get();");
+            builder.AppendLine("        }");
+            builder.AppendLine("");
+            
+            builder.AppendLine("        public static ProcessNodeBase Get(ProcessNodeType type)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            if (m_FactoryMap.TryGetValue(type, out var creator))");
+            builder.AppendLine("                return creator();");
+            builder.AppendLine("");
+            builder.AppendLine("            Debug.LogError($\"Invalid process node type: {type}\");");
+            builder.AppendLine("            return null;");
             builder.AppendLine("        }");
             builder.AppendLine("");
             
             //释放所有NodePool
             builder.AppendLine("        public static void DisposeAllPools()");
             builder.AppendLine("        {");
+            builder.AppendLine("             foreach (var pairs in m_FactoryMap)");
+            builder.AppendLine("             {");
+            builder.AppendLine("                 pairs.Value().Dispose();");
+            builder.AppendLine("             }");
+            builder.AppendLine("        }");
+            
+            builder.AppendLine("    }");
+            builder.AppendLine("");
+            builder.AppendLine("    public static class ProcessNodeParamCreator");
+            builder.AppendLine("    {");
+            builder.AppendLine("");
+            builder.AppendLine("        private static readonly Dictionary<ProcessNodeType, Func<ProcessNodeParam>> m_FactoryMap = new();");
+            builder.AppendLine("");
+            
+            builder.AppendLine("        static ProcessNodeParamCreator()");
+            builder.AppendLine("        {");
             foreach (ProcessNodeType value in values)
             {
                 if (m_BlackNodeList.Contains(value))
                     continue;
                 
                 string typeName = Enum.GetName(typeof(ProcessNodeType), value);
-                builder.AppendLine($"            NodePool<{typeName}Node>.Dispose();");
+                builder.AppendLine($"             Register<{typeName}NodeParam>(ProcessNodeType.{typeName});");
             }
             builder.AppendLine("        }");
+            builder.AppendLine("");
+            
+            builder.AppendLine("        private static void Register<T>(ProcessNodeType type) where T : ProcessNodeParam, new()");
+            builder.AppendLine("        {");
+            builder.AppendLine("            m_FactoryMap[type] = () => new T();");
+            builder.AppendLine("        }");
+            builder.AppendLine("");
+            
+            builder.AppendLine("        public static ProcessNodeParam Get(ProcessNodeType type)");
+            builder.AppendLine("        {");
+            builder.AppendLine("            if (m_FactoryMap.TryGetValue(type, out var creator))");
+            builder.AppendLine("                return creator();");
+            builder.AppendLine("");
+            builder.AppendLine("            Debug.LogError($\"Invalid process node type: {type}\");");
+            builder.AppendLine("            return null;");
+            builder.AppendLine("        }");
+            builder.AppendLine("");
             
             builder.AppendLine("    }");
+            
             builder.AppendLine("}");
             
             ProcessWriter.WriteFile(builder, GlobalPathConfig.NodePoolPath);
         }
 
-        /// <summary>获取字段名称</summary>
-        /// <param name="field">字段属性</param>
-        /// <param name="index">字段索引</param>
-        /// <returns></returns>
-        private static string GetFieldName(FieldInfo field, int index)
-        {
-            //先判断是否是枚举
-            if (field.FieldType.BaseType == typeof(Enum))
-                return $"EnumValue{index}";
-            
-            //常规类型
-            switch (field.FieldType.Name)
-            {
-                case "Int32":
-                    return $"IntValue{index}";
-                case "UInt32":
-                    return $"UIntValue{index}";
-                case "Int64":
-                    return $"LongValue{index}";
-                case "UInt64":
-                    return $"ULongValue{index}";
-                case "Single":
-                    return $"FloatValue{index}";
-                case "String":
-                    return $"StringValue{index}";
-                case "Boolean":
-                    return $"BoolValue{index}";
-                case "Vector2":
-                    return $"Vector2Value{index}";
-                case "Vector3":
-                    return $"Vector3Value{index}";
-                case "Quaternion":
-                    return $"QuaternionValue{index}";
-                case "Color":
-                    return $"ColorValue{index}";
-                default:
-                    Debug.LogError($"无效的字段类型：{field.FieldType.Name}");
-                    return $"ErrorValue{index}";
-            }
-        }
         
         /// <summary>
         /// 获取字段类型的别名

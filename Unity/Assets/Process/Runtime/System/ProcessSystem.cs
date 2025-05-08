@@ -8,6 +8,15 @@ namespace Process.Runtime
 {
     public class ProcessSystem
     {
+        private Dictionary<ulong, ProcessConfig> Configs;
+
+        public async UniTask LoadConfigs()
+        {
+            ProcessLoader loader = new ProcessLoader();
+            await FastFileUtils.ReadFileByBinaryAsync($"{Application.streamingAssetsPath}/Events.bytes", loader);
+            Configs = loader.Configs;
+        }
+        
         /// <summary>
         /// 创建流程实例
         /// </summary>
@@ -15,10 +24,10 @@ namespace Process.Runtime
         /// <param name="processId"></param>
         /// <param name="callback"></param>
         /// <returns></returns>
-        private async UniTask<GameProcess> CreateProcess(GlobalProcessConfig res, int processId, Action<ProcessStatus> callback)
+        public GameProcess CreateProcess(ulong processId, Action<ProcessStatus> callback)
         {
             //先找配置
-            var config = res.ProcessList.Find((conf) => conf.ProcessId == processId);
+            Configs.TryGetValue(processId, out var config);
             if (config == null)
                 return null;
 
@@ -26,7 +35,7 @@ namespace Process.Runtime
             var process = new GameProcess();
             process.ProcessId       = processId;
             process.OnComplete      = callback;
-            process.ProcessNodes    = await CreateNodeLink(config, process);
+            process.ProcessNodes    = CreateNodeLink(config, process);
         
             return process;
         }
@@ -37,13 +46,9 @@ namespace Process.Runtime
     /// <param name="config"></param>
     /// <param name="process"></param>
     /// <returns></returns>
-    public async UniTask<List<ProcessNodeBase>> CreateNodeLink(ProcessConfig config, GameProcess process)
+    private List<ProcessNodeBase> CreateNodeLink(ProcessConfig config, GameProcess process)
     {
         List<ProcessNodeBase> nodes = new List<ProcessNodeBase>();
-        
-        ProcessCreator creator = new ProcessCreator();
-        await FastFileUtils.ReadFileByBinaryAsync($"{Application.streamingAssetsPath}/Process_1008.bytes", creator);
-        return null;
         
         //先创建所有节点
         foreach (var nodeData in config.NodeDataList)

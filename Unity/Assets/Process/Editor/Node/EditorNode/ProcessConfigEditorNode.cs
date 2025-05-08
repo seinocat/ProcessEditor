@@ -17,7 +17,7 @@ namespace Process.Editor
         public ProcessStartPort Output;
 
         [CustomSetting("流程ID(必填)")] 
-        public int ProcessId;
+        public ulong ProcessId;
         
         [CustomSetting("允许同时执行")]
         public bool MultiProcess = true;
