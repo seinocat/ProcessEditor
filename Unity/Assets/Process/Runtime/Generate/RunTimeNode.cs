@@ -1,5 +1,6 @@
 ﻿/*** 工具自动生成 => Tools/ProcessEditor/GenerateRuntimeNode ***/
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Process.Runtime
 {
@@ -71,6 +72,7 @@ namespace Process.Runtime
          private Vector3 m_scale;
          private Color m_color;
          private eFadeType m_fadeType;
+         private List<int> m_AtkList;
 
          public override void ReadNodeData(ProcessNodeParam data)
          {
@@ -81,7 +83,8 @@ namespace Process.Runtime
                  m_rotation = paramData.rotation;
                  m_scale = paramData.scale;
                  m_color = paramData.color;
-                 m_fadeType = (eFadeType)paramData.fadeType;
+                 m_fadeType = paramData.fadeType;
+                 m_AtkList = paramData.AtkList;
              }
          }
 
@@ -93,6 +96,7 @@ namespace Process.Runtime
              m_scale = Vector3.zero;
              m_color = Color.black;
              m_fadeType = default;
+             m_AtkList = null;
          }
 
          public override void Recycle()

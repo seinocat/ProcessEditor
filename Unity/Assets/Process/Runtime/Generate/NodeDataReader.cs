@@ -1,6 +1,7 @@
 ﻿/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeReader ***/
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 using Seino.Utils.FastFileReader;
 
 namespace Process.Runtime
@@ -35,6 +36,7 @@ namespace Process.Runtime
         public Vector3 scale;
         public Color color;
         public eFadeType fadeType;
+        public List<int> AtkList;
 
         public override void ReadNodeData(BinaryReader reader)
         {
@@ -44,6 +46,14 @@ namespace Process.Runtime
             scale = reader.ReadVector3();
             color = reader.ReadColor();
             fadeType = (eFadeType)reader.ReadInt32();
+
+            AtkList = new List<int>();
+            var AtkListCount = reader.ReadInt32();
+            for(int i = 0; i < AtkListCount; i++)
+            {
+                AtkList.Add(reader.ReadInt32());
+            }
+
         }
     }
 

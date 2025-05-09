@@ -365,8 +365,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -362, y: 31, z: 0}
-  scale: {x: 1, y: 1, z: 1}
+  position: {x: -758, y: 69, z: 0}
+  scale: {x: 0.57175326, y: 0.57175326, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -580,10 +580,10 @@ MonoBehaviour:
         computeOrder: 10
         position:
           serializedVersion: 2
-          x: 2567.8516
-          y: 514
+          x: 2546.9998
+          y: 502.99997
           width: 345
-          height: 196
+          height: 217
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -602,10 +602,10 @@ MonoBehaviour:
         computeOrder: 11
         position:
           serializedVersion: 2
-          x: 2568
-          y: 733
+          x: 2546.9998
+          y: 730.99994
           width: 345
-          height: 196
+          height: 217
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -624,10 +624,10 @@ MonoBehaviour:
         computeOrder: 12
         position:
           serializedVersion: 2
-          x: 2567.8516
-          y: 964.00006
+          x: 2546.9998
+          y: 960.99994
           width: 345
-          height: 196
+          height: 217
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -646,10 +646,10 @@ MonoBehaviour:
         computeOrder: 13
         position:
           serializedVersion: 2
-          x: 2567.8516
-          y: 1189.0001
+          x: 2546.9998
+          y: 1189
           width: 345
-          height: 196
+          height: 217
         expanded: 0
         debug: 0
         nodeLock: 0

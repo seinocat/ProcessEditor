@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -69,11 +70,26 @@ namespace Process.Editor
 
                 foreach (var field in fields)
                 {
-                    var isEnum = field.FieldType.IsEnum;
                     //枚举类型需要转换
-                    builder.AppendLine(isEnum
-                        ? $"            writer.Write((int){field.Name});"
-                        : $"            writer.Write({field.Name});");
+                    if (field.FieldType.IsEnum)
+                    {
+                        builder.AppendLine($"            writer.Write((int){field.Name});");
+                        continue;
+                    }
+
+                    // List类型需要转换
+                    if (typeof(IList).IsAssignableFrom(field.FieldType))
+                    {
+                        builder.AppendLine($"            writer.Write((int){field.Name}.Count);");
+                        builder.AppendLine($"            foreach (var element in {field.Name})");
+                        builder.AppendLine("            {");
+                        builder.AppendLine("                   writer.Write(element);");
+                        builder.AppendLine("            }");
+                        continue;
+                    }
+                    
+                    //枚举类型需要转换
+                    builder.AppendLine($"            writer.Write({field.Name});");
                 }
                 
                 builder.AppendLine("        }");
@@ -101,6 +117,7 @@ namespace Process.Editor
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeReader ***/");
             builder.AppendLine("using System.IO;");
             builder.AppendLine("using UnityEngine;");
+            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
@@ -134,11 +151,28 @@ namespace Process.Editor
                 builder.AppendLine("        {");
                 foreach (var field in fields)
                 {
-                    var isEnum = field.FieldType.IsEnum;
                     //枚举类型需要转换
-                    builder.AppendLine(isEnum
-                        ? $"            {field.Name} = ({field.FieldType.Name})reader.ReadInt32();"
-                        : $"            {field.Name} = reader.Read{field.FieldType.Name}();");
+                    if (field.FieldType.IsEnum)
+                    {
+                        builder.AppendLine($"            {field.Name} = ({field.FieldType.Name})reader.ReadInt32();");
+                        continue;
+                    }
+                    
+                    // List类型需要转换
+                    if (typeof(IList).IsAssignableFrom(field.FieldType))
+                    {
+                        builder.AppendLine("");
+                        builder.AppendLine($"            {field.Name} = new {GetFieldAlias(field)}();");
+                        builder.AppendLine($"            var {field.Name}Count = reader.ReadInt32();");
+                        builder.AppendLine($"            for(int i = 0; i < {field.Name}Count; i++)");
+                        builder.AppendLine("            {");
+                        builder.AppendLine($"                {field.Name}.Add(reader.Read{field.FieldType.GetGenericArguments()[0].Name}());");
+                        builder.AppendLine("            }");
+                        builder.AppendLine("");
+                        continue;
+                    }
+                    
+                    builder.AppendLine($"            {field.Name} = reader.Read{field.FieldType.Name}();");
                     
                 }
                 builder.AppendLine("        }");
@@ -166,6 +200,7 @@ namespace Process.Editor
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateRuntimeNode ***/");
             builder.AppendLine("using UnityEngine;");
+            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
@@ -215,11 +250,7 @@ namespace Process.Editor
                 //写入字段数据
                 foreach (var field in fields)
                 {
-                    var isEnum = field.FieldType.IsEnum;
-                    //枚举类型需要转换
-                    builder.AppendLine(isEnum
-                        ? $"                 m_{field.Name} = ({field.FieldType.Name})paramData.{field.Name};"
-                        : $"                 m_{field.Name} = paramData.{field.Name};");
+                    builder.AppendLine($"                 m_{field.Name} = paramData.{field.Name};");
                 }
                 
                 builder.AppendLine("             }");
@@ -373,7 +404,20 @@ namespace Process.Editor
         /// <returns></returns>
         private static string GetFieldAlias(FieldInfo field)
         {
-            switch (field.FieldType.Name)
+            //列表类型
+            if (typeof(IList).IsAssignableFrom(field.FieldType))
+            {
+                var elementType = field.FieldType.GetGenericArguments()[0];
+                return $"List<{GetFieldAliasName(elementType.Name)}>";
+            }
+            
+            return GetFieldAliasName(field.FieldType.Name);
+        }
+
+        private static string GetFieldAliasName(string typeName)
+        {
+            //基础类型
+            switch (typeName)
             {
                 case "Int32":
                     return "int";
@@ -392,7 +436,7 @@ namespace Process.Editor
                 case "Color":
                     return "Color";
                 default:
-                    return field.FieldType.Name;
+                    return typeName;
             }
         }
 
@@ -403,6 +447,11 @@ namespace Process.Editor
         /// <returns></returns>
         private static string GetFieldDefaultValue(FieldInfo field)
         {
+            if (typeof(IList).IsAssignableFrom(field.FieldType))
+            {
+                return "null";
+            }
+            
             switch (field.FieldType.Name)
             {
                 case "Int32":

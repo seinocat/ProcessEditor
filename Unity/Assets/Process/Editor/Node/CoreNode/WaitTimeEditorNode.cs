@@ -1,4 +1,5 @@
-﻿using Process.Runtime;
+﻿using System.Collections.Generic;
+using Process.Runtime;
 using GraphProcessor;
 using UnityEngine;
 
@@ -26,5 +27,8 @@ namespace Process.Editor
         
         [CustomSetting("过渡类型")]
         public eFadeType fadeType;
+
+        [CustomSetting("动画类型")]
+        public List<int> AtkList;
     }
 }

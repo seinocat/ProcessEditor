@@ -31,6 +31,11 @@ namespace Process.Editor
             writer.Write(scale);
             writer.Write(color);
             writer.Write((int)fadeType);
+            writer.Write((int)AtkList.Count);
+            foreach (var element in AtkList)
+            {
+                   writer.Write(element);
+            }
         }
     }
 
