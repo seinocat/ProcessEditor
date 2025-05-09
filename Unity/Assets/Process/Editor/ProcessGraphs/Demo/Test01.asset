@@ -59,8 +59,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -336, y: 48, z: 0}
-  scale: {x: 0.65751624, y: 0.65751624, z: 1}
+  position: {x: 60, y: 160, z: 0}
+  scale: {x: 0.49717674, y: 0.49717674, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -137,13 +137,6 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 2
         Time: 250
-        uid: 13232
-        rotation: {x: 1, y: 2, z: 3, w: 4}
-        scale: {x: 1, y: 3, z: 2}
-        color: {r: 0.7830189, g: 0.40258992, b: 0.40258992, a: 0}
-        fadeType: 1
-        AtkList: 0100000003000000
-        PosList: []
     - rid: 8003730113316257801
       type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -152,10 +145,10 @@ MonoBehaviour:
         computeOrder: 4
         position:
           serializedVersion: 2
-          x: 1600
-          y: 496.03027
-          width: 100
-          height: 100
+          x: 1607
+          y: 390
+          width: 87
+          height: 75
         expanded: 0
         debug: 0
         nodeLock: 0

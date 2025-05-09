@@ -31,38 +31,10 @@ namespace Process.Runtime
     public class WaitTimeNodeParam : ProcessNodeParam
     {
         public float Time;
-        public ulong uid;
-        public Quaternion rotation;
-        public Vector3 scale;
-        public Color color;
-        public eFadeType fadeType;
-        public List<int> AtkList;
-        public List<Vector3> PosList;
 
         public override void ReadNodeData(BinaryReader reader)
         {
             Time = reader.ReadSingle();
-            uid = reader.ReadUInt64();
-            rotation = reader.ReadQuaternion();
-            scale = reader.ReadVector3();
-            color = reader.ReadColor();
-            fadeType = (eFadeType)reader.ReadInt32();
-
-            AtkList = new List<int>();
-            var AtkListCount = reader.ReadInt32();
-            for(int i = 0; i < AtkListCount; i++)
-            {
-                AtkList.Add(reader.ReadInt32());
-            }
-
-
-            PosList = new List<Vector3>();
-            var PosListCount = reader.ReadInt32();
-            for(int i = 0; i < PosListCount; i++)
-            {
-                PosList.Add(reader.ReadVector3());
-            }
-
         }
     }
 

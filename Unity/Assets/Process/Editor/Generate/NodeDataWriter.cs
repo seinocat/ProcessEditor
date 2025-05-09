@@ -26,21 +26,6 @@ namespace Process.Editor
         public override void WriteNodeData(BinaryWriter writer)
         {
             writer.Write(Time);
-            writer.Write(uid);
-            writer.Write(rotation);
-            writer.Write(scale);
-            writer.Write(color);
-            writer.Write((int)fadeType);
-            writer.Write((int)AtkList.Count);
-            foreach (var element in AtkList)
-            {
-                   writer.Write(element);
-            }
-            writer.Write((int)PosList.Count);
-            foreach (var element in PosList)
-            {
-                   writer.Write(element);
-            }
         }
     }
 

@@ -67,39 +67,18 @@ namespace Process.Runtime
          public override bool IsStart => false;
 
          private float m_Time;
-         private ulong m_uid;
-         private Quaternion m_rotation;
-         private Vector3 m_scale;
-         private Color m_color;
-         private eFadeType m_fadeType;
-         private List<int> m_AtkList;
-         private List<Vector3> m_PosList;
 
          public override void ReadNodeData(ProcessNodeParam data)
          {
              if(data is WaitTimeNodeParam paramData)
              {
                  m_Time = paramData.Time;
-                 m_uid = paramData.uid;
-                 m_rotation = paramData.rotation;
-                 m_scale = paramData.scale;
-                 m_color = paramData.color;
-                 m_fadeType = paramData.fadeType;
-                 m_AtkList = paramData.AtkList;
-                 m_PosList = paramData.PosList;
              }
          }
 
          protected override void ClearNodeData()
          {
              m_Time = 0f;
-             m_uid = 0;
-             m_rotation = Quaternion.identity;
-             m_scale = Vector3.zero;
-             m_color = Color.black;
-             m_fadeType = default;
-             m_AtkList = null;
-             m_PosList = null;
          }
 
          public override void Recycle()
