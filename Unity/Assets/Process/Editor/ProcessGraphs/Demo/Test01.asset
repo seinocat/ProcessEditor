@@ -59,8 +59,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -965, y: -255, z: 0}
-  scale: {x: 1.15, y: 1.15, z: 1}
+  position: {x: -336, y: 48, z: 0}
+  scale: {x: 0.65751624, y: 0.65751624, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
         color: {r: 0.7830189, g: 0.40258992, b: 0.40258992, a: 0}
         fadeType: 1
         AtkList: 0100000003000000
+        PosList: []
     - rid: 8003730113316257801
       type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:

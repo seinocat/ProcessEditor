@@ -55,7 +55,6 @@ namespace Process.Runtime
         {
             ProcessNodeBase processNode = ProcessNodePool.Get(nodeData.Type);
             processNode.Initialize(process, nodeData);
-            process.BindNode(processNode);
             nodes.Add(processNode);
         }
         

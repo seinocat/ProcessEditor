@@ -23,7 +23,7 @@ namespace Process.Runtime
         /// <summary>
         /// 是否停止
         /// </summary>
-        public bool                     IsStop => Status is ProcessStatus.Success or  ProcessStatus.Failed;
+        public bool                     IsStop => Status is ProcessStatus.Success or  ProcessStatus.FailedBreak;
         
         /// <summary>
         /// 流程完成回调

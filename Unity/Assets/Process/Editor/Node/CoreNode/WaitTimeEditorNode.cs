@@ -30,5 +30,8 @@ namespace Process.Editor
 
         [CustomSetting("动画类型")]
         public List<int> AtkList;
+
+        [CustomSetting("位置列表")]
+        public List<Vector3> PosList;
     }
 }

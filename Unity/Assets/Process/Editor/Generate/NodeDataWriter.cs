@@ -36,6 +36,11 @@ namespace Process.Editor
             {
                    writer.Write(element);
             }
+            writer.Write((int)PosList.Count);
+            foreach (var element in PosList)
+            {
+                   writer.Write(element);
+            }
         }
     }
 

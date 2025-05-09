@@ -73,6 +73,7 @@ namespace Process.Runtime
          private Color m_color;
          private eFadeType m_fadeType;
          private List<int> m_AtkList;
+         private List<Vector3> m_PosList;
 
          public override void ReadNodeData(ProcessNodeParam data)
          {
@@ -85,6 +86,7 @@ namespace Process.Runtime
                  m_color = paramData.color;
                  m_fadeType = paramData.fadeType;
                  m_AtkList = paramData.AtkList;
+                 m_PosList = paramData.PosList;
              }
          }
 
@@ -97,6 +99,7 @@ namespace Process.Runtime
              m_color = Color.black;
              m_fadeType = default;
              m_AtkList = null;
+             m_PosList = null;
          }
 
          public override void Recycle()

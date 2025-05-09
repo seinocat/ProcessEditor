@@ -25,9 +25,13 @@ namespace Process.Runtime
         /// </summary>
         Success,
         /// <summary>
-        /// 失败
+        /// 失败继续
         /// </summary>
-        Failed
+        FailedSkip,
+        /// <summary>
+        /// 失败中止
+        /// </summary>
+        FailedBreak,
     }
     
     [Serializable]

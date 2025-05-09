@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -60,7 +59,7 @@ namespace Process.Runtime
         /// <summary>
         /// 是否完成
         /// </summary>
-        public bool                     IsFinished  => Status is ProcessStatus.Success or ProcessStatus.Failed;
+        public bool                     IsFinished  => Status is ProcessStatus.Success or ProcessStatus.FailedBreak or ProcessStatus.FailedSkip;
         
         public abstract bool            IsStart     { get; }
         
@@ -103,16 +102,22 @@ namespace Process.Runtime
         /// <param name="data"></param>
         public void Initialize(GameProcess process, ProcessNodeData data)
         {
-            //重置节点数据
-            Process = process;
-            ProcessId = process.ProcessId;
-            OrderId = data.Order;
-            Status = ProcessStatus.Ready;
-            SeqStatus = ProcessStatus.Ready;
-            m_IsDirty = false;
+            if (process == null || data == null)
+                return;
+            
+            //初始化节点
+            Process      = process;
+            ProcessId    = process.ProcessId;
+            OrderId      = data.Order;
+            Status       = ProcessStatus.Ready;
+            SeqStatus    = ProcessStatus.Ready;
+            m_IsDirty    = false;
             IsSequential = data.IsSequential;
             
-            //读取节点数据
+            // 绑定流程
+            process.BindNode(this);
+            
+            // 读取节点数据
             ReadNodeData(data.Param);
         }  
         
@@ -261,19 +266,19 @@ namespace Process.Runtime
         {
             if (m_IsDirty || Status is ProcessStatus.Preparing or ProcessStatus.Ready)  return;
             if (Status == ProcessStatus.Running)                                        Status = OnUpdate(deltaTime);
-            if (Status == ProcessStatus.Success && SeqStatus == ProcessStatus.Success)  Exit();
-            if (Status == ProcessStatus.Failed)                                         Exit(true);
+            if (IsStateFinished() && IsSeqStateFinished())                              Exit();
+            if (Status == ProcessStatus.FailedBreak)                                    Exit();
             
             //超时处理
             OnTimeOut();
         }
 
-        private void Exit(bool isFailed = false)
+        private void Exit()
         {
             OnExit();
             
             // 进入下一个节点
-            if (m_NextNodes.Count > 0 && !isFailed)
+            if (m_NextNodes.Count > 0 && Status != ProcessStatus.FailedBreak)
                 m_NextNodes.ForEach((node)=> node.Enter(m_StreamingData));
             
             // 流程结束
@@ -281,15 +286,15 @@ namespace Process.Runtime
                 OnProcessComplete?.Invoke(ProcessStatus.Success);
             
             // 流程失败
-            if (isFailed)
+            if ( Status == ProcessStatus.FailedBreak)
             {
                 //中断流程并抛出错误
-                OnProcessComplete?.Invoke(ProcessStatus.Failed);
+                OnProcessComplete?.Invoke(ProcessStatus.FailedBreak);
                 Debug.LogError($"ProcessNode error, process id : {ProcessId}, node type : {Type}");
             }
             
             //标记节点不可用
-            m_IsDirty = true;
+            m_IsDirty   = true;
             m_IsTimeOut = false;
         }
 
@@ -323,6 +328,24 @@ namespace Process.Runtime
             Status = status;
         }
 
+        /// <summary>
+        /// 当前节点是否完成(失败跳过也算完成)
+        /// </summary>
+        /// <returns></returns>
+        private bool IsStateFinished()
+        {
+            return Status is ProcessStatus.Success or ProcessStatus.FailedSkip;
+        }
+
+        /// <summary>
+        /// 序列节点是否完成(失败跳过也算完成)
+        /// </summary>
+        /// <returns></returns>
+        private bool IsSeqStateFinished()
+        {
+            return SeqStatus is ProcessStatus.Success or ProcessStatus.FailedSkip;
+        }
+
         #endregion
 
         #region 异常提示
@@ -343,7 +366,7 @@ namespace Process.Runtime
 
         #endregion
 
-        #region 二进制读取
+        #region 节点参数读取
 
         public virtual void ReadNodeData(ProcessNodeParam data){}
 
