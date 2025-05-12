@@ -67,24 +67,18 @@ namespace Process.Runtime
          public override bool IsStart => false;
 
          private float m_Time;
-         private TestClass m_TestData;
-         private List<TestClass> m_TestClasses;
 
          public override void ReadNodeData(ProcessNodeParam data)
          {
              if(data is WaitTimeNodeParam paramData)
              {
                  m_Time = paramData.Time;
-                 m_TestData = paramData.TestData;
-                 m_TestClasses = paramData.TestClasses;
              }
          }
 
          protected override void ClearNodeData()
          {
              m_Time = 0f;
-             m_TestData = default;
-             m_TestClasses = null;
          }
 
          public override void Recycle()

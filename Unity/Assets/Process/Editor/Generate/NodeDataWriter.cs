@@ -24,16 +24,10 @@ namespace Process.Editor
 
     public partial class WaitTimeEditorNode
     {
-        // public override void WriteNodeData(BinaryWriter writer)
-        // {
-        //     writer.Write(Time);
-        //     writer.Write(TestData);
-        //     writer.Write(TestClasses.Count);
-        //     foreach (var element in TestClasses)
-        //     {
-        //         writer.Write(element);
-        //     }
-        // }
+        public override void WriteNodeData(BinaryWriter writer)
+        {
+            writer.Write(Time);
+        }
     }
 
 }
