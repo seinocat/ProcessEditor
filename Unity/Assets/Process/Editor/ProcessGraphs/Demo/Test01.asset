@@ -59,8 +59,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -778, y: -293, z: 0}
-  scale: {x: 1.3225, y: 1.3225, z: 1}
+  position: {x: -798, y: -379, z: 0}
+  scale: {x: 1.7490063, y: 1.7490063, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -102,7 +102,9 @@ MonoBehaviour:
         ProcessId: 1001
         MultiProcess: 1
         AutoExecute: 1
-        Conditions: []
+        Conditions:
+        - Id: 0
+          IsAnd: 1
         ProcessDesc: 
     - rid: 525765139367460866
       type: {class: StartEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}

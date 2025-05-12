@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using GraphProcessor;
 using UnityEditor;
-using UnityEngine;
 using Process.Runtime;
 
 namespace Process.Editor
@@ -16,6 +15,14 @@ namespace Process.Editor
     /// </summary>
     public static class AutoGenerator
     {
+        /// <summary>
+        /// 不需要生成的运行时节点列表
+        /// </summary>
+        private static List<ProcessNodeType> m_BlackNodeList = new List<ProcessNodeType>()
+        {
+            // ProcessNodeType.WaitTime,
+        };
+        
         /// <summary>
         /// 一键生成
         /// </summary>
@@ -29,7 +36,10 @@ namespace Process.Editor
             GenerateProcessNodePool();
         }
 
-        [MenuItem("Tools/ProcessEditor/GenerateIOExtension")]
+        /// <summary>
+        /// 生成自定义类型扩展
+        /// </summary>
+        // [MenuItem("Tools/ProcessEditor/GenerateIOExtension")]
         public static void GenerateIOExtension()
         {
             //先找到打了CustomData标签的类
@@ -128,7 +138,7 @@ namespace Process.Editor
         /// <summary>
         /// 自动生成DataNodeWriter，用于序列化数据
         /// </summary>
-        [MenuItem("Tools/ProcessEditor/GenerateDataNodeWriter")]
+        // [MenuItem("Tools/ProcessEditor/GenerateDataNodeWriter")]
         public static void GenerateDataNodeWriter()
         {
             //先找到所有继承自ProcessNodeBase的类
@@ -203,7 +213,7 @@ namespace Process.Editor
         /// <summary>
         /// 自动生成DataNodeReader，用于反序列化数据
         /// </summary>
-        [MenuItem("Tools/ProcessEditor/GenerateDataNodeReader")]
+        // [MenuItem("Tools/ProcessEditor/GenerateDataNodeReader")]
         public static void GenerateDataNodeReader()
         {
             //先找到所有继承自ProcessNodeBase的类
@@ -287,7 +297,7 @@ namespace Process.Editor
         /// <summary>
         /// 自动生成RuntimeNode，用于运行时使用
         /// </summary>
-        [MenuItem("Tools/ProcessEditor/GenerateRuntimeNode")]
+        // [MenuItem("Tools/ProcessEditor/GenerateRuntimeNode")]
         public static void GenerateRuntimeNode()
         {
             //先找到所有继承自ProcessNodeBase的类
@@ -384,17 +394,9 @@ namespace Process.Editor
         }
         
         /// <summary>
-        /// 不需要生成的运行时节点列表
-        /// </summary>
-        private static List<ProcessNodeType> m_BlackNodeList = new List<ProcessNodeType>()
-        {
-            // ProcessNodeType.WaitTime,
-        };
-        
-        /// <summary>
         /// 生成节点池
         /// </summary>
-        [MenuItem("Tools/ProcessEditor/GenerateProcessNodePool")]
+        // [MenuItem("Tools/ProcessEditor/GenerateProcessNodePool")]
         public static void GenerateProcessNodePool()
         {
             StringBuilder builder = new StringBuilder();
@@ -493,7 +495,6 @@ namespace Process.Editor
             
             ProcessWriter.WriteFile(builder, GlobalPathConfig.NodePoolPath);
         }
-
         
         /// <summary>
         /// 获取字段类型的别名
@@ -512,6 +513,11 @@ namespace Process.Editor
             return GetFieldAliasName(field.FieldType.Name);
         }
 
+        /// <summary>
+        /// 获取字段类型的别名名称
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
         private static string GetFieldAliasName(string typeName)
         {
             //基础类型
