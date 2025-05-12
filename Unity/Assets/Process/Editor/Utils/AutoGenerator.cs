@@ -18,7 +18,7 @@ namespace Process.Editor
         /// <summary>
         /// 不需要生成的运行时节点列表
         /// </summary>
-        private static List<ProcessNodeType> m_BlackNodeList = new List<ProcessNodeType>()
+        private static List<ProcessNodeType> m_BlackNodeList = new()
         {
             // ProcessNodeType.WaitTime,
         };

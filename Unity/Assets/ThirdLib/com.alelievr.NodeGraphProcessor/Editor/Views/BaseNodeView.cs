@@ -906,7 +906,9 @@ namespace GraphProcessor
             if (!isList)
             {
                 container.style.flexDirection = FlexDirection.Row;
-                container.Add(new VisualElement{name = $"FieldViewIcon_{field.FieldType.Name}"});
+
+                var fieldIconName = field.FieldType.IsEnum ? "FieldViewIcon_Enum" : $"FieldViewIcon_{field.FieldType.Name}";
+                container.Add(new VisualElement{name = fieldIconName});
                 container.Add(element);
             }
 

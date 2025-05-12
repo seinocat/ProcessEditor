@@ -12,11 +12,8 @@ namespace Process.Editor
         
         [CustomSetting("时间(秒)")]
         public float Time;
-
-        [CustomSetting("测试数据")]
-        public TestClass TestData;
         
-        [CustomSetting("测试列表")]
-        public List<TestClass> TestClasses;
+        [CustomSetting("测试枚举")]
+        public eFadeType FadeType;
     }
 }

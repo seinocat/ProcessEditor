@@ -509,3 +509,11 @@ Vector3Field{
     margin-left: 3px;
     margin-top: 5px;
 }
+
+#FieldViewIcon_Enum {
+    width: 12px;
+    height: 12px;
+    background-image: resource("Icons/Enum@x3");
+    margin-left: 3px;
+    margin-top: 5px;
+}
