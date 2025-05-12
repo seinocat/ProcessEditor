@@ -16,6 +16,13 @@ namespace GraphProcessor
             this.export = export;
         }
     }
+
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CustomDataAttribute : Attribute
+    {
+        
+    }
+    
     /// <summary>
     /// Tell that this field is will generate an input port
     /// </summary>

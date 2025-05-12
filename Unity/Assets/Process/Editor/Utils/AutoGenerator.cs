@@ -22,10 +22,82 @@ namespace Process.Editor
         [MenuItem("Tools/ProcessEditor/一键生成")]
         public static void OneKeyGenerate()
         {
+            GenerateIOExtension();
             GenerateDataNodeWriter();
             GenerateDataNodeReader();
             GenerateRuntimeNode();
             GenerateProcessNodePool();
+        }
+
+        [MenuItem("Tools/ProcessEditor/GenerateIOExtension")]
+        public static void GenerateIOExtension()
+        {
+            //先找到所有继承自ProcessNodeBase的类
+            var types = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
+                .ToList();
+            
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeWriter ***/");
+            builder.AppendLine("using System.IO;");
+            builder.AppendLine("using Seino.Utils.FastFileReader;");
+            builder.AppendLine("");
+            builder.AppendLine("namespace Process.Editor");
+            builder.AppendLine("{");
+            
+            builder.AppendLine("    public static class GenerateIOExtension");
+            builder.AppendLine("    {");
+             foreach (var type in types)
+            {
+                //获取所有带CustomData标签
+                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p =>
+                    {
+                        var customAttr = p.GetCustomAttribute(typeof(CustomDataAttribute), false);
+                        return customAttr is CustomDataAttribute;
+                    })
+                    .ToList();
+
+                if (fields.Count == 0)
+                    continue;
+                
+                builder.AppendLine("        public static void Write(this BinaryWriter writer, float3x3 value)");
+                builder.AppendLine("        {");
+
+                foreach (var field in fields)
+                {
+                    //枚举类型需要转换
+                    if (field.FieldType.IsEnum)
+                    {
+                        builder.AppendLine($"            writer.Write((int){field.Name});");
+                        continue;
+                    }
+
+                    // List类型需要转换
+                    if (typeof(IList).IsAssignableFrom(field.FieldType))
+                    {
+                        builder.AppendLine($"            writer.Write((int){field.Name}.Count);");
+                        builder.AppendLine($"            foreach (var element in {field.Name})");
+                        builder.AppendLine("            {");
+                        builder.AppendLine("                   writer.Write(element);");
+                        builder.AppendLine("            }");
+                        continue;
+                    }
+                    
+                    //枚举类型需要转换
+                    builder.AppendLine($"            writer.Write({field.Name});");
+                }
+                
+                builder.AppendLine("        }");
+                builder.AppendLine("    }");
+                builder.AppendLine("");
+            }
+            
+            builder.AppendLine("    }");
+            builder.AppendLine("}");
+            
+            
+            ProcessWriter.WriteFile(builder, GlobalPathConfig.IOExtensionPath);
         }
         
         /// <summary>
