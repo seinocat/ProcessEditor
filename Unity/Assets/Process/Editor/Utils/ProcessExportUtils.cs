@@ -20,7 +20,7 @@ namespace Process.Editor
         {
             ProcessSystem system = new ProcessSystem();
             await system.LoadConfigs();
-            var process = system.CreateProcess(1008, null);
+            var process = system.CreateProcess(1001, null);
         }
         
         /// <summary>
@@ -29,9 +29,7 @@ namespace Process.Editor
         /// <returns></returns>
         public static bool ExportAllProcess()
         {
-             var writer = FastFileUtils.CreateBinaryWriter(
-                            $"{Application.streamingAssetsPath}/Events.bytes");
-            
+            var writer = FastFileUtils.CreateBinaryWriter($"{Application.streamingAssetsPath}/Events.bytes");
             var allProcess = ProcessUtils.GetAllProcess();
             writer.Write(allProcess.Count);
             
@@ -86,10 +84,7 @@ namespace Process.Editor
             for (int i = 0; i < nodeData.Conditions.Count; i++)
             {
                 var condition = nodeData.Conditions[i];
-                writer.Write(condition.Type);
                 writer.Write(condition.Id);
-                writer.Write(condition.Value1);
-                writer.Write(condition.Value2);
                 writer.Write(condition.IsAnd);
             }
             

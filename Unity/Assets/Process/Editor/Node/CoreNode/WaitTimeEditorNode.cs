@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Process.Runtime;
 using GraphProcessor;
 
@@ -14,12 +15,8 @@ namespace Process.Editor
 
         [CustomSetting("测试数据")]
         public TestClass TestData;
-    }
-
-    [Serializable, CustomData]
-    public class TestClass
-    {
-        public int Value1;
-        public string Value2;
+        
+        [CustomSetting("测试列表")]
+        public List<TestClass> TestClasses;
     }
 }

@@ -19,10 +19,7 @@ namespace Process.Runtime
     [Serializable]
     public class ProcessConditionData
     {
-        public string Type;
         public ulong Id;
-        public int Value1;
-        public int Value2;
         public bool IsAnd = true;
     }
 

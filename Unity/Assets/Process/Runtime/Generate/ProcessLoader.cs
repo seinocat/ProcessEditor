@@ -29,10 +29,7 @@ namespace Process.Runtime
                 for (int i = 0; i < config.ConditionCount; i++)
                 {
                     ProcessConditionData data = new ProcessConditionData();
-                    data.Type        = reader.ReadString();
                     data.Id          = reader.ReadUInt64();
-                    data.Value1      = reader.ReadInt32();
-                    data.Value2      = reader.ReadInt32();
                     data.IsAnd       = reader.ReadBoolean();
                     
                     config.Conditions.Add(data);
@@ -67,6 +64,8 @@ namespace Process.Runtime
                     // 读取节点参数
                     var nodeParam = ProcessNodeParamCreator.Get(nodeData.Type);
                     nodeParam.ReadNodeData(reader);
+                    nodeData.Param = nodeParam;
+                    
                     config.NodeDataList.Add(nodeData);
                 }
                 

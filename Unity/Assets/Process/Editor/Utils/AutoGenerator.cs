@@ -32,36 +32,31 @@ namespace Process.Editor
         [MenuItem("Tools/ProcessEditor/GenerateIOExtension")]
         public static void GenerateIOExtension()
         {
-            //先找到所有继承自ProcessNodeBase的类
-            var types = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
+            //先找到打了CustomData标签的类
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(t => t.IsClass && t.GetCustomAttribute<CustomDataAttribute>() != null)
                 .ToList();
             
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeWriter ***/");
+            builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateIOExtension ***/");
             builder.AppendLine("using System.IO;");
             builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
-            builder.AppendLine("namespace Process.Editor");
+            builder.AppendLine("namespace Process.Runtime");
             builder.AppendLine("{");
             
             builder.AppendLine("    public static class GenerateIOExtension");
             builder.AppendLine("    {");
-             foreach (var type in types)
+            foreach (var type in types)
             {
-                //获取所有带CustomData标签
-                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(p =>
-                    {
-                        var customAttr = p.GetCustomAttribute(typeof(CustomDataAttribute), false);
-                        return customAttr is CustomDataAttribute;
-                    })
-                    .ToList();
-
+                //获取所有字段
+                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance).ToList();
                 if (fields.Count == 0)
                     continue;
                 
-                builder.AppendLine("        public static void Write(this BinaryWriter writer, float3x3 value)");
+                // BinaryWriter
+                builder.AppendLine($"        public static void Write(this BinaryWriter writer, {type.Name} value)");
                 builder.AppendLine("        {");
 
                 foreach (var field in fields)
@@ -69,7 +64,7 @@ namespace Process.Editor
                     //枚举类型需要转换
                     if (field.FieldType.IsEnum)
                     {
-                        builder.AppendLine($"            writer.Write((int){field.Name});");
+                        builder.AppendLine($"            writer.Write((int)value.{field.Name});");
                         continue;
                     }
 
@@ -84,12 +79,42 @@ namespace Process.Editor
                         continue;
                     }
                     
-                    //枚举类型需要转换
-                    builder.AppendLine($"            writer.Write({field.Name});");
+                    builder.AppendLine($"            writer.Write(value.{field.Name});");
                 }
                 
                 builder.AppendLine("        }");
-                builder.AppendLine("    }");
+                builder.AppendLine("");
+                
+                // BinaryReader
+                builder.AppendLine($"        public static {type.Name} Read{type.Name}(this BinaryReader reader)");
+                builder.AppendLine("        {");
+                builder.AppendLine($"            var value = new {type.Name}();");
+                foreach (var field in fields)
+                {
+                    //枚举类型需要转换
+                    if (field.FieldType.IsEnum)
+                    {
+                        builder.AppendLine($"            value.{field.Name} = ({field.FieldType.Name})reader.ReadInt32();");
+                        continue;
+                    }
+                    
+                    // List类型需要转换
+                    if (typeof(IList).IsAssignableFrom(field.FieldType))
+                    {
+                        builder.AppendLine($"            var {field.Name}Count = reader.ReadInt32();");
+                        builder.AppendLine($"            value.{field.Name} = new {field.FieldType.GetGenericArguments()[0].Name}[{field.Name}Count];");
+                        builder.AppendLine($"            for(int i = 0; i < {field.Name}Count; i++)");
+                        builder.AppendLine("            {");
+                        builder.AppendLine($"                value.{field.Name}.Add(reader.Read{field.FieldType.GetGenericArguments()[0].Name}())");
+                        builder.AppendLine("            }");
+                        continue;
+                    }
+                    
+                    builder.AppendLine($"            value.{field.Name} = reader.Read{field.FieldType.Name}();");
+                }
+                
+                builder.AppendLine("            return value;");
+                builder.AppendLine("        }");
                 builder.AppendLine("");
             }
             
@@ -114,6 +139,7 @@ namespace Process.Editor
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateDataNodeWriter ***/");
             builder.AppendLine("using System.IO;");
+            builder.AppendLine("using Process.Runtime;");
             builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Editor");
@@ -152,10 +178,10 @@ namespace Process.Editor
                     // List类型需要转换
                     if (typeof(IList).IsAssignableFrom(field.FieldType))
                     {
-                        builder.AppendLine($"            writer.Write((int){field.Name}.Count);");
+                        builder.AppendLine($"            writer.Write({field.Name}.Count);");
                         builder.AppendLine($"            foreach (var element in {field.Name})");
                         builder.AppendLine("            {");
-                        builder.AppendLine("                   writer.Write(element);");
+                        builder.AppendLine("                writer.Write(element);");
                         builder.AppendLine("            }");
                         continue;
                     }

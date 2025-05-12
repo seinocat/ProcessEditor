@@ -365,8 +365,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -758, y: 69, z: 0}
-  scale: {x: 0.57175326, y: 0.57175326, z: 1}
+  position: {x: -187, y: 23, z: 0}
+  scale: {x: 0.43232757, y: 0.43232757, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -443,11 +443,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 2
         Time: 0
-        uid: 9989
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 1
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730132929085440
       type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -483,11 +482,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 4
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730132929085442
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -505,11 +503,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 5
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144768
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -527,11 +524,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 6
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144769
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -549,11 +545,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 7
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144770
       type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -589,11 +584,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 9
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144772
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -611,11 +605,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 10
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144773
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -633,11 +626,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 11
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144774
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -655,11 +647,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 12
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144775
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -677,11 +668,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 13
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144776
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -715,11 +705,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 15
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144778
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -737,11 +726,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 16
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144779
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -759,11 +747,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 17
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144780
       type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -799,11 +786,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 19
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144782
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -821,11 +807,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 20
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144783
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -859,11 +844,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 22
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 1
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144785
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -881,11 +865,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 23
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144786
       type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -921,11 +904,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 25
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144788
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -943,11 +925,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 26
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144789
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -981,11 +962,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 28
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144791
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -1019,11 +999,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 30
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144794
       type: {class: SequenceEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -1059,11 +1038,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 32
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144796
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -1081,11 +1059,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 33
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144797
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -1119,11 +1096,10 @@ MonoBehaviour:
         nodeLock: 0
         NodeOrder: 35
         Time: 0
-        uid: 0
-        rotation: {x: 0, y: 0, z: 0, w: 0}
-        scale: {x: 0, y: 0, z: 0}
-        color: {r: 0, g: 0, b: 0, a: 0}
-        fadeType: 0
+        TestData:
+          Value1: 0
+          Value2: 
+        TestClasses: []
     - rid: 8003730137690144799
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:

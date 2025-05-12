@@ -59,8 +59,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -1787, y: -646, z: 0}
-  scale: {x: 2, y: 2, z: 1}
+  position: {x: -778, y: -293, z: 0}
+  scale: {x: 1.3225, y: 1.3225, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -138,8 +138,13 @@ MonoBehaviour:
         NodeOrder: 2
         Time: 250
         TestData:
-          Value1: 0
-          Value2: 
+          Value1: 1
+          Value2: "\u963F\u8428\u6CD5\u5927\u6982\u7684"
+        TestClasses:
+        - Value1: 123
+          Value2: "\u6492\u7684\u53D1"
+        - Value1: 132
+          Value2: "\u5341\u591A\u4E2A"
     - rid: 8003730113316257801
       type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:

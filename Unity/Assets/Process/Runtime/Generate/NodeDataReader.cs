@@ -31,10 +31,21 @@ namespace Process.Runtime
     public class WaitTimeNodeParam : ProcessNodeParam
     {
         public float Time;
+        public TestClass TestData;
+        public List<TestClass> TestClasses;
 
         public override void ReadNodeData(BinaryReader reader)
         {
             Time = reader.ReadSingle();
+            TestData = reader.ReadTestClass();
+
+            TestClasses = new List<TestClass>();
+            var TestClassesCount = reader.ReadInt32();
+            for(int i = 0; i < TestClassesCount; i++)
+            {
+                TestClasses.Add(reader.ReadTestClass());
+            }
+
         }
     }
 
