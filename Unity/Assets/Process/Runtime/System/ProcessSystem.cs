@@ -40,64 +40,64 @@ namespace Process.Runtime
             return process;
         }
         
-    /// <summary>
-    /// 创建节点链
-    /// </summary>
-    /// <param name="config"></param>
-    /// <param name="process"></param>
-    /// <returns></returns>
-    private List<ProcessNodeBase> CreateNodeLink(ProcessConfig config, GameProcess process)
-    {
-        List<ProcessNodeBase> nodes = new List<ProcessNodeBase>();
-        
-        //先创建所有节点
-        foreach (var nodeData in config.NodeDataList)
+        /// <summary>
+        /// 创建节点链
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="process"></param>
+        /// <returns></returns>
+        private List<ProcessNodeBase> CreateNodeLink(ProcessConfig config, GameProcess process)
         {
-            ProcessNodeBase processNode = ProcessNodePool.Get(nodeData.Type);
-            processNode.Initialize(process, nodeData);
-            nodes.Add(processNode);
-        }
-        
-        //链接节点
-        foreach (var nodeData in config.NodeDataList)
-        {
-            var curNode = nodes.Find((node) => node.OrderId == nodeData.Order);
-            if (curNode == null)
+            List<ProcessNodeBase> nodes = new List<ProcessNodeBase>();
+            
+            //先创建所有节点
+            foreach (var nodeData in config.NodeDataList)
             {
-                // LogManager.LogError($"create node link error, can't find node by order: {nodeData.Order}");
-                continue;
-            }
-
-            //链接下一个节点
-            var nextNodeOrders = nodeData.NextNodeOrderList;
-            foreach (var nextNodeOrder in nextNodeOrders)
-            {
-                var nextNode = nodes.Find((node) => node.OrderId == nextNodeOrder);
-                if (nextNode == null)
-                {
-                    // LogManager.LogError($"create node link error, can't find next node by order: {nextNodeOrder}");
-                    continue;
-                }
-                curNode.AddNextNode(nextNode);
+                ProcessNodeBase processNode = ProcessNodePool.Get(nodeData.Type);
+                processNode.Initialize(process, nodeData);
+                nodes.Add(processNode);
             }
             
-            //链接序列节点
-            var sequenceNodeOrders = nodeData.SequenceNodeOrderList;
-            foreach (var sequenceNodeOrder in sequenceNodeOrders)
+            //链接节点
+            foreach (var nodeData in config.NodeDataList)
             {
-                var sequenceNode = nodes.Find((node) => node.OrderId == sequenceNodeOrder);
-                if (sequenceNode == null)
+                var curNode = nodes.Find((node) => node.OrderId == nodeData.Order);
+                if (curNode == null)
                 {
-                    // LogManager.LogError($"create node link error, can't find sequence node by order: {sequenceNodeOrder}");
+                    // LogManager.LogError($"create node link error, can't find node by order: {nodeData.Order}");
                     continue;
                 }
-                curNode.IsSequenceNode = true;
-                curNode.IsSequential = nodeData.IsSequential;
-                curNode.AddSeqNode(sequenceNode);
+
+                //链接下一个节点
+                var nextNodeOrders = nodeData.NextNodeOrderList;
+                foreach (var nextNodeOrder in nextNodeOrders)
+                {
+                    var nextNode = nodes.Find((node) => node.OrderId == nextNodeOrder);
+                    if (nextNode == null)
+                    {
+                        // LogManager.LogError($"create node link error, can't find next node by order: {nextNodeOrder}");
+                        continue;
+                    }
+                    curNode.AddNextNode(nextNode);
+                }
+                
+                //链接序列节点
+                var sequenceNodeOrders = nodeData.SequenceNodeOrderList;
+                foreach (var sequenceNodeOrder in sequenceNodeOrders)
+                {
+                    var sequenceNode = nodes.Find((node) => node.OrderId == sequenceNodeOrder);
+                    if (sequenceNode == null)
+                    {
+                        // LogManager.LogError($"create node link error, can't find sequence node by order: {sequenceNodeOrder}");
+                        continue;
+                    }
+                    curNode.IsSequenceNode = true;
+                    curNode.IsSequential = nodeData.IsSequential;
+                    curNode.AddSeqNode(sequenceNode);
+                }
             }
+            
+            return nodes;
         }
-        
-        return nodes;
-    }
     }
 }
