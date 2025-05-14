@@ -12,5 +12,7 @@ namespace Process.Editor
         
         [CustomSetting("时间(秒)")]
         public float Time;
+        
+        public eFadeType FadeType;
     }
 }

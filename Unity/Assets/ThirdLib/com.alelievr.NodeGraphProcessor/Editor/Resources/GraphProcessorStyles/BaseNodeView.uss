@@ -517,3 +517,11 @@ Vector3Field{
     margin-left: 3px;
     margin-top: 5px;
 }
+
+#Icon_Runtime{
+    width: 36px;
+    height: 36px;
+    background-image: resource("Icons/Runtime@x3");
+    margin-left: 3px;
+    margin-top: 1px;
+}

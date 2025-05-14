@@ -53,7 +53,6 @@ MonoBehaviour:
   - rid: 8003730137690144798
   - rid: 8003730137690144799
   - rid: 8003730137690144800
-  - rid: 8003730250894934016
   edges:
   - GUID: 04dd0fd8-86e5-4cbb-a887-7ae812b91898
     owner: {fileID: 11400000}
@@ -366,8 +365,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -2823, y: -1425, z: 0}
-  scale: {x: 2, y: 2, z: 1}
+  position: {x: -2045, y: 192, z: 0}
+  scale: {x: 1.520875, y: 1.520875, z: 1}
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -398,10 +397,10 @@ MonoBehaviour:
         computeOrder: 1
         position:
           serializedVersion: 2
-          x: 709.5
-          y: 128.5
+          x: 710
+          y: 285.49997
           width: 171
-          height: 200
+          height: 151
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -435,10 +434,10 @@ MonoBehaviour:
         computeOrder: 3
         position:
           serializedVersion: 2
-          x: 1081.5
+          x: 1096.5475
           y: 286
           width: 171
-          height: 139
+          height: 118
         expanded: 1
         debug: 0
         nodeLock: 0
@@ -452,15 +451,15 @@ MonoBehaviour:
         computeOrder: 4
         position:
           serializedVersion: 2
-          x: 1499
-          y: 639
+          x: 1481.5
+          y: 549
           width: 171
           height: 137
         expanded: 0
         debug: 0
         nodeLock: 0
         NodeOrder: 3
-        IsSequential: 1
+        IsSequential: 0
         PortCount: 2
     - rid: 8003730132929085441
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -470,10 +469,10 @@ MonoBehaviour:
         computeOrder: 5
         position:
           serializedVersion: 2
-          x: 1712.2158
-          y: 442.74677
-          width: 345
-          height: 196
+          x: 1712
+          y: 470.37573
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -488,9 +487,9 @@ MonoBehaviour:
         position:
           serializedVersion: 2
           x: 1712
-          y: 709.7221
-          width: 345
-          height: 196
+          y: 648.78925
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -641,8 +640,8 @@ MonoBehaviour:
         computeOrder: 15
         position:
           serializedVersion: 2
-          x: 2983.2
-          y: 154.00002
+          x: 2828.2124
+          y: 150.99998
           width: 104
           height: 99
         expanded: 0
@@ -657,10 +656,10 @@ MonoBehaviour:
         computeOrder: 16
         position:
           serializedVersion: 2
-          x: 3166.3
-          y: 154.00002
-          width: 345
-          height: 196
+          x: 3011.2124
+          y: 150.99998
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -674,10 +673,10 @@ MonoBehaviour:
         computeOrder: 17
         position:
           serializedVersion: 2
-          x: 3590.2002
-          y: 155.00009
-          width: 345
-          height: 196
+          x: 3234.4807
+          y: 153.00005
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -691,10 +690,10 @@ MonoBehaviour:
         computeOrder: 18
         position:
           serializedVersion: 2
-          x: 3992
-          y: 155
-          width: 345
-          height: 196
+          x: 3454.977
+          y: 153
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -708,8 +707,8 @@ MonoBehaviour:
         computeOrder: 19
         position:
           serializedVersion: 2
-          x: 3987.4106
-          y: 569.9999
+          x: 3456.5005
+          y: 568.00006
           width: 171
           height: 137
         expanded: 0
@@ -726,10 +725,10 @@ MonoBehaviour:
         computeOrder: 20
         position:
           serializedVersion: 2
-          x: 4269.4106
-          y: 439.99994
-          width: 345
-          height: 196
+          x: 3738.5005
+          y: 438
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -743,10 +742,10 @@ MonoBehaviour:
         computeOrder: 21
         position:
           serializedVersion: 2
-          x: 4269.4106
-          y: 683.9999
-          width: 345
-          height: 196
+          x: 3738.5005
+          y: 682.00006
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -760,8 +759,8 @@ MonoBehaviour:
         computeOrder: 22
         position:
           serializedVersion: 2
-          x: 4479
-          y: 155
+          x: 3719.9993
+          y: 153
           width: 104
           height: 99
         expanded: 0
@@ -776,10 +775,10 @@ MonoBehaviour:
         computeOrder: 23
         position:
           serializedVersion: 2
-          x: 4662
-          y: 156
-          width: 345
-          height: 196
+          x: 3902.9995
+          y: 153.99997
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -793,10 +792,10 @@ MonoBehaviour:
         computeOrder: 24
         position:
           serializedVersion: 2
-          x: 5270.1895
-          y: 153.00006
-          width: 345
-          height: 196
+          x: 4190.6465
+          y: 154.00008
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -810,8 +809,8 @@ MonoBehaviour:
         computeOrder: 25
         position:
           serializedVersion: 2
-          x: 5108.1895
-          y: 569.99994
+          x: 4186.288
+          y: 567.9999
           width: 171
           height: 137
         expanded: 0
@@ -828,10 +827,10 @@ MonoBehaviour:
         computeOrder: 26
         position:
           serializedVersion: 2
-          x: 5390.1895
-          y: 440.00006
-          width: 345
-          height: 196
+          x: 4468.288
+          y: 437.9999
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -845,10 +844,10 @@ MonoBehaviour:
         computeOrder: 27
         position:
           serializedVersion: 2
-          x: 5390.1895
-          y: 684.00006
-          width: 345
-          height: 196
+          x: 4468.288
+          y: 682
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -862,8 +861,8 @@ MonoBehaviour:
         computeOrder: 28
         position:
           serializedVersion: 2
-          x: 5757.1895
-          y: 153.00006
+          x: 4677.6465
+          y: 154.00008
           width: 104
           height: 99
         expanded: 0
@@ -878,10 +877,10 @@ MonoBehaviour:
         computeOrder: 29
         position:
           serializedVersion: 2
-          x: 5940.1895
-          y: 154
-          width: 345
-          height: 196
+          x: 4860.6465
+          y: 155.00005
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -895,8 +894,8 @@ MonoBehaviour:
         computeOrder: 30
         position:
           serializedVersion: 2
-          x: 6358.6577
-          y: 156.00005
+          x: 5279.6465
+          y: 156.99997
           width: 104
           height: 99
         expanded: 0
@@ -911,10 +910,10 @@ MonoBehaviour:
         computeOrder: 31
         position:
           serializedVersion: 2
-          x: 6638.4653
-          y: 156.00006
-          width: 345
-          height: 196
+          x: 5558.6465
+          y: 156.99997
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -928,8 +927,8 @@ MonoBehaviour:
         computeOrder: 32
         position:
           serializedVersion: 2
-          x: 6476.4653
-          y: 573.0001
+          x: 5396.6465
+          y: 574.0001
           width: 171
           height: 137
         expanded: 0
@@ -946,10 +945,10 @@ MonoBehaviour:
         computeOrder: 33
         position:
           serializedVersion: 2
-          x: 6758.4653
-          y: 443.0001
-          width: 345
-          height: 196
+          x: 5678.6465
+          y: 444.0001
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -963,10 +962,10 @@ MonoBehaviour:
         computeOrder: 34
         position:
           serializedVersion: 2
-          x: 6758.4653
-          y: 687
-          width: 345
-          height: 196
+          x: 5678.6465
+          y: 688
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -980,8 +979,8 @@ MonoBehaviour:
         computeOrder: 35
         position:
           serializedVersion: 2
-          x: 7125.4653
-          y: 156.00006
+          x: 6045.647
+          y: 156.99997
           width: 104
           height: 99
         expanded: 0
@@ -996,10 +995,10 @@ MonoBehaviour:
         computeOrder: 36
         position:
           serializedVersion: 2
-          x: 7308.4653
-          y: 157.00009
-          width: 345
-          height: 196
+          x: 6228.647
+          y: 158.00008
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -1013,8 +1012,8 @@ MonoBehaviour:
         computeOrder: 37
         position:
           serializedVersion: 2
-          x: 7724
-          y: 156
+          x: 6644.647
+          y: 156.99997
           width: 104
           height: 99
         expanded: 0
@@ -1029,28 +1028,11 @@ MonoBehaviour:
         computeOrder: 38
         position:
           serializedVersion: 2
-          x: 7891
-          y: 156
+          x: 6811.647
+          y: 156.99997
           width: 87
           height: 75
         expanded: 0
         debug: 0
         nodeLock: 0
         NodeOrder: 37
-    - rid: 8003730250894934016
-      type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
-      data:
-        nodeCustomName: 
-        GUID: 5d38e65a-5d46-4013-b17c-29684d4d8fd2
-        computeOrder: 39
-        position:
-          serializedVersion: 2
-          x: 1600.7562
-          y: 894.518
-          width: 100
-          height: 100
-        expanded: 0
-        debug: 0
-        nodeLock: 0
-        NodeOrder: -1
-        Time: 0

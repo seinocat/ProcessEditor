@@ -138,12 +138,22 @@ namespace GraphProcessor
             titleContainer.Add(rightTitleContainer);
             // 插入TitleIcon
             titleContainer.Insert(0, new VisualElement(){ name = "NodeIcon_Action" });
+            
+            var textures = new List<Texture2D>
+            {
+                Resources.Load<Texture2D>("Icons/Array@x3"),
+                Resources.Load<Texture2D>("Icons/Boolean@x3"),
+                Resources.Load<Texture2D>("Icons/Quaternion@x3"),
+                Resources.Load<Texture2D>("Icons/Vector2@x3"),
+            };
+            var animatedIcon = new FrameAnimationView(textures);
+            titleContainer.Add(animatedIcon);
 
             topPortContainer = new VisualElement { name = "TopPortContainer" };
             this.Insert(0, topPortContainer);
 
             bottomPortContainer = new VisualElement { name = "BottomPortContainer" };
-            this.Add(bottomPortContainer);
+            Add(bottomPortContainer);
 
             if (nodeTarget.showControlsOnHover)
             {

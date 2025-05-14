@@ -312,6 +312,7 @@ namespace Process.Runtime
         protected virtual ProcessStatus OnEnter()                       => ProcessStatus.Running;
         protected virtual async UniTask<ProcessStatus> OnAsyncEnter()   => ProcessStatus.Running;
         protected virtual ProcessStatus OnUpdate(float deltaTime)       => ProcessStatus.Running;
+        protected virtual ProcessStatus OnSkip()                        => ProcessStatus.Success;   
         protected virtual void OnExit(){}
         public virtual void OnProcessFinished(ProcessStatus status){} 
 
