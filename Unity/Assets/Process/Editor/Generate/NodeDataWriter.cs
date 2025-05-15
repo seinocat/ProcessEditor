@@ -30,4 +30,16 @@ namespace Process.Editor
         }
     }
 
+    public partial class SelectBranchEditorNode
+    {
+        public override void WriteNodeData(BinaryWriter writer)
+        {
+            writer.Write(BranchPortL.Count);
+            foreach (var element in BranchPortL)
+            {
+                writer.Write(element);
+            }
+        }
+    }
+
 }

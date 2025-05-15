@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Process.Runtime
 {
@@ -7,5 +9,13 @@ namespace Process.Runtime
     {
         public int Value1;
         public string Value2;
+    }
+    
+    [Serializable, CustomData]
+    public class BranchData
+    {
+        public List<int> Conditions;
+        [HideInInspector]
+        public int NextID;
     }
 }

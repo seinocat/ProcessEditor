@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Process.Runtime;
 using UnityEngine;
 
 namespace Process.Editor
 {
-    [Serializable, ExportData]
-    public class BranchData
-    {
-        public List<int> Conditions;
-        [HideInInspector]
-        public int NextID;
-    }
-    
     [Serializable, ExportData]
     public class SequenceData
     {

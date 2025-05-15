@@ -53,6 +53,7 @@ MonoBehaviour:
   - rid: 8003730137690144798
   - rid: 8003730137690144799
   - rid: 8003730137690144800
+  - rid: 8003730273783775235
   edges:
   - GUID: 04dd0fd8-86e5-4cbb-a887-7ae812b91898
     owner: {fileID: 11400000}
@@ -365,8 +366,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -5981, y: -354, z: 0}
-  scale: {x: 1.15, y: 1.15, z: 1}
+  position: {x: -2284, y: -916, z: 0}
+  scale: {x: 1.3225, y: 1.3225, z: 1}
   RuntimeDebug: 0
   Timestamp: 1741334291
   OpenCount: 0
@@ -547,8 +548,8 @@ MonoBehaviour:
         computeOrder: 9
         position:
           serializedVersion: 2
-          x: 2264.8516
-          y: 853.00006
+          x: 2118.0833
+          y: 658.7904
           width: 171
           height: 185
         expanded: 0
@@ -566,10 +567,10 @@ MonoBehaviour:
         computeOrder: 10
         position:
           serializedVersion: 2
-          x: 2546.9998
-          y: 502.99997
-          width: 345
-          height: 217
+          x: 2400
+          y: 490
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -584,10 +585,10 @@ MonoBehaviour:
         computeOrder: 11
         position:
           serializedVersion: 2
-          x: 2546.9998
-          y: 730.99994
-          width: 345
-          height: 217
+          x: 2400
+          y: 627
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -602,10 +603,10 @@ MonoBehaviour:
         computeOrder: 12
         position:
           serializedVersion: 2
-          x: 2546.9998
-          y: 960.99994
-          width: 345
-          height: 217
+          x: 2400.0833
+          y: 766.7904
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -620,10 +621,10 @@ MonoBehaviour:
         computeOrder: 13
         position:
           serializedVersion: 2
-          x: 2546.9998
-          y: 1189
-          width: 345
-          height: 217
+          x: 2400
+          y: 899.6715
+          width: 171
+          height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
@@ -979,8 +980,8 @@ MonoBehaviour:
         computeOrder: 33
         position:
           serializedVersion: 2
-          x: 5678.6465
-          y: 444.0001
+          x: 5603
+          y: 515
           width: 171
           height: 118
         expanded: 0
@@ -997,8 +998,8 @@ MonoBehaviour:
         computeOrder: 34
         position:
           serializedVersion: 2
-          x: 5678.6465
-          y: 688
+          x: 5603
+          y: 659.7297
           width: 171
           height: 118
         expanded: 0
@@ -1076,3 +1077,26 @@ MonoBehaviour:
         nodeLock: 0
         isRunning: 0
         NodeOrder: 37
+    - rid: 8003730273783775235
+      type: {class: SelectBranchEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 814d23f0-62c3-47a1-badb-2c186411e1a6
+        computeOrder: 39
+        position:
+          serializedVersion: 2
+          x: 1997.5002
+          y: 876.2193
+          width: 241
+          height: 638
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        isRunning: 0
+        NodeOrder: -1
+        PortCount: 2
+        BranchPortL:
+        - Conditions: 11270000
+          NextID: 0
+        - Conditions: 
+          NextID: 0

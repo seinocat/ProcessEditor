@@ -88,6 +88,33 @@ namespace Process.Runtime
 
     }
 
+    public partial class SelectBranchNode : ProcessNodeBase
+    {
+         public override ProcessNodeType Type => ProcessNodeType.SelectBranch;
+         public override bool IsStart => false;
+
+         private List<BranchData> m_BranchPortL;
+
+         public override void ReadNodeData(ProcessNodeParam data)
+         {
+             if(data is SelectBranchNodeParam paramData)
+             {
+                 m_BranchPortL = paramData.BranchPortL;
+             }
+         }
+
+         protected override void ClearNodeData()
+         {
+             m_BranchPortL = null;
+         }
+
+         public override void Recycle()
+         {
+             NodePool<SelectBranchNode>.Recycle(this);
+         }
+
+    }
+
     public partial class EmptyNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.Empty;
@@ -132,30 +159,6 @@ namespace Process.Runtime
          public override void Recycle()
          {
              NodePool<EndNode>.Recycle(this);
-         }
-
-    }
-
-    public partial class SelectBranchNode : ProcessNodeBase
-    {
-         public override ProcessNodeType Type => ProcessNodeType.SelectBranch;
-         public override bool IsStart => false;
-
-
-         public override void ReadNodeData(ProcessNodeParam data)
-         {
-             if(data is SelectBranchNodeParam paramData)
-             {
-             }
-         }
-
-         protected override void ClearNodeData()
-         {
-         }
-
-         public override void Recycle()
-         {
-             NodePool<SelectBranchNode>.Recycle(this);
          }
 
     }

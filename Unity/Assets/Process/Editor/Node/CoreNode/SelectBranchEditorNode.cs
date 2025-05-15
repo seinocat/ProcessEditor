@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Process.Editor
 {
-    [NodeMenuItem((int)ProcessNodeType.SelectBranch), ProcessNode, Serializable, DiscardNode]
+    [NodeMenuItem((int)ProcessNodeType.SelectBranch), ProcessNode, Serializable]
     public partial class SelectBranchEditorNode : ProcessEditorNodeBase
     {
         public override ProcessNodeType Type => ProcessNodeType.SelectBranch;
@@ -14,11 +14,11 @@ namespace Process.Editor
         [Input("In")]
         public ProcessNodePort Input;
         
-        [CustomSetting("分支端口", false)] 
+        [CustomSetting("分支数量", false)] 
         public int PortCount = 2;
         
-        // [CustomSetting("分支列表"), ListReference(typeof(BranchData), nameof(BranchDatas))]
-        public List<BranchData> BranchDatas = new List<BranchData>();
+        [CustomSetting("分支列表")]
+        public List<BranchData> BranchPortL = new();
         
         [Output, SerializeField, HideInInspector]
         public ProcessNodePort Branchs;
@@ -30,7 +30,7 @@ namespace Process.Editor
             {
                 yield return new PortData
                 {
-                    displayName = $"分支{i}",
+                    displayName = $"Branch{i}",
                     displayType = typeof(ProcessNodePort),
                     identifier = i.ToString(),
                     acceptMultipleEdges = false,
@@ -40,17 +40,17 @@ namespace Process.Editor
         
         public void AddBranch()
         {
-            BranchDatas.Add(new BranchData());
+            BranchPortL.Add(new BranchData());
         }
 
         public void RemoveBranch(int id)
         {
-            BranchDatas.RemoveAt(id - 1);
+            BranchPortL.RemoveAt(id - 1);
         }
 
         public void ClearBranch()
         {
-            BranchDatas.Clear();
+            BranchPortL.Clear();
         }
 
         public override void UpdateForExport()
@@ -61,8 +61,8 @@ namespace Process.Editor
                     continue;
                 
                 var index = Math.Max(0, int.Parse(port.portData.identifier));
-                if(index <= BranchDatas.Count - 1)
-                    SetNextNode(BranchDatas[index], port);
+                if(index <= BranchPortL.Count - 1)
+                    SetNextNode(BranchPortL[index], port);
             }
         }
         
@@ -70,7 +70,10 @@ namespace Process.Editor
         {
             if (port.GetEdges().Count > 0)
             {
-                data.NextID = port.GetEdges()[0].inputNode.computeOrder;
+                if (port.GetEdges()[0].inputNode is ProcessEditorNodeBase node)
+                {
+                    data.NextID = node.NodeOrder;
+                }
             }
             else
             {

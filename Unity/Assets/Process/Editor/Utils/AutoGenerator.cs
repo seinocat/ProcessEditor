@@ -51,6 +51,7 @@ namespace Process.Editor
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("/*** 工具自动生成 => Tools/ProcessEditor/GenerateIOExtension ***/");
             builder.AppendLine("using System.IO;");
+            builder.AppendLine("using System.Collections.Generic;");
             builder.AppendLine("using Seino.Utils.FastFileReader;");
             builder.AppendLine("");
             builder.AppendLine("namespace Process.Runtime");
@@ -81,10 +82,10 @@ namespace Process.Editor
                     // List类型需要转换
                     if (typeof(IList).IsAssignableFrom(field.FieldType))
                     {
-                        builder.AppendLine($"            writer.Write((int){field.Name}.Count);");
-                        builder.AppendLine($"            foreach (var element in {field.Name})");
+                        builder.AppendLine($"            writer.Write(value.{field.Name}.Count);");
+                        builder.AppendLine($"            foreach (var element in value.{field.Name})");
                         builder.AppendLine("            {");
-                        builder.AppendLine("                   writer.Write(element);");
+                        builder.AppendLine("                writer.Write(element);");
                         builder.AppendLine("            }");
                         continue;
                     }
@@ -112,10 +113,10 @@ namespace Process.Editor
                     if (typeof(IList).IsAssignableFrom(field.FieldType))
                     {
                         builder.AppendLine($"            var {field.Name}Count = reader.ReadInt32();");
-                        builder.AppendLine($"            value.{field.Name} = new {field.FieldType.GetGenericArguments()[0].Name}[{field.Name}Count];");
+                        builder.AppendLine($"            value.{field.Name} = new {GetFieldAlias(field)}();");
                         builder.AppendLine($"            for(int i = 0; i < {field.Name}Count; i++)");
                         builder.AppendLine("            {");
-                        builder.AppendLine($"                value.{field.Name}.Add(reader.Read{field.FieldType.GetGenericArguments()[0].Name}())");
+                        builder.AppendLine($"                value.{field.Name}.Add(reader.Read{field.FieldType.GetGenericArguments()[0].Name}());");
                         builder.AppendLine("            }");
                         continue;
                     }

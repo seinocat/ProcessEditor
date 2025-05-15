@@ -18,8 +18,7 @@ namespace Process.Editor
         
         [CustomSetting("失败节点ID"), HideInInspector]
         public int FailID;
-
-
+        
         public ConditionEditorNode()
         {
             onAfterEdgeConnected    += OnEdgeChange;
@@ -47,8 +46,12 @@ namespace Process.Editor
         {
             if (port.GetEdges().Count > 0)
             {
-                if (isSuccess)  SuccessID   = port.GetEdges()[0].inputNode.computeOrder;
-                else            FailID      = port.GetEdges()[0].inputNode.computeOrder;
+                var node = port.GetEdges()[0].inputNode as ProcessEditorNodeBase;
+                if (node == null)
+                    return;
+                    
+                if (isSuccess)  SuccessID   = node.NodeOrder;
+                else            FailID      = node.NodeOrder;
             }
             else
             {

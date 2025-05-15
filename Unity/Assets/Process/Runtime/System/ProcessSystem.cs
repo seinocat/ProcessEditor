@@ -48,7 +48,8 @@ namespace Process.Runtime
         /// <returns></returns>
         private List<ProcessNodeBase> CreateNodeLink(ProcessConfig config, GameProcess process)
         {
-            List<ProcessNodeBase> nodes = new List<ProcessNodeBase>();
+            var nodes           = new List<ProcessNodeBase>();            // 节点列表
+            var orderIdToNode   = new Dictionary<int, ProcessNodeBase>(); // 加速查找节点
             
             //先创建所有节点
             foreach (var nodeData in config.NodeDataList)
@@ -56,15 +57,14 @@ namespace Process.Runtime
                 ProcessNodeBase processNode = ProcessNodePool.Get(nodeData.Type);
                 processNode.Initialize(process, nodeData);
                 nodes.Add(processNode);
+                orderIdToNode[nodeData.Order] = processNode;
             }
             
             //链接节点
             foreach (var nodeData in config.NodeDataList)
             {
-                var curNode = nodes.Find((node) => node.OrderId == nodeData.Order);
-                if (curNode == null)
+                if (!orderIdToNode.TryGetValue(nodeData.Order, out var curNode))
                 {
-                    // LogManager.LogError($"create node link error, can't find node by order: {nodeData.Order}");
                     continue;
                 }
 
@@ -72,28 +72,22 @@ namespace Process.Runtime
                 var nextNodeOrders = nodeData.NextNodeOrderList;
                 foreach (var nextNodeOrder in nextNodeOrders)
                 {
-                    var nextNode = nodes.Find((node) => node.OrderId == nextNodeOrder);
-                    if (nextNode == null)
+                    if (orderIdToNode.TryGetValue(nextNodeOrder, out var nextNode))
                     {
-                        // LogManager.LogError($"create node link error, can't find next node by order: {nextNodeOrder}");
-                        continue;
+                        curNode.AddNextNode(nextNode);
                     }
-                    curNode.AddNextNode(nextNode);
                 }
                 
                 //链接序列节点
                 var sequenceNodeOrders = nodeData.SequenceNodeOrderList;
                 foreach (var sequenceNodeOrder in sequenceNodeOrders)
                 {
-                    var sequenceNode = nodes.Find((node) => node.OrderId == sequenceNodeOrder);
-                    if (sequenceNode == null)
+                    if (orderIdToNode.TryGetValue(sequenceNodeOrder, out var sequenceNode))
                     {
-                        // LogManager.LogError($"create node link error, can't find sequence node by order: {sequenceNodeOrder}");
-                        continue;
+                        curNode.IsSequenceNode = true;
+                        curNode.IsSequential = nodeData.IsSequential;
+                        curNode.AddSeqNode(sequenceNode);
                     }
-                    curNode.IsSequenceNode = true;
-                    curNode.IsSequential = nodeData.IsSequential;
-                    curNode.AddSeqNode(sequenceNode);
                 }
             }
             

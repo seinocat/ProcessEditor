@@ -7,4 +7,10 @@ namespace Process.Runtime
     {
         
     }
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
+    public class IgnoreExportAttribute : Attribute
+    {
+        
+    }
 }

@@ -38,6 +38,23 @@ namespace Process.Runtime
         }
     }
 
+    public class SelectBranchNodeParam : ProcessNodeParam
+    {
+        public List<BranchData> BranchPortL;
+
+        public override void ReadNodeData(BinaryReader reader)
+        {
+
+            BranchPortL = new List<BranchData>();
+            var BranchPortLCount = reader.ReadInt32();
+            for(int i = 0; i < BranchPortLCount; i++)
+            {
+                BranchPortL.Add(reader.ReadBranchData());
+            }
+
+        }
+    }
+
     public class EmptyNodeParam : ProcessNodeParam
     {
 
@@ -47,14 +64,6 @@ namespace Process.Runtime
     }
 
     public class EndNodeParam : ProcessNodeParam
-    {
-
-        public override void ReadNodeData(BinaryReader reader)
-        {
-        }
-    }
-
-    public class SelectBranchNodeParam : ProcessNodeParam
     {
 
         public override void ReadNodeData(BinaryReader reader)

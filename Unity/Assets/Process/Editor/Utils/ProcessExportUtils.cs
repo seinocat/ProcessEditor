@@ -109,6 +109,8 @@ namespace Process.Editor
         /// <returns></returns>
         public static void BinaryWriteNodeData(ProcessEditorNodeBase baseNode, BinaryWriter writer)
         {
+            baseNode.UpdateForExport();
+            
             var (orderList, seqOrderList, isOrder) = GetNextNodeOrderList(baseNode);
             
             writer.Write((int)baseNode.Type);

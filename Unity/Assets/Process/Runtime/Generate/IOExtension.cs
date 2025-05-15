@@ -1,5 +1,6 @@
 ﻿/*** 工具自动生成 => Tools/ProcessEditor/GenerateIOExtension ***/
 using System.IO;
+using System.Collections.Generic;
 using Seino.Utils.FastFileReader;
 
 namespace Process.Runtime
@@ -20,5 +21,27 @@ namespace Process.Runtime
             return value;
         }
 
+        public static void Write(this BinaryWriter writer, BranchData value)
+        {
+            writer.Write(value.Conditions.Count);
+            foreach (var element in value.Conditions)
+            {
+                writer.Write(element);
+            }
+            writer.Write(value.NextID);
+        }
+
+        public static BranchData ReadBranchData(this BinaryReader reader)
+        {
+            var value = new BranchData();
+            var ConditionsCount = reader.ReadInt32();
+            value.Conditions = new List<int>();
+            for(int i = 0; i < ConditionsCount; i++)
+            {
+                value.Conditions.Add(reader.ReadInt32());
+            }
+            value.NextID = reader.ReadInt32();
+            return value;
+        }
     }
 }
