@@ -446,10 +446,14 @@ namespace Process.Editor
             //释放所有NodePool
             builder.AppendLine("        public static void DisposeAllPools()");
             builder.AppendLine("        {");
-            builder.AppendLine("             foreach (var pairs in m_FactoryMap)");
-            builder.AppendLine("             {");
-            builder.AppendLine("                 pairs.Value().Dispose();");
-            builder.AppendLine("             }");
+            foreach (ProcessNodeType value in values)
+            {
+                if (m_BlackNodeList.Contains(value))
+                    continue;
+                
+                string typeName = Enum.GetName(typeof(ProcessNodeType), value);
+                builder.AppendLine($"             NodePool<{typeName}Node>.Dispose();");
+            }
             builder.AppendLine("        }");
             
             builder.AppendLine("    }");

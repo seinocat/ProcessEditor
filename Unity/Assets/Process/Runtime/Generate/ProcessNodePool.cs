@@ -36,10 +36,13 @@ namespace Process.Runtime
 
         public static void DisposeAllPools()
         {
-             foreach (var pairs in m_FactoryMap)
-             {
-                 pairs.Value().Dispose();
-             }
+             NodePool<StartNode>.Dispose();
+             NodePool<WaitTimeNode>.Dispose();
+             NodePool<SequenceNode>.Dispose();
+             NodePool<SelectBranchNode>.Dispose();
+             NodePool<ConditionNode>.Dispose();
+             NodePool<EmptyNode>.Dispose();
+             NodePool<EndNode>.Dispose();
         }
     }
 

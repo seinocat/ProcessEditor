@@ -62,14 +62,6 @@ MonoBehaviour:
     outputFieldName: Output
     inputPortIdentifier: 
     outputPortIdentifier: 
-  - GUID: 38a20092-692c-4d8b-a82f-5dcaa367263b
-    owner: {fileID: 11400000}
-    inputNodeGUID: bb316934-95cc-4fdc-a3fb-d60785a2428e
-    outputNodeGUID: 03d9d3d8-62c3-4ddf-9fe6-c5e968ae7cb2
-    inputFieldName: Input
-    outputFieldName: Output
-    inputPortIdentifier: 
-    outputPortIdentifier: 
   - GUID: c2fcd92f-63cd-4fec-a19e-88197538e110
     owner: {fileID: 11400000}
     inputNodeGUID: 1ae7f23b-0907-46d7-85e2-4959f91b77ed
@@ -358,6 +350,14 @@ MonoBehaviour:
     outputFieldName: Output
     inputPortIdentifier: 
     outputPortIdentifier: 
+  - GUID: 3e6ea369-912c-497b-bada-06d8c964ebde
+    owner: {fileID: 11400000}
+    inputNodeGUID: bb316934-95cc-4fdc-a3fb-d60785a2428e
+    outputNodeGUID: 03d9d3d8-62c3-4ddf-9fe6-c5e968ae7cb2
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
   groups: []
   stackNodes: []
   pinnedElements: []
@@ -365,8 +365,9 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -2045, y: 192, z: 0}
-  scale: {x: 1.520875, y: 1.520875, z: 1}
+  position: {x: -5981, y: -354, z: 0}
+  scale: {x: 1.15, y: 1.15, z: 1}
+  RuntimeDebug: 0
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -388,6 +389,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: -1
     - rid: 525765135661793294
       type: {class: ProcessConfigEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -404,6 +406,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: -1
         ProcessId: 1008
         MultiProcess: 1
@@ -425,6 +428,7 @@ MonoBehaviour:
         expanded: 1
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 1
     - rid: 525765139367460871
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -441,6 +445,7 @@ MonoBehaviour:
         expanded: 1
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 2
         Time: 0
     - rid: 8003730132929085440
@@ -458,6 +463,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 3
         IsSequential: 0
         PortCount: 2
@@ -476,6 +482,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 4
         Time: 0
     - rid: 8003730132929085442
@@ -493,6 +500,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 5
         Time: 0
     - rid: 8003730137690144768
@@ -510,6 +518,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 6
         Time: 0
     - rid: 8003730137690144769
@@ -527,6 +536,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 7
         Time: 0
     - rid: 8003730137690144770
@@ -544,6 +554,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 8
         IsSequential: 1
         PortCount: 4
@@ -562,6 +573,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 9
         Time: 0
     - rid: 8003730137690144772
@@ -579,6 +591,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 10
         Time: 0
     - rid: 8003730137690144773
@@ -596,6 +609,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 11
         Time: 0
     - rid: 8003730137690144774
@@ -613,6 +627,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 12
         Time: 0
     - rid: 8003730137690144775
@@ -630,6 +645,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 13
         Time: 0
     - rid: 8003730137690144776
@@ -647,6 +663,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 14
     - rid: 8003730137690144777
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -663,6 +680,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 15
         Time: 0
     - rid: 8003730137690144778
@@ -680,6 +698,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 16
         Time: 0
     - rid: 8003730137690144779
@@ -697,6 +716,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 17
         Time: 0
     - rid: 8003730137690144780
@@ -714,6 +734,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 18
         IsSequential: 1
         PortCount: 2
@@ -732,6 +753,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 19
         Time: 0
     - rid: 8003730137690144782
@@ -749,6 +771,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 20
         Time: 0
     - rid: 8003730137690144783
@@ -766,6 +789,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 21
     - rid: 8003730137690144784
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -782,6 +806,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 22
         Time: 0
     - rid: 8003730137690144785
@@ -799,6 +824,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 23
         Time: 0
     - rid: 8003730137690144786
@@ -816,6 +842,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 24
         IsSequential: 1
         PortCount: 2
@@ -834,6 +861,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 25
         Time: 0
     - rid: 8003730137690144788
@@ -851,6 +879,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 26
         Time: 0
     - rid: 8003730137690144789
@@ -868,6 +897,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 27
     - rid: 8003730137690144790
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -884,6 +914,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 28
         Time: 0
     - rid: 8003730137690144791
@@ -901,6 +932,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 29
     - rid: 8003730137690144793
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -917,6 +949,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 30
         Time: 0
     - rid: 8003730137690144794
@@ -934,6 +967,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 31
         IsSequential: 1
         PortCount: 2
@@ -952,6 +986,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 32
         Time: 0
     - rid: 8003730137690144796
@@ -969,6 +1004,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 33
         Time: 0
     - rid: 8003730137690144797
@@ -986,6 +1022,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 34
     - rid: 8003730137690144798
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -1002,6 +1039,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 35
         Time: 0
     - rid: 8003730137690144799
@@ -1019,6 +1057,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 36
     - rid: 8003730137690144800
       type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -1035,4 +1074,5 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 37
