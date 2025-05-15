@@ -25,8 +25,9 @@ namespace Process.Editor
             // AddToggle(new GUIContent("导出面板"), Cookie.GetPublic(SHOW_OPERATION, true), ShowOperation);
             AddToggle(new GUIContent("小地图"), Cookie.GetPublic(SHOW_MINIMAP, true), ShowMiniMap);
             AddButton(new GUIContent("定位"), LocateFile);
-            AddButton(new GUIContent("计算Order"), ()=> {m_GraphView.Window.Graph.ComputeGraphOrder();});
-            AddButton(new GUIContent("刷新"), Refresh);
+            AddToggle(new GUIContent("Runtime Debug"), false, RuntimeDebug);
+            // AddButton(new GUIContent("计算Order"), ()=> {m_GraphView.Window.Graph.ComputeGraphOrder();});
+            // AddButton(new GUIContent("刷新"), Refresh);
             AddButton(new GUIContent("导出当前"), Export, false);
             AddButton(new GUIContent("代码生成"), OneKeyGenerate, false);
         }
@@ -62,6 +63,12 @@ namespace Process.Editor
         public void LocateFile()
         {
             m_GraphView.FileView.LocateSelect();
+        }
+
+        public void RuntimeDebug(bool open)
+        {
+            m_GraphView.graph.RuntimeDebug = open;
+            m_GraphView.nodeViews.ForEach(x=>x.UpdateRuntimeIconView());
         }
 
         public void Refresh()

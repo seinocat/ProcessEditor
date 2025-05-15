@@ -84,6 +84,10 @@ namespace GraphProcessor
         /// Node locked state
         /// </summary>
         public bool nodeLock;
+        /// <summary>
+        /// Current node is running
+        /// </summary>
+        public bool isRunning;
 
         public delegate void ProcessDelegate();
 

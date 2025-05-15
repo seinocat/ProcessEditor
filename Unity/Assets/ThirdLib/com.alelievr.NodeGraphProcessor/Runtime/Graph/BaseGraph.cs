@@ -162,6 +162,8 @@ namespace GraphProcessor
 		public bool isEnabled { get => _isEnabled; private set => _isEnabled = value; }
 		
 		public HashSet< BaseNode >		graphOutputs { get; private set; } = new HashSet<BaseNode>();
+		
+		public bool RuntimeDebug;
 
         protected virtual void OnEnable()
         {

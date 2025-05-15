@@ -34,6 +34,7 @@ namespace GraphProcessor
         protected VisualElement topPortContainer;
         protected VisualElement bottomPortContainer;
         private VisualElement inputContainerElement;
+        protected VisualElement runtimeIconContainer;
 
         VisualElement settings;
         NodeSettingsView settingsContainer;
@@ -139,16 +140,6 @@ namespace GraphProcessor
             // 插入TitleIcon
             titleContainer.Insert(0, new VisualElement(){ name = "NodeIcon_Action" });
             
-            var textures = new List<Texture2D>
-            {
-                Resources.Load<Texture2D>("Icons/Array@x3"),
-                Resources.Load<Texture2D>("Icons/Boolean@x3"),
-                Resources.Load<Texture2D>("Icons/Quaternion@x3"),
-                Resources.Load<Texture2D>("Icons/Vector2@x3"),
-            };
-            var animatedIcon = new FrameAnimationView(textures);
-            titleContainer.Add(animatedIcon);
-
             topPortContainer = new VisualElement { name = "TopPortContainer" };
             this.Insert(0, topPortContainer);
 
@@ -598,6 +589,32 @@ namespace GraphProcessor
                 mainContainer.Add(debugContainer);
             else
                 mainContainer.Remove(debugContainer);
+        }
+
+        public void UpdateRuntimeIconView()
+        {
+            if (owner.graph.RuntimeDebug && nodeTarget.isRunning)
+            {
+                if (runtimeIconContainer == null)
+                {
+                    var textures = new List<Texture2D>
+                    {
+                        Resources.Load<Texture2D>("Icons/Array@x3"),
+                        Resources.Load<Texture2D>("Icons/Boolean@x3"),
+                        Resources.Load<Texture2D>("Icons/Quaternion@x3"),
+                        Resources.Load<Texture2D>("Icons/Vector2@x3"),
+                    };
+                    runtimeIconContainer = new FrameAnimationView(textures);
+                }
+                titleContainer.Add(runtimeIconContainer);
+            }
+            else
+            {
+                if (titleContainer.Contains(runtimeIconContainer))
+                {
+                    titleContainer.Remove(runtimeIconContainer);
+                }
+            }
         }
 
         public void AddMessageView(string message, Texture icon, Color color)
