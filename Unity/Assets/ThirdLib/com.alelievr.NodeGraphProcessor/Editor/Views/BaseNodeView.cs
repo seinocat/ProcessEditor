@@ -172,9 +172,9 @@ namespace GraphProcessor
 
             Undo.undoRedoPerformed += UpdateFieldValues;
 
-            debugContainer = new VisualElement { name = "debug" };
-            if (nodeTarget.debug)
-                mainContainer.Add(debugContainer);
+            // debugContainer = new VisualElement { name = "debug" };
+            // if (nodeTarget.debug)
+            //     mainContainer.Add(debugContainer);
 
             initializing = true;
 
@@ -335,7 +335,7 @@ namespace GraphProcessor
         void InitializeDebug()
         {
             ComputeOrderUpdatedCallback();
-            debugContainer.Add(computeOrderLabel);
+            // debugContainer.Add(computeOrderLabel);
         }
 
         #endregion
@@ -585,10 +585,15 @@ namespace GraphProcessor
 
         public void UpdateDebugView()
         {
-            if (nodeTarget.debug)
-                mainContainer.Add(debugContainer);
-            else
-                mainContainer.Remove(debugContainer);
+            if (visibleConditions.TryGetValue("debug", out var list))
+            {
+                UpdateFieldVisibility("debug", nodeTarget.debug);
+            }
+            
+            // if (nodeTarget.debug)
+            //     mainContainer.Add(debugContainer);L
+            // else
+            //     mainContainer.Remove(debugContainer);
         }
 
         public void UpdateRuntimeIconView()
@@ -696,6 +701,7 @@ namespace GraphProcessor
         Dictionary<string, List<(object value, VisualElement target)>> visibleConditions = new Dictionary<string, List<(object value, VisualElement target)>>();
         Dictionary<string, VisualElement> hideElementIfConnected = new Dictionary<string, VisualElement>();
         Dictionary<FieldInfo, List<VisualElement>> fieldControlsMap = new Dictionary<FieldInfo, List<VisualElement>>();
+        Dictionary<string, Tuple<string, VisualElement>> complexVisibleConditions = new();
 
         protected void AddInputContainer()
         {
@@ -840,6 +846,29 @@ namespace GraphProcessor
             }
         }
 
+        void UpdateAllComponentVisibility()
+        {
+            foreach (var paris in complexVisibleConditions)
+            {
+                UpdateComplexVisibility(paris.Key);
+            }
+        }
+
+        void UpdateComplexVisibility(string fieldName)
+        {
+            if (complexVisibleConditions.TryGetValue(fieldName, out var tuple))
+            {
+                MethodInfo func = nodeTarget.GetType().GetMethod(tuple.Item1);
+                if (func != null)
+                {
+                    if ((bool)func.Invoke(nodeTarget, null))
+                        tuple.Item2.style.display = DisplayStyle.Flex;
+                    else
+                        tuple.Item2.style.display = DisplayStyle.None;
+                }
+            }
+        }
+
         void UpdateOtherFieldValueSpecific<T>(FieldInfo field, object newValue)
         {
             foreach (var inputField in fieldControlsMap[field])
@@ -933,12 +962,23 @@ namespace GraphProcessor
             if (!isList)
             {
                 container.style.flexDirection = FlexDirection.Row;
-
+                
                 var fieldIconName = field.FieldType.IsEnum ? "FieldViewIcon_Enum" : $"FieldViewIcon_{field.FieldType.Name}";
-                container.Add(new VisualElement{name = fieldIconName});
+                var iconElement = new VisualElement { name = fieldIconName };
+                container.Add(iconElement);
                 container.Add(element);
-            }
 
+                var visibleAttr = field.GetCustomAttribute<VisibleIf>();
+                if (visibleAttr != null)
+                {
+                    if (!visibleConditions.TryGetValue(visibleAttr.fieldName, out var list))
+                    {
+                        visibleConditions.Add(visibleAttr.fieldName, new List<(object value, VisualElement target)>());
+                    }
+                    
+                    visibleConditions[visibleAttr.fieldName].Add((visibleAttr.value, iconElement));
+                }
+            }
 
 #if UNITY_2020_3 // In Unity 2020.3 the empty label on property field doesn't hide it, so we do it manually
             if ((showInputDrawer || String.IsNullOrEmpty(label)) && element != null)
@@ -951,6 +991,7 @@ namespace GraphProcessor
             element.RegisterValueChangeCallback(e =>
             {
                 UpdateFieldVisibility(field.Name, field.GetValue(nodeTarget));
+                UpdateAllComponentVisibility();
                 valueChangedCallback?.Invoke();
                 NotifyNodeChanged();
             });
@@ -983,7 +1024,8 @@ namespace GraphProcessor
             element.name    = field.Name; 
             container.name  = field.Name;
 
-            if (field.GetCustomAttribute(typeof(VisibleIf)) is VisibleIf visibleCondition)
+            var visibleCondition = field.GetCustomAttribute<VisibleIf>();
+            if (visibleCondition != null)
             {
                 // Check if target field exists:
                 var conditionField = nodeTarget.GetType().GetField(visibleCondition.fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -998,7 +1040,19 @@ namespace GraphProcessor
                     UpdateFieldVisibility(visibleCondition.fieldName, conditionField.GetValue(nodeTarget));
                 }
             }
-
+            
+            //复杂可见条件
+            var complexVisibleAttr = field.GetCustomAttribute<ComplexVisibleIf>();
+            if (complexVisibleAttr != null)
+            {
+                if (!complexVisibleConditions.TryGetValue(field.Name, out var tuple))
+                {
+                    complexVisibleConditions.Add(field.Name, new Tuple<string, VisualElement>
+                        (complexVisibleAttr.assertFunc, isList ? element : container));
+                }
+                UpdateComplexVisibility(field.Name);
+            }
+            
             return element;
         }
 

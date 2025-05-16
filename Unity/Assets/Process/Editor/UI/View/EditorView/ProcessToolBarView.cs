@@ -26,7 +26,7 @@ namespace Process.Editor
             AddToggle(new GUIContent("小地图"), Cookie.GetPublic(SHOW_MINIMAP, true), ShowMiniMap);
             AddButton(new GUIContent("定位"), LocateFile);
             AddToggle(new GUIContent("Runtime Debug"), false, RuntimeDebug);
-            // AddButton(new GUIContent("计算Order"), ()=> {m_GraphView.Window.Graph.ComputeGraphOrder();});
+            AddButton(new GUIContent("计算Order"), ()=> {m_GraphView.Window.Graph.ComputeGraphOrder();});
             // AddButton(new GUIContent("刷新"), Refresh);
             AddButton(new GUIContent("导出当前"), Export, false);
             AddButton(new GUIContent("代码生成"), OneKeyGenerate, false);

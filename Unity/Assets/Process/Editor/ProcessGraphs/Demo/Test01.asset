@@ -19,6 +19,8 @@ MonoBehaviour:
   - rid: 525765139367460866
   - rid: 525765139367460867
   - rid: 8003730113316257801
+  - rid: 8003730273783775237
+  - rid: 8003730273783775241
   edges:
   - GUID: 71f6d49c-369e-414c-b872-3586f24b074f
     owner: {fileID: 11400000}
@@ -36,18 +38,42 @@ MonoBehaviour:
     outputFieldName: Output
     inputPortIdentifier: 
     outputPortIdentifier: 
-  - GUID: ee2e6494-0ee4-4f16-be99-b12ceae7b65d
+  - GUID: f0d673ab-ad00-4b1f-b011-bd10605957bd
     owner: {fileID: 11400000}
-    inputNodeGUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+    inputNodeGUID: 523f41f2-5b9d-441c-8228-8238fcf96a61
+    outputNodeGUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 66fab580-9918-4a6c-88b8-6c77e234c0fb
+    owner: {fileID: 11400000}
+    inputNodeGUID: 8cdffc40-b12e-4bc3-b035-536cda38f131
     outputNodeGUID: f4739f2f-46f8-44b6-9a54-27503ca3c685
     inputFieldName: Input
     outputFieldName: Output
     inputPortIdentifier: 
     outputPortIdentifier: 
-  - GUID: f0d673ab-ad00-4b1f-b011-bd10605957bd
+  - GUID: e57da1e8-93d6-4466-83b5-b015a5bd8245
+    owner: {fileID: 11400000}
+    inputNodeGUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+    outputNodeGUID: 8cdffc40-b12e-4bc3-b035-536cda38f131
+    inputFieldName: Input
+    outputFieldName: Output
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: 35d9d8ad-e3b0-49e3-92f1-f112be55846e
+    owner: {fileID: 11400000}
+    inputNodeGUID: 9bfabbea-1616-4928-96e0-f844fe2305ec
+    outputNodeGUID: 8cdffc40-b12e-4bc3-b035-536cda38f131
+    inputFieldName: Input
+    outputFieldName: Output2
+    inputPortIdentifier: 
+    outputPortIdentifier: 
+  - GUID: d97dc360-fe94-4a42-ab28-45ca820584a9
     owner: {fileID: 11400000}
     inputNodeGUID: 523f41f2-5b9d-441c-8228-8238fcf96a61
-    outputNodeGUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
+    outputNodeGUID: 9bfabbea-1616-4928-96e0-f844fe2305ec
     inputFieldName: Input
     outputFieldName: Output
     inputPortIdentifier: 
@@ -59,8 +85,9 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: 156, y: 73, z: 0}
-  scale: {x: 0.65751624, y: 0.65751624, z: 1}
+  position: {x: -1273, y: -419, z: 0}
+  scale: {x: 1.520875, y: 1.520875, z: 1}
+  RuntimeDebug: 0
   Timestamp: 1741334291
   OpenCount: 0
   ProcessWindow: {fileID: 0}
@@ -82,6 +109,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: -1
     - rid: 525765139367460865
       type: {class: ProcessConfigEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
@@ -98,6 +126,7 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: -1
         ProcessId: 1001
         MultiProcess: 1
@@ -121,37 +150,77 @@ MonoBehaviour:
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
         NodeOrder: 1
     - rid: 525765139367460867
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
         nodeCustomName: 
         GUID: d9bf27dc-1266-419e-9a43-7d4c6eea61ce
-        computeOrder: 3
+        computeOrder: 4
         position:
           serializedVersion: 2
-          x: 1195
-          y: 390
-          width: 156
+          x: 1376
+          y: 353
+          width: 171
           height: 118
         expanded: 0
         debug: 0
         nodeLock: 0
-        NodeOrder: 2
+        isRunning: 0
+        NodeOrder: 5
         Time: 250
     - rid: 8003730113316257801
       type: {class: EndEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
         nodeCustomName: 
         GUID: 523f41f2-5b9d-441c-8228-8238fcf96a61
-        computeOrder: 4
+        computeOrder: 6
         position:
           serializedVersion: 2
-          x: 1412.671
-          y: 390
+          x: 1674
+          y: 396
           width: 87
           height: 75
         expanded: 0
         debug: 0
         nodeLock: 0
+        isRunning: 0
+        NodeOrder: 6
+    - rid: 8003730273783775237
+      type: {class: ConditionEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 8cdffc40-b12e-4bc3-b035-536cda38f131
+        computeOrder: 3
+        position:
+          serializedVersion: 2
+          x: 1165
+          y: 390
+          width: 191
+          height: 619
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        isRunning: 0
+        NodeOrder: 2
+        Conditions: e9030000
+        SuccessID: 5
+        FailID: 3
+    - rid: 8003730273783775241
+      type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
+      data:
+        nodeCustomName: 
+        GUID: 9bfabbea-1616-4928-96e0-f844fe2305ec
+        computeOrder: 5
+        position:
+          serializedVersion: 2
+          x: 1382.3425
+          y: 544.76733
+          width: 104
+          height: 99
+        expanded: 0
+        debug: 0
+        nodeLock: 0
+        isRunning: 0
         NodeOrder: 3

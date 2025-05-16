@@ -227,6 +227,17 @@ namespace GraphProcessor
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    public class ComplexVisibleIf : Attribute
+    {
+        public string assertFunc;
+
+        public ComplexVisibleIf(string predicate)
+        {
+            assertFunc = predicate;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class ShowInInspector : Attribute
     {
         public bool showInNode;

@@ -53,7 +53,6 @@ MonoBehaviour:
   - rid: 8003730137690144798
   - rid: 8003730137690144799
   - rid: 8003730137690144800
-  - rid: 8003730273783775235
   edges:
   - GUID: 04dd0fd8-86e5-4cbb-a887-7ae812b91898
     owner: {fileID: 11400000}
@@ -366,7 +365,7 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -2284, y: -916, z: 0}
+  position: {x: -2426, y: 19, z: 0}
   scale: {x: 1.3225, y: 1.3225, z: 1}
   RuntimeDebug: 0
   Timestamp: 1741334291
@@ -1077,26 +1076,3 @@ MonoBehaviour:
         nodeLock: 0
         isRunning: 0
         NodeOrder: 37
-    - rid: 8003730273783775235
-      type: {class: SelectBranchEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
-      data:
-        nodeCustomName: 
-        GUID: 814d23f0-62c3-47a1-badb-2c186411e1a6
-        computeOrder: 39
-        position:
-          serializedVersion: 2
-          x: 1997.5002
-          y: 876.2193
-          width: 241
-          height: 638
-        expanded: 0
-        debug: 0
-        nodeLock: 0
-        isRunning: 0
-        NodeOrder: -1
-        PortCount: 2
-        BranchPortL:
-        - Conditions: 11270000
-          NextID: 0
-        - Conditions: 
-          NextID: 0

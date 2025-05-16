@@ -19,15 +19,8 @@ namespace Process.Editor
         [CustomSetting("失败节点ID"), HideInInspector]
         public int FailID;
         
-        public ConditionEditorNode()
+        public override void UpdateForExport()
         {
-            onAfterEdgeConnected    += OnEdgeChange;
-            onAfterEdgeDisconnected += OnEdgeChange;
-        }
-        
-        private void OnEdgeChange(SerializableEdge edge)
-        {
-            graph.UpdateComputeOrder();
             foreach (var port in outputPorts)
             {
                 switch (port.fieldName)

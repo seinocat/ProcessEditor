@@ -90,11 +90,11 @@ namespace Process.Editor
             
             // 写入节点数据
             List<BaseNode> nodes = graphBase.nodes;
-            writer.Write(nodes.Count(x=> x is not EditorEditorNode));
+            writer.Write(nodes.Count(x=> x is not ProcessEditorNode));
             
             foreach (var baseNode in nodes)
             {
-                if (baseNode is EditorEditorNode)
+                if (baseNode is ProcessEditorNode)
                     continue;
                 
                 BinaryWriteNodeData(baseNode as ProcessEditorNodeBase, writer);

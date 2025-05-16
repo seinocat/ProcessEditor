@@ -144,7 +144,7 @@ namespace Process.Editor
         {
             //先找到所有继承自ProcessNodeBase的类
             var types = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
+                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(ProcessEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
                 .ToList();
 
             StringBuilder builder = new StringBuilder();
@@ -219,7 +219,7 @@ namespace Process.Editor
         {
             //先找到所有继承自ProcessNodeBase的类
             var types = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
+                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(ProcessEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
                 .ToList();
 
             StringBuilder builder = new StringBuilder();
@@ -303,7 +303,7 @@ namespace Process.Editor
         {
             //先找到所有继承自ProcessNodeBase的类
             var types = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(EditorEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
+                .Where(t => t.IsClass && !t.IsAbstract && !t.IsSubclassOf(typeof(ProcessEditorNode)) && t.IsSubclassOf(typeof(ProcessEditorNodeBase)))
                 .ToList();
 
             StringBuilder builder = new StringBuilder();

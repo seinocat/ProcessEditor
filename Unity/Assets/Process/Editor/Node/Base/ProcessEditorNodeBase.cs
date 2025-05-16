@@ -14,7 +14,7 @@ namespace Process.Editor
         /// <summary>
         /// 节点顺序
         /// </summary>
-        [InspectorName("节点序号"), HideInInspector]
+        [InspectorName("节点序号"), VisibleIf("debug", true)]
         public int NodeOrder = -1;
         
         /// <summary>

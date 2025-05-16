@@ -6,7 +6,7 @@ using Process.Runtime;
 namespace Process.Editor
 {
     [NodeMenuItem("基础流程/流程配置"), ProcessNode, Serializable]
-    public class ProcessConfigEditorNode : EditorEditorNode
+    public class ProcessConfigEditorNode : ProcessEditorNode
     {
         public override string name => "流程配置";
         
@@ -24,11 +24,16 @@ namespace Process.Editor
         
         [CustomSetting("自动触发")] 
         public bool AutoExecute;
+
+        [CustomSetting("条件触发")] 
+        public bool NeedCondition;
         
-        [CustomSetting("条件列表"), VisibleIf("AutoExecute", true)]
+        [CustomSetting("条件列表"), ComplexVisibleIf("ShowConditions")]
         public List<ProcessConditionData> Conditions;
         
         [CustomSetting("备注", false)] 
         public string ProcessDesc;
+
+        public bool ShowConditions() => AutoExecute || NeedCondition;
     }
 }
