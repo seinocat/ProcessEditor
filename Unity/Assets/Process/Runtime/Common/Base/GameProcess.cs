@@ -16,6 +16,11 @@ namespace Process.Runtime
         public ulong                    ProcessId;
         
         /// <summary>
+        /// 触发类型
+        /// </summary>
+        public eTriggerType             TriggerType;
+        
+        /// <summary>
         /// 流程状态
         /// </summary>
         public ProcessStatus            Status { get; private set; }

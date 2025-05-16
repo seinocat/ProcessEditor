@@ -76,7 +76,7 @@ namespace Process.Editor
         {
             // 写入基本数据
             writer.Write(nodeData.ProcessId);
-            writer.Write(nodeData.AutoExecute);
+            writer.Write((uint)nodeData.TriggerType);
             writer.Write(nodeData.MultiProcess);
             writer.Write(nodeData.Conditions.Count);
 

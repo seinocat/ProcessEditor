@@ -8,7 +8,7 @@ namespace Process.Runtime
     public class ProcessConfig
     {
         public ulong ProcessId;
-        public bool AutoExecute;
+        public eTriggerType TriggerType;
         public bool MultiProcess;
         public int ConditionCount;
         public int NodeCount;

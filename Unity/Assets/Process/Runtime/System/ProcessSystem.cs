@@ -34,6 +34,7 @@ namespace Process.Runtime
             //创建流程实例
             var process = new GameProcess();
             process.ProcessId       = processId;
+            process.TriggerType     = config.TriggerType;
             process.OnComplete      = callback;
             process.ProcessNodes    = CreateNodeLink(config, process);
         

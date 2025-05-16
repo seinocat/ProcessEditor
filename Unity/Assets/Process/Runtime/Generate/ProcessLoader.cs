@@ -21,7 +21,7 @@ namespace Process.Runtime
                 config.Conditions    = new List<ProcessConditionData>();
                 
                 config.ProcessId        = reader.ReadUInt64();
-                config.AutoExecute      = reader.ReadBoolean();
+                config.TriggerType      = (eTriggerType)reader.ReadUInt32();
                 config.MultiProcess     = reader.ReadBoolean();
                 config.ConditionCount   = reader.ReadInt32();
 
