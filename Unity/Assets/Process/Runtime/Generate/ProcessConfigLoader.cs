@@ -5,7 +5,7 @@ using Seino.Utils.FastFileReader;
 
 namespace Process.Runtime
 {
-    public class ProcessLoader : IFileReader
+    public class ProcessConfigLoader : IFileReader
     {
         public Dictionary<ulong, ProcessConfig> Configs  { get; private set; }
         

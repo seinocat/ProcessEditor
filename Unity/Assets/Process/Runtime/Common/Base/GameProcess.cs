@@ -13,22 +13,27 @@ namespace Process.Runtime
         /// <summary>
         /// 流程ID
         /// </summary>
-        public ulong                    ProcessId;
+        public ulong                    ProcessId       { get; private set; }
         
         /// <summary>
         /// 触发类型
         /// </summary>
-        public eTriggerType             TriggerType;
+        public eTriggerType             TriggerType     { get; private set; }
+        
+        /// <summary>
+        /// 允许和其他流程同时运行
+        /// </summary>
+        public bool                     MultiProcess    { get; private set; }
         
         /// <summary>
         /// 流程状态
         /// </summary>
-        public ProcessStatus            Status { get; private set; }
+        public ProcessStatus            Status          { get; private set; }
         
         /// <summary>
         /// 是否停止
         /// </summary>
-        public bool                     IsStop => Status is ProcessStatus.Success or  ProcessStatus.FailedBreak;
+        public bool                     IsStop          => Status is ProcessStatus.Success or  ProcessStatus.FailedBreak;
         
         /// <summary>
         /// 流程完成回调
@@ -48,15 +53,24 @@ namespace Process.Runtime
         /// </summary>
         public Dictionary<string, CacheData>    CacheResDic;
         
-        /// <summary>
-        /// 资源回收检查回调
-        /// </summary>
-        public Action<GameProcess>              ResCheckAction;
-        
         public GameProcess()
         {
             ProcessNodes = new List<ProcessNodeBase>();
             CacheResDic  = new Dictionary<string, CacheData>();
+        }
+
+        /// <summary>
+        /// 初始化流程
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="onComplete"></param>
+        public void Initialize(ProcessConfig config, Action<ProcessStatus> onComplete)
+        {
+            ProcessId       = config.ProcessId;
+            TriggerType     = config.TriggerType;
+            MultiProcess    = config.MultiProcess;
+            OnComplete      = onComplete;
+            ProcessNodes    = CreateNodeLink(config);
         }
         
         /// <summary>
@@ -95,7 +109,61 @@ namespace Process.Runtime
             OnComplete?.Invoke(status);
             OnComplete = null;
             Debug.Log($"Process Stop, ProcessId: {ProcessId}, Status: {status}");
-        }  
+        }
+        
+        /// <summary>
+        /// 创建节点链
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="process"></param>
+        /// <returns></returns>
+        private List<ProcessNodeBase> CreateNodeLink(ProcessConfig config)
+        {
+            var nodes           = new List<ProcessNodeBase>();            // 节点列表
+            var orderIdToNode   = new Dictionary<int, ProcessNodeBase>(); // 加速查找节点
+            
+            //先创建所有节点
+            foreach (var nodeData in config.NodeDataList)
+            {
+                ProcessNodeBase processNode = ProcessNodePool.Get(nodeData.Type);
+                processNode.Initialize(this, nodeData);
+                nodes.Add(processNode);
+                orderIdToNode[nodeData.Order] = processNode;
+            }
+            
+            //链接节点
+            foreach (var nodeData in config.NodeDataList)
+            {
+                if (!orderIdToNode.TryGetValue(nodeData.Order, out var curNode))
+                {
+                    continue;
+                }
+
+                //链接下一个节点
+                var nextNodeOrders = nodeData.NextNodeOrderList;
+                foreach (var nextNodeOrder in nextNodeOrders)
+                {
+                    if (orderIdToNode.TryGetValue(nextNodeOrder, out var nextNode))
+                    {
+                        curNode.AddNextNode(nextNode);
+                    }
+                }
+                
+                //链接序列节点
+                var sequenceNodeOrders = nodeData.SequenceNodeOrderList;
+                foreach (var sequenceNodeOrder in sequenceNodeOrders)
+                {
+                    if (orderIdToNode.TryGetValue(sequenceNodeOrder, out var sequenceNode))
+                    {
+                        curNode.IsSequenceNode = true;
+                        curNode.IsSequential   = nodeData.IsSequential;
+                        curNode.AddSeqNode(sequenceNode);
+                    }
+                }
+            }
+            
+            return nodes;
+        }
         
         private void Dispose()
         {
@@ -106,10 +174,6 @@ namespace Process.Runtime
             //清空节点列表
             ProcessNodes?.Clear();
             ProcessNodes = null;
-
-            //回收缓存资源
-            ResCheckAction?.Invoke(this);
-            ResCheckAction = null;
             
             CacheResDic?.Clear();
             CacheResDic = null;
