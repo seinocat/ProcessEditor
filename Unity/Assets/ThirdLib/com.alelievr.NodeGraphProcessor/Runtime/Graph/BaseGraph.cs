@@ -476,7 +476,7 @@ namespace GraphProcessor
 				nodes.Clear();
 				foreach (var serializedNode in serializedNodes.ToList())
 				{
-                    var node = JsonSerializer.DeserializeNode(serializedNode) as BaseNode;
+                    var node = JsonSerializer.DeserializeNode(serializedNode);
                     if (node != null)
                         nodes.Add(node);
 				}
