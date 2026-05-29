@@ -804,10 +804,9 @@ namespace LitJson
 
             if (obj is IJsonWrapper)
             {
-                if (writer_is_private)
-                    writer.TextWriter.Write(((IJsonWrapper)obj).ToJson());
-                else
-                    ((IJsonWrapper)obj).ToJson(writer);
+                // Always write through JsonWriter to keep writer state stack consistent
+                // when serializing nested IJsonWrapper values.
+                ((IJsonWrapper)obj).ToJson(writer);
 
                 return;
             }

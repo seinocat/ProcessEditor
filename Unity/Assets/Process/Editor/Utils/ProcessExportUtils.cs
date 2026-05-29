@@ -1,8 +1,8 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GraphProcessor;
+using LitJson;
 using Process.Runtime;
 using Seino.Utils.FastFileReader;
 using UnityEditor;
@@ -15,27 +15,70 @@ namespace Process.Editor
     /// </summary>
     public static class ProcessExportUtils
     {
+        private const string BinaryFileName = "Events.bytes";
+        private const string JsonFileName = "Events.json";
+        private const string ManifestFileName = "Events.manifest.json";
+
         [MenuItem("Assets/Open Process Editor")]
         public static async void TestRead()
         {
             ProcessSystem system = new ProcessSystem();
             await system.LoadConfigs();
-            var process = system.CreateProcess(1001, null);
+            _ = system.CreateProcess(1001, null);
         }
         
         /// <summary>
         /// 导出所有流程
         /// </summary>
-        /// <returns></returns>
         public static bool ExportAllProcess()
         {
-            var writer = FastFileUtils.CreateBinaryWriter($"{Application.streamingAssetsPath}/Events.bytes");
+            var outputFormat = ProcessRuntimeFormatSettings.GetFormat();
+            var binaryPath = Path.Combine(Application.streamingAssetsPath, BinaryFileName);
+
+            if (!ExportBinary(binaryPath))
+                return false;
+
+            var configs = LoadBinaryConfigs(binaryPath);
+            var jsonText = JsonProcessConfigSerializer.Serialize(configs);
+            var jsonPath = Path.Combine(Application.streamingAssetsPath, JsonFileName);
+            File.WriteAllText(jsonPath, jsonText);
+
+            WriteManifest(outputFormat);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            return true;
+        }
+
+        private static Dictionary<ulong, ProcessConfig> LoadBinaryConfigs(string binaryPath)
+        {
+            using var stream = new FileStream(binaryPath, FileMode.Open, FileAccess.Read);
+            using var reader = new BinaryReader(stream);
+            var loader = new ProcessConfigLoader();
+            loader.ReadAsync(reader).GetAwaiter().GetResult();
+            return loader.Configs ?? new Dictionary<ulong, ProcessConfig>();
+        }
+
+        private static void WriteManifest(ProcessConfigFormat outputFormat)
+        {
+            var manifest = new ProcessConfigManifest
+            {
+                Format = outputFormat,
+                FileName = outputFormat == ProcessConfigFormat.Json ? JsonFileName : BinaryFileName
+            };
+
+            var path = Path.Combine(Application.streamingAssetsPath, ManifestFileName);
+            File.WriteAllText(path, JsonMapper.ToJson(manifest));
+        }
+
+        private static bool ExportBinary(string binaryPath)
+        {
+            var writer = FastFileUtils.CreateBinaryWriter(binaryPath);
             var allProcess = ProcessUtils.GetAllProcess();
             writer.Write(allProcess.Count);
-            
+             
             foreach (var processGraph in allProcess)
             {
-                //根节点
                 BaseNode baseNode = processGraph.nodes.Find((node) => node is RootEditorNode);
                 if (baseNode == null)
                 {
@@ -44,75 +87,54 @@ namespace Process.Editor
                 }
 
                 processGraph.ComputeGraphOrder();
-                
+                 
                 var outputNodes = baseNode.GetOutputNodeList();
-                ProcessConfigEditorNode node = (ProcessConfigEditorNode)outputNodes.Find((node) => node is ProcessConfigEditorNode);
+                ProcessConfigEditorNode node = (ProcessConfigEditorNode)outputNodes.Find((n) => n is ProcessConfigEditorNode);
                 if (node == null)
                 {
                     Debug.LogError("未配置流程配置节点");
                     continue;
                 }
-                
+                 
                 BinaryWriteNodeList(processGraph, node, writer);
             }
 
-            // 释放写入器
             writer.Dispose();
-            
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            
             return true;
         }
 
-        /// <summary>
-        /// 生成节点列表
-        /// </summary>
-        /// <param name="graphBase"></param>
-        /// <param name="nodeData"></param>
-        /// <param name="writer"></param>
-        /// <returns></returns>
         public static void BinaryWriteNodeList(ProcessGraphBase graphBase, ProcessConfigEditorNode nodeData, BinaryWriter writer) 
         {
-            // 写入基本数据
             writer.Write(nodeData.ProcessId);
             writer.Write((uint)nodeData.TriggerType);
             writer.Write(nodeData.MultiProcess);
             writer.Write(nodeData.Conditions.Count);
 
-            // 写入条件数据
             for (int i = 0; i < nodeData.Conditions.Count; i++)
             {
                 var condition = nodeData.Conditions[i];
                 writer.Write(condition.Id);
                 writer.Write(condition.IsAnd);
             }
-            
-            // 写入节点数据
+             
             List<BaseNode> nodes = graphBase.nodes;
             writer.Write(nodes.Count(x=> x is not ProcessEditorNode));
-            
+             
             foreach (var baseNode in nodes)
             {
                 if (baseNode is ProcessEditorNode)
                     continue;
-                
+                 
                 BinaryWriteNodeData(baseNode as ProcessEditorNodeBase, writer);
             }
         }
 
-        /// <summary>
-        /// 写入节点数据
-        /// </summary>
-        /// <param name="baseNode"></param>
-        /// <param name="writer"></param>
-        /// <returns></returns>
         public static void BinaryWriteNodeData(ProcessEditorNodeBase baseNode, BinaryWriter writer)
         {
             baseNode.UpdateForExport();
-            
+             
             var (orderList, seqOrderList, isOrder) = GetNextNodeOrderList(baseNode);
-            
+             
             writer.Write((int)baseNode.Type);
             writer.Write(baseNode.NodeOrder);
             writer.Write(orderList.Count);
@@ -121,22 +143,17 @@ namespace Process.Editor
             {
                 writer.Write(orderList[i]);
             }
-            
+             
             writer.Write(isOrder);
             writer.Write(seqOrderList.Count);
             for (int i = 0; i < seqOrderList.Count; i++)
             {
                 writer.Write(seqOrderList[i]);
             }
-            
+             
             baseNode.WriteNodeData(writer);
         }
 
-        /// <summary>
-        /// 获取后续节点列表
-        /// </summary>
-        /// <param name="baseEditorNode"></param>
-        /// <returns></returns>
         public static (List<int>, List<int>, bool) GetNextNodeOrderList(ProcessEditorNodeBase baseEditorNode)
         {
             List<int> orderList = new List<int>();

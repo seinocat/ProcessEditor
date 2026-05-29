@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Process.Runtime;
 using GraphProcessor;
+using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -44,6 +45,19 @@ namespace Process.Editor
             
             window.SetGraph(graph);
             window.Show();
+        }
+
+        [MenuItem("Tools/ProcessEditor/Open Export Config Folder")]
+        public static void OpenExportConfigFolder()
+        {
+            var exportPath = Application.streamingAssetsPath;
+            if (!Directory.Exists(exportPath))
+            {
+                Directory.CreateDirectory(exportPath);
+                AssetDatabase.Refresh();
+            }
+
+            EditorUtility.RevealInFinder(exportPath);
         }
         
         [OnOpenAsset(0)]

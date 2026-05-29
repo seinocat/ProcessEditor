@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using Cysharp.Threading.Tasks;
-using Seino.Utils.FastFileReader;
+using LitJson;
 using UnityEngine;
 
 namespace Process.Runtime
@@ -9,18 +10,26 @@ namespace Process.Runtime
     public class ProcessSystem
     {
         private Dictionary<ulong, ProcessConfig> Configs;
+        private const string ManifestFileName = "Events.manifest.json";
 
         public async UniTask LoadConfigs()
         {
-            ProcessConfigLoader configLoader = new ProcessConfigLoader();
-            await FastFileUtils.ReadFileByBinaryAsync($"{Application.streamingAssetsPath}/Events.bytes", configLoader);
-            Configs = configLoader.Configs;
+            var manifestPath = Path.Combine(Application.streamingAssetsPath, ManifestFileName);
+            var manifest = LoadManifest(manifestPath);
+
+            var dataPath = Path.Combine(Application.streamingAssetsPath, manifest.FileName);
+            IProcessConfigSerializer serializer = manifest.Format == ProcessConfigFormat.Json
+                ? new JsonProcessConfigSerializer()
+                : new BinaryProcessConfigSerializer();
+
+            Configs = await serializer.LoadAsync(dataPath);
+            if (Configs == null)
+                Configs = new Dictionary<ulong, ProcessConfig>();
         }
-        
+
         /// <summary>
         /// 创建流程实例
         /// </summary>
-        /// <param name="res"></param>
         /// <param name="processId"></param>
         /// <param name="callback"></param>
         /// <returns></returns>
@@ -32,7 +41,6 @@ namespace Process.Runtime
                 return null;
             }
 
-            //先找配置
             Configs.TryGetValue(processId, out var config);
             if (config == null)
             {
@@ -40,13 +48,46 @@ namespace Process.Runtime
                 return null;
             }
 
-            //创建流程实例
             var process = new GameProcess();
             process.Initialize(config, callback);
-
             return process;
         }
-        
-        
+
+        private static ProcessConfigManifest LoadManifest(string manifestPath)
+        {
+            if (!File.Exists(manifestPath))
+            {
+                return new ProcessConfigManifest
+                {
+                    Format = ProcessConfigFormat.Binary,
+                    FileName = "Events.bytes"
+                };
+            }
+
+            try
+            {
+                var text = File.ReadAllText(manifestPath);
+                var manifest = JsonMapper.ToObject<ProcessConfigManifest>(text);
+                if (manifest == null || string.IsNullOrEmpty(manifest.FileName))
+                {
+                    return new ProcessConfigManifest
+                    {
+                        Format = ProcessConfigFormat.Binary,
+                        FileName = "Events.bytes"
+                    };
+                }
+
+                return manifest;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Load process manifest failed: {ex.Message}");
+                return new ProcessConfigManifest
+                {
+                    Format = ProcessConfigFormat.Binary,
+                    FileName = "Events.bytes"
+                };
+            }
+        }
     }
 }

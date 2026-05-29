@@ -365,8 +365,8 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -2426, y: 19, z: 0}
-  scale: {x: 1.3225, y: 1.3225, z: 1}
+  position: {x: -1756, y: 227, z: 0}
+  scale: {x: 0.57175326, y: 0.57175326, z: 1}
   RuntimeDebug: 0
   Timestamp: 1741334291
   OpenCount: 0
@@ -410,7 +410,7 @@ MonoBehaviour:
         NodeOrder: -1
         ProcessId: 1008
         MultiProcess: 1
-        AutoExecute: 0
+        TriggerType: 0
         Conditions: []
         ProcessDesc: 
     - rid: 525765135661793295
@@ -988,7 +988,7 @@ MonoBehaviour:
         nodeLock: 0
         isRunning: 0
         NodeOrder: 32
-        Time: 0
+        Time: 25
     - rid: 8003730137690144796
       type: {class: WaitTimeEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:
@@ -1006,7 +1006,7 @@ MonoBehaviour:
         nodeLock: 0
         isRunning: 0
         NodeOrder: 33
-        Time: 0
+        Time: 3
     - rid: 8003730137690144797
       type: {class: EmptyEditorNode, ns: Process.Editor, asm: Seino.Flow.Editor}
       data:

@@ -7,7 +7,8 @@
         "Seino.Utils.Runtime",
         "Seino.Flow.Runtime",
         "UniTask",
-        "Unity.Mathematics"
+        "Unity.Mathematics",
+        "Seino.LitJson.Runtime"
     ],
     "includePlatforms": [
         "Editor"
