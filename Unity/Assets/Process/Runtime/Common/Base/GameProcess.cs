@@ -189,14 +189,11 @@ namespace Process.Runtime
             var nodes           = new List<ProcessNodeBase>();            // 节点列表
             var orderIdToNode   = new Dictionary<int, ProcessNodeBase>(); // 加速查找节点
 
-            if (config.NodeDataList == null || config.NodeDataList.Count == 0)
+            if (!ProcessGraphValidator.TryValidate(config, out int startNodeOrder, out string validateError))
             {
-                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, node list is empty");
+                Debug.LogError(validateError);
                 return nodes;
             }
-
-            if (!TryValidateBoundaryNodes(config.NodeDataList, out int startNodeOrder))
-                return nodes;
             
             //先创建所有节点
             foreach (var nodeData in config.NodeDataList)
@@ -258,44 +255,14 @@ namespace Process.Runtime
             return nodes;
         }
 
-        private bool TryValidateBoundaryNodes(List<ProcessNodeData> nodeDataList, out int startNodeOrder)
-        {
-            int startNodeCount = 0;
-            int endNodeCount = 0;
-            startNodeOrder = -1;
-
-            foreach (var nodeData in nodeDataList)
-            {
-                if (nodeData.Type == ProcessNodeType.Start)
-                {
-                    startNodeCount++;
-                    startNodeOrder = nodeData.Order;
-                }
-
-                if (nodeData.Type == ProcessNodeType.End)
-                    endNodeCount++;
-            }
-
-            if (startNodeCount != 1)
-            {
-                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, start node count: {startNodeCount}, expected: 1");
-                return false;
-            }
-
-            if (endNodeCount < 1)
-            {
-                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, end node count: {endNodeCount}, expected: >= 1");
-                return false;
-            }
-
-            return true;
-        }
-        
         private void Dispose()
         {
             //回收节点
-            foreach (var node in ProcessNodes)
-                node.Recycle();
+            if (ProcessNodes != null)
+            {
+                foreach (var node in ProcessNodes)
+                    node.Recycle();
+            }
             
             //清空节点列表
             ProcessNodes?.Clear();

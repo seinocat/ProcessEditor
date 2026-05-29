@@ -63,6 +63,10 @@ namespace Process.Runtime
                     
                     // 读取节点参数
                     var nodeParam = ProcessNodeParamCreator.Get(nodeData.Type);
+                    if (nodeParam == null)
+                    {
+                        throw new InvalidDataException($"Process config read failed. Invalid node type: {nodeData.Type}, processId: {config.ProcessId}, nodeOrder: {nodeData.Order}");
+                    }
                     nodeParam.ReadNodeData(reader);
                     nodeData.Param = nodeParam;
                     

@@ -89,7 +89,7 @@ namespace Process.Runtime
         /// <summary>
         /// 传输数据，由上一个节点传输过来
         /// </summary>
-        private Dictionary<string, object> m_StreamingData;
+        private ProcessDataScope m_StreamingData;
         
         #region 公开方法
 
@@ -144,7 +144,8 @@ namespace Process.Runtime
         /// <param name="value"></param>
         protected void AddStreamingData(string key, object value)
         {
-            m_StreamingData?.Add(key, value);
+            m_StreamingData ??= new ProcessDataScope();
+            m_StreamingData.TryAdd(key, value);
         }
         
         /// <summary>
@@ -155,9 +156,7 @@ namespace Process.Runtime
         /// <returns></returns>
         protected T GetStreamingData<T>(string key)
         {
-            if (m_StreamingData.TryGetValue(key, out object value))
-                return (T)value;
-            return default;
+            return m_StreamingData == null ? default : m_StreamingData.Get<T>(key);
         }
         
         /// <summary>
@@ -178,14 +177,15 @@ namespace Process.Runtime
             {
                 foreach (var node in m_SequenceNodes)
                 {
-                    node.Enter(m_StreamingData);
+                    node.Enter(m_StreamingData?.Snapshot());
                     //依次执行节点
                     await UniTask.WaitUntil(() => node.IsFinished);
                 }
             }
             else
             {
-                m_SequenceNodes.ForEach(node => node.Enter(m_StreamingData));
+                var sequenceStreaming = m_StreamingData?.Snapshot();
+                m_SequenceNodes.ForEach(node => node.Enter(sequenceStreaming));
                 //等待序列节点执行完毕
                 await UniTask.WaitUntil(() => m_SequenceNodes.All((node) => node.IsFinished));
             }
@@ -249,7 +249,9 @@ namespace Process.Runtime
             m_startTime = Time.time;
             
             if (streaming != null) 
-                m_StreamingData = new Dictionary<string, object>(streaming);
+                m_StreamingData = new ProcessDataScope(streaming);
+            else
+                m_StreamingData ??= new ProcessDataScope();
             
             Status = await OnEnter();
             
@@ -286,7 +288,7 @@ namespace Process.Runtime
             
             // 进入下一个节点
             if (m_NextNodes.Count > 0 && Status != NodeStatus.Failed)
-                m_NextNodes.ForEach((node)=> node.Enter(m_StreamingData));
+                m_NextNodes.ForEach((node)=> node.Enter(m_StreamingData?.Snapshot()));
 
             //标记节点不可用
             m_IsDirty   = true;
@@ -302,6 +304,7 @@ namespace Process.Runtime
         {
             OnNodeFinished = null;
             m_StreamingData?.Clear();
+            m_StreamingData = null;
             m_NextNodes?.Clear();
             m_SequenceNodes?.Clear();
             ClearNodeData();
