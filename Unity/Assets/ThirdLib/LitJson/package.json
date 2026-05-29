@@ -1,0 +1,11 @@
+﻿{
+  "name": "com.seinocat.litjson",
+  "displayName": "Seino LitJson",
+  "description": "IK Solver",
+  "url" : "https://github.com/seinocat/LitJson.git",
+  "version": "0.0.5",
+  "unity": "2020.3",
+  "author": {
+    "name": "SeinoCat"
+  }
+}
