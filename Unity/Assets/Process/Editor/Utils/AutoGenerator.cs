@@ -337,11 +337,9 @@ namespace Process.Editor
                 }
                 
                 string className = type.Name.Replace("EditorNode", "Node");
-                string isStart = className.Equals("StartNode") ? "true" : "false";
                 builder.AppendLine($"    public partial class {className} : ProcessNodeBase");
                 builder.AppendLine("    {");
                 builder.AppendLine($"         public override ProcessNodeType Type => ProcessNodeType.{type.Name.Replace("EditorNode", string.Empty)};");
-                builder.AppendLine($"         public override bool IsStart => {isStart};");
                 builder.AppendLine("");
                 
                 //字段声明

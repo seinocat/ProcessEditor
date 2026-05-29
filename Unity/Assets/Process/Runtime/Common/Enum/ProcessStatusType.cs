@@ -9,6 +9,33 @@ namespace Process.Runtime
     public enum ProcessStatus
     {
         /// <summary>
+        /// 准备完成
+        /// </summary>
+        Ready,
+        /// <summary>
+        /// 进行中
+        /// </summary>
+        Running,
+        /// <summary>
+        /// 成功
+        /// </summary>
+        Success,
+        /// <summary>
+        /// 跳过
+        /// </summary>
+        Skipped,
+        /// <summary>
+        /// 失败中止
+        /// </summary>
+        Failed,
+    }
+
+    /// <summary>
+    /// 节点状态
+    /// </summary>
+    public enum NodeStatus
+    {
+        /// <summary>
         /// 准备中
         /// </summary>
         Preparing,
@@ -25,13 +52,13 @@ namespace Process.Runtime
         /// </summary>
         Success,
         /// <summary>
-        /// 失败继续
+        /// 跳过
         /// </summary>
-        FailedSkip,
+        Skipped,
         /// <summary>
         /// 失败中止
         /// </summary>
-        FailedBreak,
+        Failed,
     }
     
     [Serializable]

@@ -1,9 +1,12 @@
-﻿namespace Process.Runtime
+using System.Collections.Generic;
+
+namespace Process.Runtime
 {
     public interface IProcessNode
     {
-        protected ProcessStatus OnEnter()  => ProcessStatus.Running;
-        protected ProcessStatus OnUpdate() => ProcessStatus.Success;
-        protected void OnExit(){}
+        void Enter(Dictionary<string, object> streaming = null);
+        void Update(float deltaTime);
+        void Skip();
+        void Dispose();
     }
 }

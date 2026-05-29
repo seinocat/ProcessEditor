@@ -33,7 +33,7 @@ namespace Process.Runtime
         /// <summary>
         /// 是否停止
         /// </summary>
-        public bool                     IsStop          => Status is ProcessStatus.Success or  ProcessStatus.FailedBreak;
+        public bool                     IsStop          => m_IsStopped;
         
         /// <summary>
         /// 流程完成回调
@@ -45,8 +45,15 @@ namespace Process.Runtime
         /// </summary>
         public List<ProcessNodeBase>    ProcessNodes { get; set; }
         
-        //开始节点
+        /// <summary>
+        /// 起始节点
+        /// </summary>
         private ProcessNodeBase         m_StartNode;
+        
+        /// <summary>
+        /// 玩家标记
+        /// </summary>
+        private bool                    m_IsStopped;
         
         /// <summary>
         /// 资源对象缓存池，用于流程内部资源的持有和回收管理
@@ -66,9 +73,18 @@ namespace Process.Runtime
         /// <param name="onComplete"></param>
         public void Initialize(ProcessConfig config, Action<ProcessStatus> onComplete)
         {
+            if (config == null)
+            {
+                Debug.LogError("Process initialize failed: config is null");
+                return;
+            }
+
             ProcessId       = config.ProcessId;
             TriggerType     = config.TriggerType;
             MultiProcess    = config.MultiProcess;
+            m_IsStopped     = false;
+            Status          = ProcessStatus.Ready;
+            m_StartNode     = null;
             OnComplete      = onComplete;
             ProcessNodes    = CreateNodeLink(config);
         }
@@ -79,16 +95,38 @@ namespace Process.Runtime
         /// <param name="node"></param>
         public void BindNode(ProcessNodeBase node)
         {
-            node.OnProcessComplete = OnProcessStop;
-            if (node.IsStart) m_StartNode = node;
+            node.OnNodeFinished = OnNodeFinished;
             ProcessNodes?.Add(node);
         }
 
         public void Start()
         {
             Debug.Log("Process Start, ProcessId: " + ProcessId);
+            m_IsStopped = false;
             Status = ProcessStatus.Running;
-            m_StartNode?.Enter();
+            if (m_StartNode == null)
+            {
+                Debug.LogError($"Process start node is null, ProcessId: {ProcessId}");
+                OnProcessStop(ProcessStatus.Failed);
+                return;
+            }
+            m_StartNode.Enter();
+        }
+
+        public void SkipProcess()
+        {
+            if (m_IsStopped)
+                return;
+
+            if (ProcessNodes == null)
+                return;
+
+            for (int i = 0; i < ProcessNodes.Count; i++)
+            {
+                var node = ProcessNodes[i];
+                if (node.Status is NodeStatus.Preparing or NodeStatus.Running)
+                    node.Skip();
+            }
         }
         
         public void Update(float deltaTime)
@@ -98,11 +136,40 @@ namespace Process.Runtime
         }
         
         /// <summary>
+        /// 节点结束，由流程统一裁决
+        /// </summary>
+        /// <param name="node"></param>
+        private void OnNodeFinished(ProcessNodeBase node)
+        {
+            if (m_IsStopped || node == null)
+                return;
+
+            if (node.Status == NodeStatus.Failed)
+            {
+                OnProcessStop(ProcessStatus.Failed);
+                return;
+            }
+
+            if (node.Type == ProcessNodeType.End)
+            {
+                var finalStatus = node.Status switch
+                {
+                    NodeStatus.Skipped => ProcessStatus.Skipped,
+                    NodeStatus.Success => ProcessStatus.Success,
+                    NodeStatus.Failed => ProcessStatus.Failed,
+                    _ => ProcessStatus.Failed
+                };
+                OnProcessStop(finalStatus);
+            }
+        }
+
+        /// <summary>
         /// 流程停止(完成和失败)
         /// </summary>
         /// <param name="status"></param>
         private void OnProcessStop(ProcessStatus status)
         {
+            m_IsStopped = true;
             Status = status;
             ProcessNodes?.ForEach((node)=> node.OnProcessFinished(status));
             Dispose();
@@ -121,14 +188,40 @@ namespace Process.Runtime
         {
             var nodes           = new List<ProcessNodeBase>();            // 节点列表
             var orderIdToNode   = new Dictionary<int, ProcessNodeBase>(); // 加速查找节点
+
+            if (config.NodeDataList == null || config.NodeDataList.Count == 0)
+            {
+                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, node list is empty");
+                return nodes;
+            }
+
+            if (!TryValidateBoundaryNodes(config.NodeDataList, out int startNodeOrder))
+                return nodes;
             
             //先创建所有节点
             foreach (var nodeData in config.NodeDataList)
             {
                 ProcessNodeBase processNode = ProcessNodePool.Get(nodeData.Type);
+                if (processNode == null)
+                {
+                    Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, node create failed, type: {nodeData.Type}, order: {nodeData.Order}");
+                    continue;
+                }
+
                 processNode.Initialize(this, nodeData);
                 nodes.Add(processNode);
+
+                if (orderIdToNode.ContainsKey(nodeData.Order))
+                {
+                    Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, duplicate node order: {nodeData.Order}");
+                    continue;
+                }
                 orderIdToNode[nodeData.Order] = processNode;
+            }
+
+            if (!orderIdToNode.TryGetValue(startNodeOrder, out m_StartNode))
+            {
+                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, start node order not found: {startNodeOrder}");
             }
             
             //链接节点
@@ -164,6 +257,39 @@ namespace Process.Runtime
             
             return nodes;
         }
+
+        private bool TryValidateBoundaryNodes(List<ProcessNodeData> nodeDataList, out int startNodeOrder)
+        {
+            int startNodeCount = 0;
+            int endNodeCount = 0;
+            startNodeOrder = -1;
+
+            foreach (var nodeData in nodeDataList)
+            {
+                if (nodeData.Type == ProcessNodeType.Start)
+                {
+                    startNodeCount++;
+                    startNodeOrder = nodeData.Order;
+                }
+
+                if (nodeData.Type == ProcessNodeType.End)
+                    endNodeCount++;
+            }
+
+            if (startNodeCount != 1)
+            {
+                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, start node count: {startNodeCount}, expected: 1");
+                return false;
+            }
+
+            if (endNodeCount < 1)
+            {
+                Debug.LogError($"Process config invalid, ProcessId: {ProcessId}, end node count: {endNodeCount}, expected: >= 1");
+                return false;
+            }
+
+            return true;
+        }
         
         private void Dispose()
         {
@@ -178,6 +304,7 @@ namespace Process.Runtime
             CacheResDic?.Clear();
             CacheResDic = null;
         }
+
     }
 
     public class CacheData

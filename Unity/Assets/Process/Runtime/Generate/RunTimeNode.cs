@@ -7,7 +7,6 @@ namespace Process.Runtime
     public partial class ConditionNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.Condition;
-         public override bool IsStart => false;
 
          private int m_SuccessID;
          private int m_FailID;
@@ -37,7 +36,6 @@ namespace Process.Runtime
     public partial class SequenceNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.Sequence;
-         public override bool IsStart => false;
 
          private bool m_IsSequential;
 
@@ -64,7 +62,6 @@ namespace Process.Runtime
     public partial class WaitTimeNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.WaitTime;
-         public override bool IsStart => false;
 
          private float m_Time;
 
@@ -91,7 +88,6 @@ namespace Process.Runtime
     public partial class SelectBranchNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.SelectBranch;
-         public override bool IsStart => false;
 
          private List<BranchData> m_BranchPortL;
 
@@ -118,7 +114,6 @@ namespace Process.Runtime
     public partial class EmptyNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.Empty;
-         public override bool IsStart => false;
 
 
          public override void ReadNodeData(ProcessNodeParam data)
@@ -142,7 +137,6 @@ namespace Process.Runtime
     public partial class EndNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.End;
-         public override bool IsStart => false;
 
 
          public override void ReadNodeData(ProcessNodeParam data)
@@ -166,7 +160,6 @@ namespace Process.Runtime
     public partial class StartNode : ProcessNodeBase
     {
          public override ProcessNodeType Type => ProcessNodeType.Start;
-         public override bool IsStart => true;
 
 
          public override void ReadNodeData(ProcessNodeParam data)

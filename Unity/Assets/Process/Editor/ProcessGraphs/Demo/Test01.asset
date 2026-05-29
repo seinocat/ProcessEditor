@@ -85,7 +85,7 @@ MonoBehaviour:
   serializedParameterList: []
   stickyNotes: []
   nodeInspectorReference: {fileID: 0}
-  position: {x: -1080, y: -590, z: 0}
+  position: {x: -1466, y: -269, z: 0}
   scale: {x: 2, y: 2, z: 1}
   RuntimeDebug: 0
   Timestamp: 1741334291
@@ -204,7 +204,7 @@ MonoBehaviour:
         nodeLock: 0
         isRunning: 0
         NodeOrder: 2
-        Conditions: e9030000
+        Conditions: 
         SuccessID: 5
         FailID: 3
     - rid: 8003730273783775241

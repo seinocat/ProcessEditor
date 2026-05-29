@@ -29,17 +29,17 @@ namespace Process.Runtime
         /// <summary>
         /// 节点执行状态
         /// </summary>
-        public ProcessStatus            Status      { get; private set; }
+        public NodeStatus               Status      { get; private set; }
         
         /// <summary>
         /// 顺序执行状态
         /// </summary>
-        public ProcessStatus            SeqStatus   { get; private set; }
+        public NodeStatus               SeqStatus   { get; private set; }
         
         /// <summary>
-        /// 流程完成回调
+        /// 节点结束回调，由流程统一裁决是否结束
         /// </summary>
-        public Action<ProcessStatus>    OnProcessComplete;
+        public Action<ProcessNodeBase>  OnNodeFinished;
         
         /// <summary>
         /// 节点类型
@@ -59,9 +59,7 @@ namespace Process.Runtime
         /// <summary>
         /// 是否完成
         /// </summary>
-        public bool                     IsFinished  => Status is ProcessStatus.Success or ProcessStatus.FailedBreak or ProcessStatus.FailedSkip;
-        
-        public abstract bool            IsStart     { get; }
+        public bool                     IsFinished  => Status is NodeStatus.Success or NodeStatus.Failed or NodeStatus.Skipped;
         
         /// <summary>
         /// 清除节点数据，需要派生类实现(工具生成)
@@ -109,8 +107,8 @@ namespace Process.Runtime
             Process      = process;
             ProcessId    = process.ProcessId;
             OrderId      = data.Order;
-            Status       = ProcessStatus.Ready;
-            SeqStatus    = ProcessStatus.Ready;
+            Status       = NodeStatus.Ready;
+            SeqStatus    = NodeStatus.Ready;
             m_IsDirty    = false;
             IsSequential = data.IsSequential;
             
@@ -167,11 +165,11 @@ namespace Process.Runtime
         /// </summary>
         protected async void RunSequence()
         {
-            SeqStatus = ProcessStatus.Running;
+            SeqStatus = NodeStatus.Running;
             
             if (m_SequenceNodes.Count == 0)
             {
-                SeqStatus = ProcessStatus.Success;
+                SeqStatus = NodeStatus.Success;
                 return;
             }
             
@@ -192,7 +190,7 @@ namespace Process.Runtime
                 await UniTask.WaitUntil(() => m_SequenceNodes.All((node) => node.IsFinished));
             }
             
-            SeqStatus = ProcessStatus.Success;
+            SeqStatus = NodeStatus.Success;
         }
 
         /// <summary>
@@ -253,10 +251,7 @@ namespace Process.Runtime
             if (streaming != null) 
                 m_StreamingData = new Dictionary<string, object>(streaming);
             
-            //提供同步和异步两种进入方式，选择一个实现即可
-            Status = OnEnter();
-            if (Status == ProcessStatus.Running)
-                Status = await OnAsyncEnter();
+            Status = await OnEnter();
             
             //执行序列节点
             RunSequence();
@@ -264,13 +259,25 @@ namespace Process.Runtime
         
         public void Update(float deltaTime)
         {
-            if (m_IsDirty || Status is ProcessStatus.Preparing or ProcessStatus.Ready)  return;
-            if (Status == ProcessStatus.Running)                                        Status = OnUpdate(deltaTime);
+            if (m_IsDirty || Status is NodeStatus.Preparing or NodeStatus.Ready)  return;
+            if (Status == NodeStatus.Running)                                      Status = OnUpdate(deltaTime);
             if (IsStateFinished() && IsSeqStateFinished())                              Exit();
-            if (Status == ProcessStatus.FailedBreak)                                    Exit();
+            if (Status == NodeStatus.Failed)                                            Exit();
             
             //超时处理
             OnTimeOut();
+        }
+
+        public void Skip()
+        {
+            if (m_IsDirty || IsFinished)
+                return;
+
+            Status = OnSkip();
+            SeqStatus = NodeStatus.Skipped;
+
+            if (IsStateFinished() || Status == NodeStatus.Failed)
+                Exit();
         }
 
         private void Exit()
@@ -278,29 +285,22 @@ namespace Process.Runtime
             OnExit();
             
             // 进入下一个节点
-            if (m_NextNodes.Count > 0 && Status != ProcessStatus.FailedBreak)
+            if (m_NextNodes.Count > 0 && Status != NodeStatus.Failed)
                 m_NextNodes.ForEach((node)=> node.Enter(m_StreamingData));
-            
-            // 流程结束
-            if (m_NextNodes.Count == 0 && Type == ProcessNodeType.End)
-                OnProcessComplete?.Invoke(ProcessStatus.Success);
-            
-            // 流程失败
-            if ( Status == ProcessStatus.FailedBreak)
-            {
-                //中断流程并抛出错误
-                OnProcessComplete?.Invoke(ProcessStatus.FailedBreak);
-                Debug.LogError($"ProcessNode error, process id : {ProcessId}, node type : {Type}");
-            }
-            
+
             //标记节点不可用
             m_IsDirty   = true;
             m_IsTimeOut = false;
+
+            if (Status == NodeStatus.Failed)
+                Debug.LogError($"ProcessNode error, process id : {ProcessId}, node type : {Type}");
+
+            OnNodeFinished?.Invoke(this);
         }
 
         public void Dispose()
         {
-            OnProcessComplete = null;
+            OnNodeFinished = null;
             m_StreamingData?.Clear();
             m_NextNodes?.Clear();
             m_SequenceNodes?.Clear();
@@ -308,11 +308,9 @@ namespace Process.Runtime
         }
 
         //此部分由派生类实现
-        //Enter方法提供同步和异步两种方式，派生类根据需求选择一个实现即可
-        protected virtual ProcessStatus OnEnter()                       => ProcessStatus.Running;
-        protected virtual async UniTask<ProcessStatus> OnAsyncEnter()   => ProcessStatus.Running;
-        protected virtual ProcessStatus OnUpdate(float deltaTime)       => ProcessStatus.Running;
-        protected virtual ProcessStatus OnSkip()                        => ProcessStatus.Success;   
+        protected virtual UniTask<NodeStatus> OnEnter()              => UniTask.FromResult(NodeStatus.Running);
+        protected virtual NodeStatus OnUpdate(float deltaTime)       => NodeStatus.Running;
+        protected virtual NodeStatus OnSkip()                        => NodeStatus.Success;   
         protected virtual void OnExit(){}
         public virtual void OnProcessFinished(ProcessStatus status){} 
 
@@ -324,7 +322,7 @@ namespace Process.Runtime
         /// 设置状态
         /// </summary>
         /// <param name="status"></param>
-        protected void SetProcessStatus(ProcessStatus status)
+        protected void SetProcessStatus(NodeStatus status)
         {
             Status = status;
         }
@@ -335,7 +333,7 @@ namespace Process.Runtime
         /// <returns></returns>
         private bool IsStateFinished()
         {
-            return Status is ProcessStatus.Success or ProcessStatus.FailedSkip;
+            return Status is NodeStatus.Success or NodeStatus.Skipped;
         }
 
         /// <summary>
@@ -344,7 +342,7 @@ namespace Process.Runtime
         /// <returns></returns>
         private bool IsSeqStateFinished()
         {
-            return SeqStatus is ProcessStatus.Success or ProcessStatus.FailedSkip;
+            return SeqStatus is NodeStatus.Success or NodeStatus.Skipped;
         }
 
         #endregion
