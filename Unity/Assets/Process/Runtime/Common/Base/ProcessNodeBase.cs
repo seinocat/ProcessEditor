@@ -75,6 +75,7 @@ namespace Process.Runtime
         /// 脏标记
         /// </summary>
         private bool m_IsDirty;
+        private int m_SequenceRunVersion;
         
         /// <summary>
         /// 后续节点
@@ -110,6 +111,7 @@ namespace Process.Runtime
             Status       = NodeStatus.Ready;
             SeqStatus    = NodeStatus.Ready;
             m_IsDirty    = false;
+            m_SequenceRunVersion = 0;
             IsSequential = data.IsSequential;
             
             // 绑定流程
@@ -164,22 +166,35 @@ namespace Process.Runtime
         /// </summary>
         protected async void RunSequence()
         {
+            int runVersion = ++m_SequenceRunVersion;
             SeqStatus = NodeStatus.Running;
-            
+             
             if (m_SequenceNodes.Count == 0)
             {
                 SeqStatus = NodeStatus.Success;
                 return;
             }
-            
+             
             //是否按顺序执行
             if (IsSequential)
             {
                 foreach (var node in m_SequenceNodes)
                 {
+                    if (!IsSequenceRunValid(runVersion))
+                        return;
+
                     node.Enter(m_StreamingData?.Snapshot());
                     //依次执行节点
                     await UniTask.WaitUntil(() => node.IsFinished);
+
+                    if (!IsSequenceRunValid(runVersion))
+                        return;
+
+                    if (node.Status == NodeStatus.Failed)
+                    {
+                        SeqStatus = NodeStatus.Failed;
+                        return;
+                    }
                 }
             }
             else
@@ -188,9 +203,19 @@ namespace Process.Runtime
                 m_SequenceNodes.ForEach(node => node.Enter(sequenceStreaming));
                 //等待序列节点执行完毕
                 await UniTask.WaitUntil(() => m_SequenceNodes.All((node) => node.IsFinished));
+
+                if (!IsSequenceRunValid(runVersion))
+                    return;
+
+                if (m_SequenceNodes.Any(node => node.Status == NodeStatus.Failed))
+                {
+                    SeqStatus = NodeStatus.Failed;
+                    return;
+                }
             }
-            
-            SeqStatus = NodeStatus.Success;
+             
+            if (IsSequenceRunValid(runVersion))
+                SeqStatus = NodeStatus.Success;
         }
 
         /// <summary>
@@ -275,6 +300,7 @@ namespace Process.Runtime
             if (m_IsDirty || IsFinished)
                 return;
 
+            m_SequenceRunVersion++;
             Status = OnSkip();
             SeqStatus = NodeStatus.Skipped;
 
@@ -302,6 +328,7 @@ namespace Process.Runtime
 
         public void Dispose()
         {
+            m_SequenceRunVersion++;
             OnNodeFinished = null;
             m_StreamingData?.Clear();
             m_StreamingData = null;
@@ -346,6 +373,11 @@ namespace Process.Runtime
         private bool IsSeqStateFinished()
         {
             return SeqStatus is NodeStatus.Success or NodeStatus.Skipped;
+        }
+
+        private bool IsSequenceRunValid(int runVersion)
+        {
+            return runVersion == m_SequenceRunVersion && !m_IsDirty;
         }
 
         #endregion
